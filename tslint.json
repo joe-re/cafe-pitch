@@ -27,7 +27,7 @@
       true,
       180
     ],
-    "member-access": true,
+    "member-access": false,
     "member-ordering": [false],
     "no-any": false,
     "no-arg": true,
@@ -36,7 +36,7 @@
     "no-consecutive-blank-lines": true,
     "no-console": [false],
     "no-construct": false,
-    "no-constructor-vars": true,
+    "no-constructor-vars": false,
     "no-debugger": true,
     "no-duplicate-key": true,
     "no-duplicate-variable": true,
@@ -54,7 +54,7 @@
     "no-unused-variable": true,
     "no-use-before-declare": true,
     "no-var-keyword": true,
-    "no-var-requires": true,
+    "no-var-requires": false,
     "object-literal-sort-keys": false,
     "one-line": [
       true,
