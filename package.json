@@ -2,8 +2,12 @@
   "name": "cafe-pitch",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "dist/browser/main.js",
   "scripts": {
+    "prepare": "cp ./src/renderer/index.html ./dist/renderer/ && mkdir -p ./dist/renderer/node_modules/angular2/bundles/ && cp node_modules/angular2/bundles/angular2-polyfills.js ./dist/renderer/node_modules/angular2/bundles/angular2-polyfills.js",
+    "build": "npm run prepare && tsc",
+    "watch": "npm run prepare && tsc -w",
+    "start": "concurrent \"npm run watch\" \"electron .\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,6 +21,8 @@
     "zone.js": "0.5.11"
   },
   "devDependencies": {
-    "electron-prebuilt": "^0.36.7"
+    "concurrently": "^1.0.0",
+    "electron-prebuilt": "^0.36.7",
+    "typescript": "^1.7.5"
   }
 }

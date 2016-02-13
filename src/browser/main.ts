@@ -1,6 +1,7 @@
 'use strict';
 
-import * as electron from 'electron';
+const electron = require('electron');
+
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -14,7 +15,7 @@ function createWindow () {
   mainWindow = new electron.BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/../renderer/index.html');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
