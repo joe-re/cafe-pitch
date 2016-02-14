@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component, ElementRef, Output, EventEmitter} from 'angular2/core';
 const _ = require('lodash');
 
 @Component({
@@ -10,7 +10,7 @@ const _ = require('lodash');
           {{lineNumber}}
         </div>
       </div>
-      <div class="editor-contents" contenteditable=true (input)="handleChangeContents()"></div>
+      <div class="editor-contents" contenteditable=true (input)="handleChangeContents()">{{text}}</div>
     </div>
   `,
   styles: [`
@@ -20,6 +20,7 @@ const _ = require('lodash');
       cursor: text;
       display: flex;
       line-height: 24px;
+      width: 50%;
     }
     .editor-line-no {
       margin: 9px;
@@ -31,16 +32,22 @@ const _ = require('lodash');
       outline: 0;
     }
     `
-  ]
+  ],
+  inputs: ['text']
 })
 export class Editor {
+  @Output('changeText') changeText = new EventEmitter();
   enteredLineNumbers = [1];
+  marked = '';
   constructor(private el: ElementRef) { }
   handleClickEditor() {
     this.el.nativeElement.querySelector('.editor-contents').focus();
   }
-  handleChangeContents() {
+  handleChangeContents(ev: MouseEvent) {
     // +2 because 1 origin + next line
-    this.enteredLineNumbers = _.range(1, this.el.nativeElement.querySelectorAll('.editor-contents div').length + 2);
+    const lines = this.el.nativeElement.querySelectorAll('.editor-contents div');
+    this.enteredLineNumbers = _.range(1, lines.length + 2);
+    const text = this.el.nativeElement.querySelector('.editor-contents').innerText;
+    this.changeText.emit(text);
   }
 }

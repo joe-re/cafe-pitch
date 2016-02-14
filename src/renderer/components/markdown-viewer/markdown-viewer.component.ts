@@ -10,6 +10,8 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
     .markdown-viewer {
       width: 100%;
       background: white;
+      height: 100%;
+      position: absolute;
     }
     `
   ],
