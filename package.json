@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "gulp build:prepare",
     "build": "npm run prepare && tsc",
-    "watch": "npm run prepare && concurrent \"tsc -w\" \"gulp watch\"",
+    "watch": "npm run prepare && concurrent --kill-others \"tsc -w\" \"gulp watch\"",
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
