@@ -6,8 +6,14 @@ import {MarkdownViewer} from './markdown-viewer/markdown-viewer.component';
   selector: 'my-app',
   styles: [`
     .contents {
+      height: 100%;
+      padding: 52px 0;
+      box-sizing: border-box;
+    }
+    .inner-contents {
       display: flex;
       height: 100%;
+      border: black solid 1px;
     }
     editor, markdown-viewer {
       height: 100%;
@@ -17,8 +23,10 @@ import {MarkdownViewer} from './markdown-viewer/markdown-viewer.component';
   `],
   template: `
     <div class="contents">
-      <editor [text]="enteredText" (changeText)="changeText($event)"></editor>
-      <markdown-viewer [text]="enteredText"></markdown-viewer>
+      <div class="inner-contents">
+        <editor [text]="enteredText" (changeText)="changeText($event)"></editor>
+        <markdown-viewer [text]="enteredText"></markdown-viewer>
+      </div>
     </div>
     `,
   directives: [Editor, MarkdownViewer]
