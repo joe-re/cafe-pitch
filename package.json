@@ -16,6 +16,7 @@
   "dependencies": {
     "angular2": "2.0.0-beta.3",
     "es6-shim": "^0.33.13",
+    "font-awesome": "^4.5.0",
     "lodash": "^4.3.0",
     "marky-markdown": "^7.0.0",
     "reflect-metadata": "0.1.2",
