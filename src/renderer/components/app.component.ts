@@ -7,7 +7,6 @@ import {MarkdownViewer} from './markdown-viewer/markdown-viewer.component';
   styles: [`
     .contents {
       height: 100%;
-      padding: 52px 0;
       box-sizing: border-box;
     }
     .inner-contents {
@@ -23,6 +22,9 @@ import {MarkdownViewer} from './markdown-viewer/markdown-viewer.component';
   `],
   template: `
     <div class="contents">
+      <div class="actions">
+        <button>Start</button>
+      </div>
       <div class="inner-contents">
         <editor [text]="enteredText" (changeText)="changeText($event)"></editor>
         <markdown-viewer [text]="enteredText"></markdown-viewer>
