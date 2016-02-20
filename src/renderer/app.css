@@ -1,8 +1,8 @@
 html {
-  height: 100%;
   background-color: #333333;
 }
 
 body {
-  height: 98%;
+  height: 100vh;
+  overflow: hidden;
 }

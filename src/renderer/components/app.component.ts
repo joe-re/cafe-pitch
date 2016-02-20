@@ -7,7 +7,7 @@ const ipc = require('ipc');
   selector: 'my-app',
   styles: [`
     .contents {
-      height: 100%;
+      height: 94%;
       box-sizing: border-box;
     }
     .inner-contents {
