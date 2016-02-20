@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {Editor} from './editor/editor.component';
 import {MarkdownViewer} from './markdown-viewer/markdown-viewer.component';
+const ipc = require('ipc');
 
 @Component({
   selector: 'my-app',
@@ -23,7 +24,7 @@ import {MarkdownViewer} from './markdown-viewer/markdown-viewer.component';
   template: `
     <div class="contents">
       <div class="actions">
-        <button>Start</button>
+        <button (click)="clickStartButton()">Start</button>
       </div>
       <div class="inner-contents">
         <editor [text]="enteredText" (changeText)="changeText($event)"></editor>
@@ -37,5 +38,8 @@ export class AppComponent {
   enteredText = '';
   changeText(text) {
     this.enteredText = text;
+  }
+  clickStartButton() {
+    ipc.send('RequestCreateNewWindow');
   }
 }
