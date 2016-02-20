@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {Editor} from './editor/editor.component';
+import {SlideList} from './slide-list/slide-list.component';
 import {MarkdownViewer} from './markdown-viewer/markdown-viewer.component';
 const ipc = require('ipc');
 
@@ -15,10 +16,23 @@ const ipc = require('ipc');
       height: 100%;
       border: black solid 1px;
     }
-    editor, markdown-viewer {
+    .center {
       height: 100%;
-      width: 50%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    editor, markdown-viewer {
+      height: 50%;
       position: relative;
+    }
+    slide-list {
+      height: 100%;
+      width: 200px;
+      position: relative;
+    }
+    .style-editor {
+      width: 400px;
     }
   `],
   template: `
@@ -27,12 +41,17 @@ const ipc = require('ipc');
         <button (click)="clickStartButton()">Start</button>
       </div>
       <div class="inner-contents">
-        <editor [text]="enteredText" (changeText)="changeText($event)"></editor>
-        <markdown-viewer [text]="enteredText"></markdown-viewer>
+        <slide-list></slide-list>
+        <div class="center">
+          <editor [text]="enteredText" (changeText)="changeText($event)"></editor>
+          <markdown-viewer [text]="enteredText"></markdown-viewer>
+        </div>
+        <div class="style-editor">
+        </div>
       </div>
     </div>
     `,
-  directives: [Editor, MarkdownViewer]
+  directives: [Editor, MarkdownViewer, SlideList]
 })
 export class AppComponent {
   enteredText = '';
