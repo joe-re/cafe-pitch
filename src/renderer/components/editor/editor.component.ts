@@ -10,7 +10,7 @@ const _ = require('lodash');
           {{lineNumber}}
         </div>
       </div>
-      <div class="editor-contents" contenteditable=true (input)="handleChangeContents()">{{text}}</div>
+      <div class="editor-contents" contenteditable=true (input)="handleChangeContents()" (keyup)="getSelectedLineNo()" (mouseup)="getSelectedLineNo">{{text}}</div>
     </div>
   `,
   styles: [`
@@ -20,7 +20,6 @@ const _ = require('lodash');
       cursor: text;
       display: flex;
       line-height: 24px;
-      width: 50%;
     }
     .editor-line-no {
       margin: 9px;
@@ -37,6 +36,7 @@ const _ = require('lodash');
 })
 export class Editor {
   @Output('changeText') changeText = new EventEmitter();
+  @Output('changePage') changePage = new EventEmitter();
   enteredLineNumbers = [1];
   marked = '';
   constructor(private el: ElementRef) { }
@@ -49,5 +49,25 @@ export class Editor {
     this.enteredLineNumbers = _.range(1, lines.length + 2);
     const text = this.el.nativeElement.querySelector('.editor-contents').innerText;
     this.changeText.emit(text);
+  }
+  getSelectedLineNo() {
+    const selectedNode = window.getSelection().anchorNode;
+    let lineDiv = selectedNode.nodeName === '#text' ? selectedNode.parentElement : selectedNode;
+    const contents = this.el.nativeElement.querySelector('.editor-contents');
+    let foundNo = 1;
+    _.each(contents.childNodes, (node: HTMLElement, index: number) => {
+      if (node === lineDiv) {
+        foundNo = index;
+      }
+    });
+    let selectedPage = 1;
+    _.each(this.el.nativeElement.querySelector('.editor-contents').innerText.split('\n'), (text, index) => {
+      if (foundNo === index + 1) {
+        this.changePage.emit(selectedPage);
+      }
+      if (text === '===') {
+        selectedPage++;
+      }
+    });
   }
 }

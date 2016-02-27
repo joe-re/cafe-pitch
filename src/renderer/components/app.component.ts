@@ -43,8 +43,8 @@ const ipc = require('ipc');
       <div class="inner-contents">
         <slide-list></slide-list>
         <div class="center">
-          <editor (changeText)="changeText($event)"></editor>
-          <slide [text]="enteredText"></slide>
+          <editor (changeText)="changeText($event)" (changePage)="changePage($event)"></editor>
+          <slide [text]="slideText"></slide>
         </div>
         <div class="style-editor">
         </div>
@@ -55,8 +55,12 @@ const ipc = require('ipc');
 })
 export class AppComponent {
   enteredText = '';
+  slideText = '';
   changeText(text) {
     this.enteredText = text;
+  }
+  changePage(page: number) {
+    this.slideText = this.enteredText.split('===')[page - 1];
   }
   clickStartButton() {
     ipc.send('RequestCreateNewWindow');

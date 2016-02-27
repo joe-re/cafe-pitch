@@ -36,8 +36,8 @@ export class Slide {
   constructor(private el: ElementRef) { }
   onResize(e: MouseEvent) {
     this.setInnerPosition();
-    this.setContentTop();
     this.setContentScale();
+    this.setContentTop();
   }
   ngAfterViewChecked() {
     this.setContentTop();
