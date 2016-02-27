@@ -52,7 +52,7 @@ export class Slide {
   setContentTop() {
     const inner = this.el.nativeElement.querySelector('slide .inner');
     const content = this.el.nativeElement.querySelector('slide .content');
-    const contentTop = (inner.clientHeight - content.clientHeight) / 2;
+    const contentTop = (inner.clientHeight - content.clientHeight) / 3;
     if (contentTop > 0) {
       content.style.top = `${contentTop}px`;
     }
