@@ -14,6 +14,7 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
     .slide {
       width: 100%;
       height: 100%;
+      font-size: 30px;
     }
     .inner {
       height: 40vh;
