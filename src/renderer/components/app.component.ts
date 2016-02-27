@@ -43,7 +43,7 @@ const ipc = require('ipc');
       <div class="inner-contents">
         <slide-list></slide-list>
         <div class="center">
-          <editor [text]="enteredText" (changeText)="changeText($event)"></editor>
+          <editor (changeText)="changeText($event)"></editor>
           <slide [text]="enteredText"></slide>
         </div>
         <div class="style-editor">
