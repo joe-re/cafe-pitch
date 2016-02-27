@@ -34,15 +34,19 @@ export class Slide {
   slideWidth: number;
   constructor(private el: ElementRef) { }
   onResize(e: MouseEvent) {
-    const inner = this.el.nativeElement.querySelector('slide .inner');
-    inner.style.width = `${inner.clientHeight * 16 / 9}px`;
-    const slide = this.el.nativeElement.querySelector('.slide');
-    inner.style.top = `${(slide.clientHeight - inner.clientHeight) / 2}px`;
-    inner.style.left = `${(slide.clientWidth - inner.clientWidth) / 2}px`;
+    this.setInnerPosition();
     this.setContentTop();
+    this.setContentScale();
   }
   ngAfterViewChecked() {
     this.setContentTop();
+  }
+  setInnerPosition() {
+    const inner = this.el.nativeElement.querySelector('slide .inner');
+    inner.style.width = `${inner.clientHeight * 4 / 3}px`;
+    const slide = this.el.nativeElement.querySelector('.slide');
+    inner.style.top = `${(slide.clientHeight - inner.clientHeight) / 2}px`;
+    inner.style.left = `${(slide.clientWidth - inner.clientWidth) / 2}px`;
   }
   setContentTop() {
     const inner = this.el.nativeElement.querySelector('slide .inner');
@@ -51,5 +55,11 @@ export class Slide {
     if (contentTop > 0) {
       content.style.top = `${contentTop}px`;
     }
+  }
+  setContentScale() {
+    const inner = this.el.nativeElement.querySelector('slide .inner');
+    const scale = inner.clientHeight / 720;
+    const content = this.el.nativeElement.querySelector('slide .content');
+    content.style.transform = `scale(${scale})`;
   }
 }
