@@ -17,7 +17,7 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
       font-size: 30px;
     }
     .inner {
-      height: 40vh;
+      height: 60vh;
       background: white;
       position: absolute;
       text-align: center;

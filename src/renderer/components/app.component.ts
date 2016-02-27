@@ -14,25 +14,16 @@ const ipc = require('ipc');
     .inner-contents {
       display: flex;
       height: 100%;
-      border: black solid 1px;
-    }
-    .center {
-      height: 100%;
       width: 100%;
+      border: black solid 1px;
       display: flex;
-      flex-direction: column;
+    }
+    .inner-contents div{
+      height: 100%;
+      width: 50%;
     }
     editor, slide {
-      height: 50%;
       position: relative;
-    }
-    slide-list {
-      height: 100%;
-      width: 200px;
-      position: relative;
-    }
-    .style-editor {
-      width: 400px;
     }
   `],
   template: `
@@ -41,12 +32,11 @@ const ipc = require('ipc');
         <button (click)="clickStartButton()">Start</button>
       </div>
       <div class="inner-contents">
-        <slide-list></slide-list>
-        <div class="center">
+        <div>
           <editor (changeText)="changeText($event)" (changePage)="changePage($event)"></editor>
-          <slide [text]="slideText"></slide>
         </div>
-        <div class="style-editor">
+        <div>
+          <slide [text]="slideText"></slide>
         </div>
       </div>
     </div>
