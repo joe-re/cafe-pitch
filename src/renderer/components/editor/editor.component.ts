@@ -20,6 +20,7 @@ const _ = require('lodash');
       cursor: text;
       display: flex;
       line-height: 24px;
+      overflow: scroll;
     }
     .editor-line-no {
       margin: 9px;

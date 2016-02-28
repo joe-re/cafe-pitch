@@ -21,6 +21,7 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
       background: white;
       position: absolute;
       text-align: center;
+      overflow: hidden;
     }
     .content {
       position: relative;
@@ -53,9 +54,7 @@ export class Slide {
     const inner = this.el.nativeElement.querySelector('slide .inner');
     const content = this.el.nativeElement.querySelector('slide .content');
     const contentTop = (inner.clientHeight - content.clientHeight) / 3;
-    if (contentTop > 0) {
-      content.style.top = `${contentTop}px`;
-    }
+    content.style.top = `${contentTop}px`;
   }
   setContentScale() {
     const inner = this.el.nativeElement.querySelector('slide .inner');
