@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {Editor} from './editor/editor.component';
 import {SlideList} from './slide-list/slide-list.component';
-import {Slide} from './slide/slide.component';
+import {SlidePreview} from './slide/slide-preview.component';
 const ipc = require('ipc');
 
 @Component({
@@ -16,14 +16,10 @@ const ipc = require('ipc');
       height: 100%;
       width: 100%;
       border: black solid 1px;
-      display: flex;
     }
-    .inner-contents div{
+    .inner-contents div.editor-area {
       height: 100%;
-      width: 50%;
-    }
-    editor, slide {
-      position: relative;
+      width: calc(90% - 760px);
     }
   `],
   template: `
@@ -32,16 +28,16 @@ const ipc = require('ipc');
         <button (click)="clickStartButton()">Start</button>
       </div>
       <div class="inner-contents">
-        <div>
+        <div class="editor-area">
           <editor (changeText)="changeText($event)" (changePage)="changePage($event)"></editor>
         </div>
         <div>
-          <slide [text]="slideText"></slide>
+          <slide-preview [text]="slideText"></slide-preview>
         </div>
       </div>
     </div>
     `,
-  directives: [Editor, Slide, SlideList]
+  directives: [Editor, SlidePreview, SlideList]
 })
 export class AppComponent {
   enteredText = '';
