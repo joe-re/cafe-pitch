@@ -4,7 +4,7 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
 @Component({
   selector: 'slide',
   template: `
-    <div class="slide">
+    <div class="slide" (window:resize)="onResize($event)">
       <div class="slide-content" [innerHTML]="text | markdown"></div>
     </div>
   `,
@@ -14,7 +14,7 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
       background: white;
       font-size: 30px;
       height: 100%;
-      wight: 100%;
+      width: 100%;
     }
     .slide-content {
       text-align: center;
@@ -31,20 +31,19 @@ export class Slide {
   constructor(private el: ElementRef) { }
   onResize(e: MouseEvent) {
     this.setContentScale();
-    this.setContentTop();
   }
   ngAfterViewChecked() {
-    this.setContentTop();
+    this.setContentScale();
   }
   setContentScale() {
-    const inner = this.el.nativeElement.querySelector('.slide-preview .inner');
-    const scale = inner.clientHeight < 720 ? inner.clientHeight / 720 : 1;
-    const content = this.el.nativeElement.querySelector('.slide-preview .content');
-    content.style.transform = `scale(${scale})`;
+    const inner = this.el.nativeElement.querySelector('.slide');
+    const scale = inner.clientHeight / 720;
+    inner.style.transform = `scale(${scale})`;
+    this.setContentTop(scale);
   }
-  setContentTop() {
+  setContentTop(scale) {
     const content = this.el.nativeElement.querySelector('.slide-content');
     const contentTop = (720 - content.clientHeight) / 2;
-    content.style.top = `${contentTop}px`;
+    content.style.top = `${contentTop * scale}px`;
   }
 }

@@ -19,7 +19,7 @@ const ipc = require('ipc');
     }
     .inner-contents div.editor-area {
       height: 100%;
-      width: calc(90% - 760px);
+      width: calc(100% - 940px);
     }
   `],
   template: `

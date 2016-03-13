@@ -5,11 +5,18 @@ import {Slide} from './slide/slide.component';
   selector: 'presentation',
   styles: [`
     .contents {
-      height: 94%;
+      height: 100%;
       box-sizing: border-box;
     }
     slide {
       position: relative;
+    }
+    .inner-contents {
+      height: 70vh;
+      width: calc(70vh * 4 / 3);
+      min-height: 720px;
+      min-width: 940px;
+      margin: 15vh auto;
     }
   `],
   template: `
@@ -22,5 +29,5 @@ import {Slide} from './slide/slide.component';
   directives: [Slide]
 })
 export class PresentationComponent {
-  slideText = '#test';
+  slideText = '# test';
 }
