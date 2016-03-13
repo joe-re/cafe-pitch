@@ -1,30 +1,26 @@
 'use strict';
 
 const electron = require('electron');
+const ipc = require( 'electron' ).ipcMain;
 
 export default class PresentationWindow {
-  _windows = new Map();
-  _ipc = require( 'electron' ).ipcMain;
+  window: any;
+  text: string;
 
   constructor() {
-    this._ipc.on( 'RequestCreateNewWindow', this._onRequestCreateNewWindow.bind( this ) );
+    ipc.on( 'RequestCreateNewWindow', this._onRequestCreateNewWindow.bind( this ) );
+    ipc.on( 'RequestMessage', (ev) => {
+      ev.returnValue = this.text;
+    });
   }
 
-  _onRequestCreateNewWindow( ev ) {
+  _onRequestCreateNewWindow( ev, args ) {
+    this.text = args.text;
     this.createNewWindow();
   }
 
   createNewWindow() {
-    const w  = new electron.BrowserWindow( { width: 400, height: 400, minWidth: 400, minHeight: 400, resizable: true } );
-    const id = w.id;
-
-    w.on( 'closed', () => {
-      this._windows.delete( id );
-    } );
-
-    w.loadURL('file://' + __dirname + '/../renderer/presentation_window.html');
-    this._windows.set( id, w );
-
-    return w;
+    this.window  = new electron.BrowserWindow( { width: 400, height: 400, minWidth: 400, minHeight: 400, resizable: true } );
+    this.window.loadURL('file://' + __dirname + '/../renderer/presentation_window.html');
   }
 }

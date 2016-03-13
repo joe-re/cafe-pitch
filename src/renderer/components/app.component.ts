@@ -2,7 +2,7 @@ import {Component} from 'angular2/core';
 import {Editor} from './editor/editor.component';
 import {SlideList} from './slide-list/slide-list.component';
 import {SlidePreview} from './slide/slide-preview.component';
-const ipc = require('ipc');
+const ipc = require('electron').ipcRenderer;
 
 @Component({
   selector: 'my-app',
@@ -49,6 +49,6 @@ export class AppComponent {
     this.slideText = this.enteredText.split('===')[page - 1];
   }
   clickStartButton() {
-    ipc.send('RequestCreateNewWindow');
+    ipc.send('RequestCreateNewWindow', { text: this.enteredText });
   }
 }

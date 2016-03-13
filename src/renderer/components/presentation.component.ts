@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {Slide} from './slide/slide.component';
+const ipcRenderer = require('electron').ipcRenderer;
 
 @Component({
   selector: 'presentation',
@@ -29,5 +30,8 @@ import {Slide} from './slide/slide.component';
   directives: [Slide]
 })
 export class PresentationComponent {
-  slideText = '# test';
+  slideText: string;
+  constructor() {
+    this.slideText = ipcRenderer.sendSync('RequestMessage');
+  }
 }
