@@ -13,5 +13,8 @@
   "exclude": [
     "node_modules",
     "typings"
+  ],
+  "files": [
+    "./typings/main.d.ts"
   ]
 }
