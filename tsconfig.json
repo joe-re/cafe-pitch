@@ -9,7 +9,7 @@
         "removeComments": false,
         "noImplicitAny": false,
         "outDir": "dist",
-        "rootDir": "."
+        "rootDir": "./src"
     },
     "excludes": [
         "./node_modules"

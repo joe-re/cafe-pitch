@@ -3,3 +3,4 @@ typings
 **/*.js
 **/*.map
 dist
+npm-debug.log

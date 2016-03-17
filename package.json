@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/browser/main.js",
   "scripts": {
-    "prepare": "gulp build:prepare",
+    "prepare": "gulp build:prepare && tsconfig -u tsconfig.json",
     "build": "npm run prepare && tsc",
     "watch": "npm run prepare && concurrent --kill-others \"tsc -w\" \"gulp watch\"",
     "start": "electron .",
