@@ -1,20 +1,37 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false,
-    "outDir": "dist"
-  },
-  "exclude": [
-    "node_modules",
-    "typings"
-  ],
-  "files": [
-    "./typings/main.d.ts"
-  ]
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "outDir": "dist",
+        "rootDir": "."
+    },
+    "excludes": [
+        "./node_modules"
+    ],
+    "filesGlob": [
+        "./lib.d.ts",
+        "./src/**/*.ts"
+    ],
+    "files": [
+        "lib.d.ts",
+        "src/browser/main.ts",
+        "src/browser/presentation_window.ts",
+        "src/renderer/app.ts",
+        "src/renderer/components/app.component.ts",
+        "src/renderer/components/editor/editor.component.ts",
+        "src/renderer/components/markdown-viewer/markdown-viewer.component.ts",
+        "src/renderer/components/presentation.component.ts",
+        "src/renderer/components/slide-list/slide-list.component.ts",
+        "src/renderer/components/slide/slide-preview.component.ts",
+        "src/renderer/components/slide/slide.component.ts",
+        "src/renderer/editor/editor.component.ts",
+        "src/renderer/pipe/markdown.pipe.ts",
+        "src/renderer/presentation.ts"
+    ]
 }
