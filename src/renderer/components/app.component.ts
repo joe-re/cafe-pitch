@@ -17,9 +17,10 @@ const ipc = require('electron').ipcRenderer;
       width: 100%;
       border: black solid 1px;
     }
-    .inner-contents div.editor-area {
+    .inner-contents div.editor-area,
+    .inner-contents div.slide-preview-area {
       height: 100%;
-      width: calc(100% - 940px);
+      width: 50%;
     }
   `],
   template: `
@@ -31,7 +32,7 @@ const ipc = require('electron').ipcRenderer;
         <div class="editor-area">
           <editor (changeText)="changeText($event)" (changePage)="changePage($event)"></editor>
         </div>
-        <div>
+        <div class="slide-preview-area">
           <slide-preview [text]="slideText"></slide-preview>
         </div>
       </div>

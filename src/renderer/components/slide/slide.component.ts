@@ -5,16 +5,23 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
   selector: 'slide',
   template: `
     <div class="slide" (window:resize)="onResize($event)">
-      <div class="slide-content" [innerHTML]="text | markdown"></div>
+      <div class="slide-inner">
+        <div class="slide-content" [innerHTML]="text | markdown"></div>
+      </div>
     </div>
   `,
   styles: [`
     .slide {
+      height: 100%;
+      width: 100%;
+    }
+    .slide-inner {
       position: relative;
       background: white;
       font-size: 30px;
-      height: 100%;
-      width: 100%;
+      height: 720px;
+      width: 940px;
+      transform-origin: 0 0;
     }
     .slide-content {
       text-align: center;
@@ -36,14 +43,12 @@ export class Slide {
     this.setContentScale();
   }
   setContentScale() {
-    const inner = this.el.nativeElement.querySelector('.slide');
-    const scale = inner.clientHeight / 720;
-    inner.style.transform = `scale(${scale})`;
-    this.setContentTop(scale);
-  }
-  setContentTop(scale) {
+    const slide = this.el.nativeElement.querySelector('.slide');
+    const scale = slide.clientHeight / 720;
     const content = this.el.nativeElement.querySelector('.slide-content');
     const contentTop = (720 - content.clientHeight) / 2;
-    content.style.top = `${contentTop * scale}px`;
+    content.style.top = `${contentTop}px`;
+    const inner = this.el.nativeElement.querySelector('.slide-inner');
+    inner.style.transform = `scale(${scale})`;
   }
 }

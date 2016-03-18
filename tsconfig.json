@@ -19,19 +19,22 @@
         "./src/**/*.ts"
     ],
     "files": [
-        "lib.d.ts",
-        "src/browser/main.ts",
-        "src/browser/presentation_window.ts",
-        "src/renderer/app.ts",
-        "src/renderer/components/app.component.ts",
-        "src/renderer/components/editor/editor.component.ts",
-        "src/renderer/components/markdown-viewer/markdown-viewer.component.ts",
-        "src/renderer/components/presentation.component.ts",
-        "src/renderer/components/slide-list/slide-list.component.ts",
-        "src/renderer/components/slide/slide-preview.component.ts",
-        "src/renderer/components/slide/slide.component.ts",
-        "src/renderer/editor/editor.component.ts",
-        "src/renderer/pipe/markdown.pipe.ts",
-        "src/renderer/presentation.ts"
-    ]
+        "./lib.d.ts",
+        "./src/browser/main.ts",
+        "./src/browser/presentation_window.ts",
+        "./src/renderer/app.ts",
+        "./src/renderer/components/app.component.ts",
+        "./src/renderer/components/editor/editor.component.ts",
+        "./src/renderer/components/markdown-viewer/markdown-viewer.component.ts",
+        "./src/renderer/components/presentation.component.ts",
+        "./src/renderer/components/slide-list/slide-list.component.ts",
+        "./src/renderer/components/slide/slide-preview.component.ts",
+        "./src/renderer/components/slide/slide.component.ts",
+        "./src/renderer/editor/editor.component.ts",
+        "./src/renderer/pipe/markdown.pipe.ts",
+        "./src/renderer/presentation.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
 }

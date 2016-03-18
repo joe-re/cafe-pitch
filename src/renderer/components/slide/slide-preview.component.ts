@@ -17,8 +17,8 @@ import {Slide} from './slide.component';
       overflow: hidden;
     }
     .content {
-      height: 720px;
-      width: 940px;
+      width: 100%;
+      height: calc(50vw * 3/4);
     }
     `
   ],

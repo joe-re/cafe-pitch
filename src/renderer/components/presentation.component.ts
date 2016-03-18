@@ -17,7 +17,7 @@ const ipcRenderer = require('electron').ipcRenderer;
       width: calc(70vh * 4 / 3);
       min-height: 720px;
       min-width: 940px;
-      margin: 15vh auto;
+      margin: auto;
     }
   `],
   template: `
