@@ -64,12 +64,8 @@ export class Editor {
     });
     let selectedPage = 1;
     _.each(this.el.nativeElement.querySelector('.editor-contents').innerText.split('\n'), (text, index) => {
-      if (foundNo === index + 1) {
-        this.changePage.emit(selectedPage);
-      }
-      if (text === '===') {
-        selectedPage++;
-      }
+      if (text === '===') selectedPage++;
+      if (foundNo === index + 1) this.changePage.emit(selectedPage);
     });
   }
 }
