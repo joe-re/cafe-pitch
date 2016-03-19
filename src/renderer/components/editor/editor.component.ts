@@ -30,6 +30,7 @@ const _ = require('lodash');
     .editor-contents {
       margin: 8px;
       outline: 0;
+      width: 100%;
     }
     `
   ],
