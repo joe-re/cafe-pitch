@@ -20,7 +20,7 @@ export default class PresentationWindow {
   }
 
   createNewWindow() {
-    this.window  = new electron.BrowserWindow( { width: 400, height: 400, minWidth: 400, minHeight: 400, resizable: true } );
+    this.window  = new electron.BrowserWindow( { width: 940, height: 720, minWidth: 940, minHeight: 720, resizable: true } );
     this.window.loadURL('file://' + __dirname + '/../renderer/presentation_window.html');
   }
 }
