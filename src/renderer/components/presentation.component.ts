@@ -43,7 +43,7 @@ export class PresentationComponent {
     this._handleKeyUp = this.handleKeyUp.bind(this);
   }
 
-  ngAfterContentInit() {
+  ngOnInit() {
     document.addEventListener('keyup', this._handleKeyUp);
   }
 
