@@ -25,12 +25,9 @@
         "./src/renderer/app.ts",
         "./src/renderer/components/app.component.ts",
         "./src/renderer/components/editor/editor.component.ts",
-        "./src/renderer/components/markdown-viewer/markdown-viewer.component.ts",
         "./src/renderer/components/presentation.component.ts",
-        "./src/renderer/components/slide-list/slide-list.component.ts",
         "./src/renderer/components/slide/slide-preview.component.ts",
         "./src/renderer/components/slide/slide.component.ts",
-        "./src/renderer/editor/editor.component.ts",
         "./src/renderer/pipe/markdown.pipe.ts",
         "./src/renderer/presentation.ts"
     ],

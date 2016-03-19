@@ -1,6 +1,5 @@
 import {Component} from 'angular2/core';
 import {Editor} from './editor/editor.component';
-import {SlideList} from './slide-list/slide-list.component';
 import {SlidePreview} from './slide/slide-preview.component';
 const ipc = require('electron').ipcRenderer;
 
@@ -38,11 +37,11 @@ const ipc = require('electron').ipcRenderer;
       </div>
     </div>
     `,
-  directives: [Editor, SlidePreview, SlideList]
+  directives: [Editor, SlidePreview]
 })
 export class AppComponent {
-  enteredText = '';
-  slideText = '';
+  private enteredText = '';
+  private slideText = '';
   changeText(text) {
     this.enteredText = text;
   }
