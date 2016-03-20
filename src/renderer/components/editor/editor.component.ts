@@ -39,8 +39,7 @@ const _ = require('lodash');
 export class Editor {
   @Output('changeText') changeText = new EventEmitter();
   @Output('changePage') changePage = new EventEmitter();
-  enteredLineNumbers = [1];
-  marked = '';
+  private enteredLineNumbers = [1];
   constructor(private el: ElementRef) { }
   handleClickEditor() {
     this.el.nativeElement.querySelector('.editor-contents').focus();
@@ -54,7 +53,7 @@ export class Editor {
   }
   getSelectedLineNo() {
     const selectedNode = window.getSelection().anchorNode;
-    let lineDiv = selectedNode.nodeName === '#text' ? selectedNode.parentElement : selectedNode;
+    const lineDiv = selectedNode.nodeName === '#text' ? selectedNode.parentElement : selectedNode;
     const contents = this.el.nativeElement.querySelector('.editor-contents');
     let foundNo = 1;
     _.each(contents.childNodes, (node: HTMLElement, index: number) => {

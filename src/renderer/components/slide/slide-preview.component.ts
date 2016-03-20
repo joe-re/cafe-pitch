@@ -26,6 +26,6 @@ import {Slide} from './slide.component';
   directives: [Slide]
 })
 export class SlidePreview {
-  text: string;
-  slideWidth: number;
+  private text: string;
+  private slideWidth: number;
 }

@@ -1,20 +1,20 @@
 'use strict';
 
 const electron = require('electron');
-const ipc = require( 'electron' ).ipcMain;
+const ipc: Electron.IPCMain = require( 'electron' ).ipcMain;
 
 export default class PresentationWindow {
-  window: any;
-  text: string;
+  private window: Electron.BrowserWindow;
+  private text: string;
 
   constructor() {
-    ipc.on( 'RequestCreateNewWindow', this._onRequestCreateNewWindow.bind( this ) );
-    ipc.on( 'RequestMessage', (ev) => {
+    ipc.on( 'RequestCreateNewWindow', this.hanldRequestCreateNewWindow.bind( this ) );
+    ipc.on( 'RequestMessage', (ev: Electron.IPCMainEvent) => {
       ev.returnValue = this.text;
     });
   }
 
-  _onRequestCreateNewWindow( ev, args ) {
+  hanldRequestCreateNewWindow( _ev: Electron.IPCMainEvent, args ) {
     this.text = args.text;
     this.createNewWindow();
   }

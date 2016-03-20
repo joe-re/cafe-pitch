@@ -34,21 +34,25 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
   pipes: [MarkdownPipe]
 })
 export class Slide {
-  text: string;
+  private text: string;
   constructor(private el: ElementRef) { }
   onResize(e: MouseEvent) {
     this.setContentScale();
+    this.setContentTop();
   }
   ngAfterViewChecked() {
     this.setContentScale();
+    this.setContentTop();
   }
   setContentScale() {
     const slide = this.el.nativeElement.querySelector('.slide');
     const scale = slide.clientHeight / 720;
+    const inner = this.el.nativeElement.querySelector('.slide-inner');
+    inner.style.transform = `scale(${scale})`;
+  }
+  setContentTop() {
     const content = this.el.nativeElement.querySelector('.slide-content');
     const contentTop = (720 - content.clientHeight) / 2;
     content.style.top = `${contentTop}px`;
-    const inner = this.el.nativeElement.querySelector('.slide-inner');
-    inner.style.transform = `scale(${scale})`;
   }
 }

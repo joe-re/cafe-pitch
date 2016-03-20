@@ -3,7 +3,7 @@ const marked = require('marked');
 
 @Pipe({name: 'markdown'})
 export class MarkdownPipe implements PipeTransform {
-  transform(value: string, args: string[]): any {
+  transform(value: string, args: string[]): HTMLDocument {
     return marked(value);
   }
 }

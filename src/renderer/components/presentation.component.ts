@@ -31,14 +31,13 @@ const ipcRenderer = require('electron').ipcRenderer;
   directives: [Slide]
 })
 export class PresentationComponent {
-  slides: string[];
-  slide: string;
-  page = 1;
-  _handleKeyUp: any;
+  private slides: string[];
+  private slide: string;
+  private page = 1;
+  private _handleKeyUp: any;
 
   constructor() {
     this.slides = ipcRenderer.sendSync('RequestMessage').split('===');
-    this.page = 1;
     this.changePage();
     this._handleKeyUp = this.handleKeyUp.bind(this);
   }
