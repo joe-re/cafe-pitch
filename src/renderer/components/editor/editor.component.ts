@@ -40,27 +40,43 @@ export class Editor {
   @Output('changeText') changeText = new EventEmitter();
   @Output('changePage') changePage = new EventEmitter();
   private enteredLineNumbers = [1];
+
   constructor(private el: ElementRef) { }
-  handleClickEditor() {
+
+  private handleClickEditor() {
     this.el.nativeElement.querySelector('.editor-contents').focus();
   }
-  handleChangeContents(ev: MouseEvent) {
+
+  private handleChangeContents(ev: MouseEvent) {
     // +2 because 1 origin + next line
     const lines = this.el.nativeElement.querySelectorAll('.editor-contents div');
     this.enteredLineNumbers = _.range(1, lines.length + 2);
     const text = this.el.nativeElement.querySelector('.editor-contents').innerText;
     this.changeText.emit(text);
   }
-  getSelectedLineNo() {
+
+  private getSelectedLineNo() {
+    let isFound = false;
+    const findIndex = (nodes: HTMLCollection, target: Node, memo: number = 1) => {
+      _.each(nodes, (node: HTMLElement, index: number) => {
+        if (isFound) return;
+        const childDivs = _.filter(node.children, (child:HTMLElement) => child.nodeName === 'DIV');
+        if (node === target) {
+          isFound = true;
+        } else if (childDivs.length > 0) {
+          memo = findIndex(childDivs, target, memo);
+        } else {
+          ++memo;
+        }
+      });
+      return memo;
+    };
+
     const selectedNode = window.getSelection().anchorNode;
-    const lineDiv = selectedNode.nodeName === '#text' ? selectedNode.parentElement : selectedNode;
+    const selectedLineDiv: Node = selectedNode.nodeName === '#text' ? selectedNode.parentElement : selectedNode;
     const contents = this.el.nativeElement.querySelector('.editor-contents');
-    let foundNo = 1;
-    _.each(contents.childNodes, (node: HTMLElement, index: number) => {
-      if (node === lineDiv) {
-        foundNo = index;
-      }
-    });
+    let foundNo = contents === selectedLineDiv ? 1 : findIndex(contents.children, selectedLineDiv);
+
     let selectedPage = 1;
     _.each(this.el.nativeElement.querySelector('.editor-contents').innerText.split('\n'), (text, index) => {
       if (text === '===') selectedPage++;
