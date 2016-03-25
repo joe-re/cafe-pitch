@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {Editor} from './editor/editor.component';
 import {SlidePreview} from './slide/slide-preview.component';
+import {SlideService} from './../services/slide.service';
 const ipc = require('electron').ipcRenderer;
 
 @Component({
@@ -32,23 +33,24 @@ const ipc = require('electron').ipcRenderer;
           <editor (changeText)="changeText($event)" (changePage)="changePage($event)"></editor>
         </div>
         <div class="slide-preview-area">
-          <slide-preview [text]="slideText"></slide-preview>
+          <slide-preview [text]="slideServie.getPageText(page)"></slide-preview>
         </div>
       </div>
     </div>
     `,
-  directives: [Editor, SlidePreview]
+  directives: [Editor, SlidePreview],
+  providers: [SlideService]
 })
 export class AppComponent {
-  private enteredText = '';
-  private slideText = '';
-  changeText(text) {
-    this.enteredText = text;
+  private page = 1;
+  constructor(private slideServie: SlideService) { }
+  changeText(text: string) {
+    this.slideServie.setText(text);
   }
   changePage(page: number) {
-    this.slideText = this.enteredText.split('===')[page - 1];
+    this.page = page;
   }
   clickStartButton() {
-    ipc.send('RequestCreateNewWindow', { text: this.enteredText });
+    ipc.send('RequestCreateNewWindow', { text: this.slideServie.getText() });
   }
 }

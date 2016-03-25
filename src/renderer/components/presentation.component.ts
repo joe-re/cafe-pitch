@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {Slide} from './slide/slide.component';
+import {SlideService} from './../services/slide.service';
 const _ = require('lodash');
 const ipcRenderer = require('electron').ipcRenderer;
 
@@ -24,21 +25,19 @@ const ipcRenderer = require('electron').ipcRenderer;
   template: `
     <div class="contents">
       <div class="inner-contents">
-        <slide [text]="slide"></slide>
+        <slide [text]="slideServie.getPageText(page)"></slide>
       </div>
     </div>
     `,
-  directives: [Slide]
+  directives: [Slide],
+  providers: [SlideService]
 })
 export class PresentationComponent {
-  private slides: string[];
-  private slide: string;
   private page = 1;
   private _handleKeyUp: any;
 
-  constructor() {
-    this.slides = ipcRenderer.sendSync('RequestMessage').split('===');
-    this.changePage();
+  constructor(private slideServie: SlideService) {
+    slideServie.setText(ipcRenderer.sendSync('RequestMessage'));
     this._handleKeyUp = this.handleKeyUp.bind(this);
   }
 
@@ -50,21 +49,15 @@ export class PresentationComponent {
     document.removeEventListener('keyup', this._handleKeyUp);
   }
 
-  private changePage() {
-    this.slide = this.slides[this.page - 1];
-  }
-
   private goToNextPage() {
-    if (this.slides.length >= this.page + 1) {
+    if (this.slideServie.getMaxPage() >= this.page + 1) {
       this.page++;
-      this.changePage();
     }
   }
 
   private goToPrevPage() {
     if (1 <= this.page - 1) {
       this.page--;
-      this.changePage();
     }
   }
 
