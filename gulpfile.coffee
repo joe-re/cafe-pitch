@@ -18,8 +18,10 @@ gulp.task 'build:angular2-polyfills.js', () ->
     .pipe gulp.dest('./dist/renderer/node_modules/angular2/bundles/')
 
 gulp.task 'build:css', () ->
-  gulp.src('src/**/*.css')
-    .pipe gulp.dest('dist')
+  gulp.src([
+   'src/**/*.css',
+   'node_modules/highlight.js/styles/solarized-light.css'
+  ]).pipe gulp.dest('dist')
 
 gulp.task 'build:scss', () ->
   gulp.src('src/**/*.scss')

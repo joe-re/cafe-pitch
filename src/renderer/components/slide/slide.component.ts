@@ -13,7 +13,8 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
   styleUrls: [
     './components/slide/slide.css',
     './components/slide/slide-content.css',
-    './components/slide/solarize.css'
+    './components/slide/solarize.css',
+    './../solarized-light.css',
   ],
   encapsulation: ViewEncapsulation.None,
   inputs: ['text'],
