@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component, ElementRef, ViewEncapsulation} from 'angular2/core';
 import {MarkdownPipe} from '../../pipe/markdown.pipe';
 
 @Component({
@@ -10,26 +10,12 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
       </div>
     </div>
   `,
-  styles: [`
-    .slide {
-      height: 100%;
-      width: 100%;
-    }
-    .slide-inner {
-      position: relative;
-      background: white;
-      font-size: 30px;
-      height: 720px;
-      width: 940px;
-      transform-origin: 0 0;
-    }
-    .slide-content {
-      text-align: center;
-      position: absolute;
-      width: 100%;
-    }
-    `
+  styleUrls: [
+    './components/slide/slide.css',
+    './components/slide/slide-content.css',
+    './components/slide/solarize.css'
   ],
+  encapsulation: ViewEncapsulation.None,
   inputs: ['text'],
   pipes: [MarkdownPipe]
 })

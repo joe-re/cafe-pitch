@@ -1,0 +1,25 @@
+.slide ul {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+.slide li {
+  text-align: left;
+}
+
+.slide pre {
+  margin: 20px auto;
+  width: 90%;
+  text-align: left;
+}
+
+.slide table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}

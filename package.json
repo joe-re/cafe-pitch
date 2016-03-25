@@ -28,6 +28,7 @@
     "concurrently": "^2.0.0",
     "del": "^2.2.0",
     "electron-prebuilt": "^0.36.7",
+    "gulp-sass": "^2.2.0",
     "run-sequence": "^1.1.5",
     "tsconfig-cli": "^1.0.2",
     "typescript": "^1.8.9",

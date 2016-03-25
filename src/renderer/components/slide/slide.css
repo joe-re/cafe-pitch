@@ -1,0 +1,17 @@
+.slide {
+  height: 100%;
+  width: 100%;
+}
+.slide-inner {
+  position: relative;
+  background: white;
+  font-size: 30px;
+  height: 720px;
+  width: 940px;
+  transform-origin: 0 0;
+}
+.slide-content {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+}
