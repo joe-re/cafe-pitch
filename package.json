@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "gulp build:prepare && tsconfig -u tsconfig.json",
     "build": "npm run prepare && tsc",
-    "watch": "npm run prepare && concurrent --kill-others \"tsc -w\" \"gulp watch\"",
+    "watch": "npm run prepare && concurrently --kill-others \"tsc -w\" \"gulp watch\"",
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,23 +14,23 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "angular2": "2.0.0-beta.7",
-    "es6-shim": "^0.33.13",
+    "angular2": "2.0.0-beta.12",
+    "es6-shim": "^0.35.0",
     "font-awesome": "^4.5.0",
     "lodash": "^4.3.0",
     "marked": "^0.3.5",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
-    "zone.js": "0.5.15"
+    "zone.js": "0.6.6"
   },
   "devDependencies": {
     "coffee-script": "^1.10.0",
-    "concurrently": "^1.0.0",
+    "concurrently": "^2.0.0",
     "del": "^2.2.0",
     "electron-prebuilt": "^0.36.7",
     "run-sequence": "^1.1.5",
     "tsconfig-cli": "^1.0.2",
-    "typescript": "^1.7.5",
+    "typescript": "^1.8.9",
     "typings": "^0.7.9"
   }
 }
