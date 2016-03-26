@@ -2,7 +2,7 @@ import {Component} from 'angular2/core';
 import {Editor} from './editor/editor.component';
 import {SlidePreview} from './slide/slide-preview.component';
 import {SlideService} from './../services/slide.service';
-const ipc = require('electron').ipcRenderer;
+import {ipcRenderer} from 'electron';
 
 @Component({
   selector: 'my-app',
@@ -51,6 +51,6 @@ export class AppComponent {
     this.page = this.slideServie.getPageNo(selectedLineNo);
   }
   clickStartButton() {
-    ipc.send('RequestCreateNewWindow', { text: this.slideServie.getText() });
+    ipcRenderer.send('RequestCreateNewWindow', { text: this.slideServie.getText() });
   }
 }

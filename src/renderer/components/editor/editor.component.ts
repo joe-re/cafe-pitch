@@ -1,5 +1,6 @@
 import {Component, ElementRef, Output, EventEmitter} from 'angular2/core';
 import * as _ from 'lodash';
+import {ipcRenderer} from 'electron';
 
 @Component({
   selector: 'editor',
@@ -42,8 +43,7 @@ import * as _ from 'lodash';
       width: 100%;
     }
     `
-  ],
-  inputs: ['text']
+  ]
 })
 export class Editor {
   @Output('changeText') changeText = new EventEmitter();
@@ -51,6 +51,13 @@ export class Editor {
   private enteredLineNumbers = [1];
 
   constructor(private el: ElementRef) { }
+
+  private ngOnInit() {
+    ipcRenderer.on('readFile', (ev, text: string) => {
+      this.el.nativeElement.querySelector('.editor-contents').innerText = text;
+      this.changeText.emit(text);
+    });
+  }
 
   private handleClickEditor() {
     this.el.nativeElement.querySelector('.editor-contents').focus();

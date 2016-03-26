@@ -2,6 +2,7 @@ import MainWindow from './main_window';
 import PresentationWindow from './presentation_window';
 import setMenu from './menu';
 import * as electron from 'electron';
+import FileManager from './file_manager';
 
 const app = electron.app;
 
