@@ -21,6 +21,7 @@
     "files": [
         "./lib.d.ts",
         "./src/browser/main.ts",
+        "./src/browser/menu.ts",
         "./src/browser/presentation_window.ts",
         "./src/renderer/app.ts",
         "./src/renderer/components/app.component.ts",

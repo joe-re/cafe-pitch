@@ -1,6 +1,7 @@
 'use strict';
 
 import PresentationWindow from './presentation_window';
+import setMenu from './menu';
 const electron = require('electron');
 
 const app = electron.app;
@@ -18,7 +19,10 @@ function createWindow () {
   presentationWindow = new PresentationWindow();
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+  setMenu(mainWindow);
+});
 
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
