@@ -1,37 +1,28 @@
-'use strict';
-
+import MainWindow from './main_window';
 import PresentationWindow from './presentation_window';
 import setMenu from './menu';
-const electron = require('electron');
+import * as electron from 'electron';
 
 const app = electron.app;
 
-let mainWindow: Electron.BrowserWindow;
+let mainWindow;
 let presentationWindow;
 
-function createWindow () {
-  mainWindow = new electron.BrowserWindow({width: 800, height: 600});
-  mainWindow.loadURL('file://' + __dirname + '/../renderer/index.html');
-  // mainWindow.webContents.openDevTools();
-  mainWindow.on('closed', function() {
-    mainWindow = null;
-  });
+const initialize = () => {
+  mainWindow = new MainWindow();
+  mainWindow.createWindow();
   presentationWindow = new PresentationWindow();
-}
+  setMenu(mainWindow.getBrowserWindow());
+};
 
-app.on('ready', () => {
-  createWindow();
-  setMenu(mainWindow);
-});
+app.on('ready', initialize);
 
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-app.on('activate', function () {
-  if (mainWindow === null) {
-    createWindow();
-  }
+app.on('activate', () => {
+  if (!mainWindow) initialize();
 });

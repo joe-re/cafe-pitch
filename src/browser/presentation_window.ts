@@ -1,7 +1,5 @@
-'use strict';
-
-const electron = require('electron');
-const ipc: Electron.IPCMain = require( 'electron' ).ipcMain;
+import * as electron from 'electron';
+const ipc: Electron.IPCMain = electron.ipcMain;
 
 export default class PresentationWindow {
   private window: Electron.BrowserWindow;
@@ -14,13 +12,15 @@ export default class PresentationWindow {
     });
   }
 
-  hanldRequestCreateNewWindow( _ev: Electron.IPCMainEvent, args ) {
+  private hanldRequestCreateNewWindow( _ev: Electron.IPCMainEvent, args ) {
     this.text = args.text;
-    this.createNewWindow();
+    this.createWindow();
   }
 
-  createNewWindow() {
-    this.window  = new electron.BrowserWindow( { width: 940, height: 720, minWidth: 940, minHeight: 720, resizable: true } );
+  private createWindow() {
+    if (this.window) return;
+    this.window  = new electron.BrowserWindow( { width: 940, height: 740, minWidth: 940, minHeight: 740, resizable: true } );
     this.window.loadURL('file://' + __dirname + '/../renderer/presentation_window.html');
+    this.window.on('closed', () => { this.window = null; });
   }
 }
