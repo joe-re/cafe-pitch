@@ -10,7 +10,13 @@ import * as _ from 'lodash';
           {{lineNumber}}
         </div>
       </div>
-      <div class="editor-contents" contenteditable=true (input)="handleChangeContents()" (keyup)="getSelectedLineNo()" (mouseup)="getSelectedLineNo">{{text}}</div>
+      <div class="editor-contents"
+        contenteditable=true
+        (input)="handleChangeContents()"
+        (paste)="handlePaste($event)"
+        (keyup)="getSelectedLineNo()"
+        (mouseup)="getSelectedLineNo()"
+      >{{text}}</div>
     </div>
   `,
   styles: [`
@@ -80,5 +86,11 @@ export class Editor {
     const contents = this.el.nativeElement.querySelector('.editor-contents');
     let selectedLineNo: number = contents === selectedLineDiv ? 1 : findIndex(contents.children, selectedLineDiv);
     this.changeSelectedLineNo.emit(selectedLineNo);
+  }
+
+  private handlePaste(e: ClipboardEvent) {
+    e.preventDefault();
+    const text = e.clipboardData.getData("text/plain");
+    document.execCommand("insertHTML", false, text);
   }
 }
