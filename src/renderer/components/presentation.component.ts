@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {Slide} from './slide/slide.component';
 import {SlideService} from './../services/slide.service';
-const _ = require('lodash');
+import * as _ from 'lodash';
 const ipcRenderer = require('electron').ipcRenderer;
 
 @Component({

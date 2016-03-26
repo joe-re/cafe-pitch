@@ -1,5 +1,5 @@
 import {Component, ElementRef, Output, EventEmitter} from 'angular2/core';
-const _ = require('lodash');
+import * as _ from 'lodash';
 
 @Component({
   selector: 'editor',
@@ -41,7 +41,7 @@ const _ = require('lodash');
 })
 export class Editor {
   @Output('changeText') changeText = new EventEmitter();
-  @Output('changePage') changePage = new EventEmitter();
+  @Output('changeSelectedLineNo') changeSelectedLineNo = new EventEmitter();
   private enteredLineNumbers = [1];
 
   constructor(private el: ElementRef) { }
@@ -60,7 +60,7 @@ export class Editor {
 
   private getSelectedLineNo() {
     let isFound = false;
-    const findIndex = (nodes: HTMLCollection, target: Node, memo: number = 1) => {
+    const findIndex = (nodes: Element[], target: Node, memo: number = 1): number => {
       _.each(nodes, (node: HTMLElement, index: number) => {
         if (isFound) return;
         const childDivs = _.filter(node.children, (child:HTMLElement) => child.nodeName === 'DIV');
@@ -78,12 +78,7 @@ export class Editor {
     const selectedNode = window.getSelection().anchorNode;
     const selectedLineDiv: Node = selectedNode.nodeName === '#text' ? selectedNode.parentElement : selectedNode;
     const contents = this.el.nativeElement.querySelector('.editor-contents');
-    let foundNo = contents === selectedLineDiv ? 1 : findIndex(contents.children, selectedLineDiv);
-
-    let selectedPage = 1;
-    _.each(this.el.nativeElement.querySelector('.editor-contents').innerText.split('\n'), (text, index) => {
-      if (text === '===') selectedPage++;
-      if (foundNo === index + 1) this.changePage.emit(selectedPage);
-    });
+    let selectedLineNo: number = contents === selectedLineDiv ? 1 : findIndex(contents.children, selectedLineDiv);
+    this.changeSelectedLineNo.emit(selectedLineNo);
   }
 }

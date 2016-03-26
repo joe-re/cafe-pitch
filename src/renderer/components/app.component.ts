@@ -30,7 +30,7 @@ const ipc = require('electron').ipcRenderer;
       </div>
       <div class="inner-contents">
         <div class="editor-area">
-          <editor (changeText)="changeText($event)" (changePage)="changePage($event)"></editor>
+          <editor (changeText)="changeText($event)" (changeSelectedLineNo)="changeSelectedLineNo($event)"></editor>
         </div>
         <div class="slide-preview-area">
           <slide-preview [text]="slideServie.getPageText(page)"></slide-preview>
@@ -47,8 +47,8 @@ export class AppComponent {
   changeText(text: string) {
     this.slideServie.setText(text);
   }
-  changePage(page: number) {
-    this.page = page;
+  changeSelectedLineNo(selectedLineNo: number) {
+    this.page = this.slideServie.getPageNo(selectedLineNo);
   }
   clickStartButton() {
     ipc.send('RequestCreateNewWindow', { text: this.slideServie.getText() });

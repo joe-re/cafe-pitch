@@ -24,6 +24,15 @@ export class SlideService {
     return this.getPages().length;
   }
 
+  public getPageNo(lineNo: number): number {
+    let selectedPage = 1;
+    _.some(this.getText().split('\n'), (text: string, index: number) => {
+      if (text === '===') selectedPage++;
+      return lineNo === index + 1;
+    });
+    return selectedPage;
+  }
+
   private getPages(): string[] {
     return this.text.split('===');
   }
