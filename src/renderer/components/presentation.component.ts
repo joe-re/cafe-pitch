@@ -12,11 +12,12 @@ const ipcRenderer = require('electron').ipcRenderer;
       box-sizing: border-box;
     }
     slide {
-      position: relative;
+      height: 100%;
+      width: 100%;
     }
     .inner-contents {
-      height: 70vh;
-      width: calc(70vh * 4 / 3);
+      height: 100%;
+      width: width: 100%;
       min-height: 720px;
       min-width: 940px;
       margin: auto;
