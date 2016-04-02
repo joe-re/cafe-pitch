@@ -13,11 +13,11 @@ import {ipcRenderer} from 'electron';
       </div>
       <div class="editor-contents"
         contenteditable=true
-        (input)="handleChangeContents()"
+        (input)="handleChangeContents($event)"
         (paste)="handlePaste($event)"
         (keyup)="getSelectedLineNo()"
         (mouseup)="getSelectedLineNo()"
-      >{{text}}</div>
+      ></div>
     </div>
   `,
   styles: [`
@@ -48,26 +48,35 @@ import {ipcRenderer} from 'electron';
 export class Editor {
   @Output('changeText') changeText = new EventEmitter();
   @Output('changeSelectedLineNo') changeSelectedLineNo = new EventEmitter();
-  private enteredLineNumbers = [1];
+  private enteredLineNumbers: number[] = [1];
 
   constructor(private el: ElementRef) { }
 
   private ngOnInit() {
     ipcRenderer.on('readFile', (ev, text: string) => {
-      this.el.nativeElement.querySelector('.editor-contents').innerText = text;
+      this.enteredLineNumbers = _.range(1, text.split('\n').length + 1);
+      this.el.nativeElement.querySelector('.editor-contents').innerHTML =
+        _.reduce(this.escapeHTML(text).split('\n'), (memo, v) => memo += `<div>${v?v:'<br>'}</div>`);
+      // this.el.nativeElement.querySelector('.editor-contents').innerHTML =
+      //   _.reduce(text.split('\n'), (memo, v) => memo += `<div>${v}<br></div>`);
       this.changeText.emit(text);
     });
   }
-
+  private escapeHTML(str) {
+    return str.replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
   private handleClickEditor() {
     this.el.nativeElement.querySelector('.editor-contents').focus();
   }
 
-  private handleChangeContents(ev: MouseEvent) {
-    // +2 because 1 origin + next line
-    const lines = this.el.nativeElement.querySelectorAll('.editor-contents div');
-    this.enteredLineNumbers = _.range(1, lines.length + 2);
-    const text = this.el.nativeElement.querySelector('.editor-contents').innerText;
+  private handleChangeContents(ev) {
+    const text = ev.target.innerText;
+    const lines = text.split('\n');
+    this.enteredLineNumbers = _.range(1, lines.length + 1);
     this.changeText.emit(text);
   }
 
