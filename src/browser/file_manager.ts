@@ -44,20 +44,24 @@ export default class FileManager extends EventEmitter {
     if (this.readingFilePath) {
       this.writeFile();
     } else {
-      dialog.showSaveDialog(
-        MainWindow.getInstance().getBrowserWindow(),
-        {
-          title: 'save',
-          filters: [{
-            name: 'markdown file',
-            extensions: ['md']
-          }]
-        },
-        (file) => {
-          if (file) this.writeFile(file);
-        }
-      );
+      this.saveAsNewFile();
     }
+  }
+
+  public saveAsNewFile() {
+    dialog.showSaveDialog(
+      MainWindow.getInstance().getBrowserWindow(),
+      {
+        title: 'save',
+        filters: [{
+          name: 'markdown file',
+          extensions: ['md']
+        }]
+      },
+      (file) => {
+        if (file) this.writeFile(file);
+      }
+    );
   }
 
   private readFile(filePath: string): void {

@@ -52,13 +52,11 @@ export class Editor {
 
   constructor(private el: ElementRef) { }
 
-  private ngOnInit() {
+  ngOnInit() {
     ipcRenderer.on('readFile', (ev, text: string) => {
       this.enteredLineNumbers = _.range(1, text.split('\n').length + 1);
       this.el.nativeElement.querySelector('.editor-contents').innerHTML =
-        _.reduce(this.escapeHTML(text).split('\n'), (memo, v) => memo += `<div>${v?v:'<br>'}</div>`);
-      // this.el.nativeElement.querySelector('.editor-contents').innerHTML =
-      //   _.reduce(text.split('\n'), (memo, v) => memo += `<div>${v}<br></div>`);
+        _.reduce(this.escapeHTML(text).split('\n'), (memo, v) => memo += `<div>${v ? v : '<br>'}</div>`);
       this.changeText.emit(text);
     });
   }
@@ -69,23 +67,23 @@ export class Editor {
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
   }
-  private handleClickEditor() {
+  handleClickEditor() {
     this.el.nativeElement.querySelector('.editor-contents').focus();
   }
 
-  private handleChangeContents(ev) {
+  handleChangeContents(ev) {
     const text = ev.target.innerText;
     const lines = text.split('\n');
     this.enteredLineNumbers = _.range(1, lines.length + 1);
     this.changeText.emit(text);
   }
 
-  private getSelectedLineNo() {
+  getSelectedLineNo() {
     let isFound = false;
     const findIndex = (nodes: Element[], target: Node, memo: number = 1): number => {
       _.each(nodes, (node: HTMLElement, index: number) => {
         if (isFound) return;
-        const childDivs = _.filter(node.children, (child:HTMLElement) => child.nodeName === 'DIV');
+        const childDivs = _.filter(node.children, (child: HTMLElement) => child.nodeName === 'DIV');
         if (node === target) {
           isFound = true;
         } else if (childDivs.length > 0) {
@@ -104,9 +102,9 @@ export class Editor {
     this.changeSelectedLineNo.emit(selectedLineNo);
   }
 
-  private handlePaste(e: ClipboardEvent) {
+  handlePaste(e: ClipboardEvent) {
     e.preventDefault();
-    const text = e.clipboardData.getData("text/plain");
-    document.execCommand("insertHTML", false, text);
+    const text = e.clipboardData.getData('text/plain');
+    document.execCommand('insertText', false, text);
   }
 }

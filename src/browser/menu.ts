@@ -18,7 +18,9 @@ const setMenu = (mainWindow: MainWindow) => {
         { label: 'Save', accelerator: 'Command+S', click: () => {
           FileManager.getInstance().saveFile();
         }},
-        { label: 'Save As...' },
+        { label: 'Save As...', click: () => {
+          FileManager.getInstance().saveAsNewFile();
+        }},
         { type: 'separator' },
         { label: 'Quit', accelerator: 'Command+Q', click: () => app.quit() }
       ]
