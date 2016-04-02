@@ -15,8 +15,8 @@ import {ipcRenderer} from 'electron';
         contenteditable=true
         (input)="handleChangeContents($event)"
         (paste)="handlePaste($event)"
-        (keyup)="getSelectedLineNo()"
-        (mouseup)="getSelectedLineNo()"
+        (keyup)="hanldeChangeLineNo()"
+        (mouseup)="hanldeChangeLineNo()"
       ></div>
     </div>
   `,
@@ -60,6 +60,7 @@ export class Editor {
       this.changeText.emit(text);
     });
   }
+
   private escapeHTML(str) {
     return str.replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
@@ -67,6 +68,7 @@ export class Editor {
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
   }
+
   handleClickEditor() {
     this.el.nativeElement.querySelector('.editor-contents').focus();
   }
@@ -74,11 +76,11 @@ export class Editor {
   handleChangeContents(ev) {
     const text = ev.target.innerText;
     const lines = text.split('\n');
-    this.enteredLineNumbers = _.range(1, lines.length + 1);
+    this.enteredLineNumbers = _.range(1, lines.length);
     this.changeText.emit(text);
   }
 
-  getSelectedLineNo() {
+  hanldeChangeLineNo() {
     let isFound = false;
     const findIndex = (nodes: Element[], target: Node, memo: number = 1): number => {
       _.each(nodes, (node: HTMLElement, index: number) => {
