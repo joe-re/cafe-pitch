@@ -1,12 +1,12 @@
 import * as electron from 'electron';
 import FileManager from './file_manager';
+import MainWindow from './main_window';
 
-const Menu = require('menu');
-const dialog = require('dialog');
+const menu = require('menu');
 const app = electron.app;
 
-const setMenu = (mainWindow: Electron.BrowserWindow) => {
-  var menu = Menu.buildFromTemplate([
+const setMenu = (mainWindow: MainWindow) => {
+  const buildedMenu = menu.buildFromTemplate([
     {
       label: 'File',
       submenu: [
@@ -15,7 +15,8 @@ const setMenu = (mainWindow: Electron.BrowserWindow) => {
           FileManager.getInstance().openFile();
         }},
         { type: 'separator' },
-        { label: 'Save' },
+        { label: 'Save', accelerator: 'Command+S', click: () => {
+        }},
         { label: 'Save As...' },
         { type: 'separator' },
         { label: 'Quit', accelerator: 'Command+Q', click: () => app.quit() }
@@ -39,13 +40,13 @@ const setMenu = (mainWindow: Electron.BrowserWindow) => {
         {
           label: 'Toggle Developer Tools',
           accelerator: 'Alt+Command+I',
-          click: function() { mainWindow.webContents.toggleDevTools(); }
-        },
+          click: function() { mainWindow.getBrowserWindow().webContents.toggleDevTools(); }
+        }
       ]
     }
   ]);
 
-  Menu.setApplicationMenu(menu);
-}
+  menu.setApplicationMenu(buildedMenu);
+};
 
 export default setMenu;

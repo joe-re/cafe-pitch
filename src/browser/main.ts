@@ -7,13 +7,13 @@ import FileManager from './file_manager';
 const app = electron.app;
 
 let mainWindow;
-let presentationWindow;
 
 const initialize = () => {
-  mainWindow = new MainWindow();
-  mainWindow.createWindow();
-  presentationWindow = new PresentationWindow();
-  setMenu(mainWindow.getBrowserWindow());
+  MainWindow.createInstance();
+  FileManager.createInstance();
+  PresentationWindow.createInstance();
+  MainWindow.getInstance().createWindow();
+  setMenu(MainWindow.getInstance());
 };
 
 app.on('ready', initialize);
