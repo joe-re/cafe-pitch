@@ -8,36 +8,67 @@ export default class FileManager extends EventEmitter {
   private readingText = '';
   private static instance: FileManager;
 
-  public static createInstance(mainWindow: MainWindow) {
-    FileManager.instance = new FileManager(mainWindow);
-    return FileManager.instance;
+  constructor() {
+    super();
+    if (FileManager.instance) throw new Error('must use the getInstance.');
+  };
+
+  public static createInstance() {
+    if (!FileManager.instance) {
+      FileManager.instance = new FileManager();
+    }
   }
 
   public static getInstance(): FileManager {
     return FileManager.instance;
   }
 
-  constructor(private mainWindow: MainWindow) {
-    super();
-    if (FileManager.instance) throw new Error("must use the getInstance.");
-    FileManager.instance = this;
-  };
-
   public openFile() {
-    dialog.showOpenDialog(this.mainWindow.getBrowserWindow(), {
-      properties: ['openFile'],
-      filters: [{
-        name: 'markdown file',
-        extensions: ['md']
-      }]
-    }, (files) => {
-      if (files && files.length > 0) this.readFile(files[0]);
-    });
+    dialog.showOpenDialog(
+      MainWindow.getInstance().getBrowserWindow(),
+      {
+        title: 'open',
+        properties: ['openFile'],
+        filters: [{
+          name: 'markdown file',
+          extensions: ['md']
+        }]
+      },
+      (files) => {
+        if (files && files.length > 0) this.readFile(files[0]);
+      }
+    );
+  }
+
+  public saveFile() {
+    if (this.readingFilePath) {
+      this.writeFile();
+    } else {
+      dialog.showSaveDialog(
+        MainWindow.getInstance().getBrowserWindow(),
+        {
+          title: 'save',
+          filters: [{
+            name: 'markdown file',
+            extensions: ['md']
+          }]
+        },
+        (file) => {
+          if (file) this.writeFile(file);
+        }
+      );
+    }
   }
 
   private readFile(filePath: string): void {
     this.readingFilePath = filePath;
     this.readingText = fs.readFileSync(filePath, 'utf8');
     this.emit('readFile', this.readingText);
+  }
+
+  private writeFile(filePath: string = this.readingFilePath): void {
+    this.readingFilePath = filePath;
+    this.readingText = MainWindow.getInstance().getText();
+    fs.writeFile(this.readingFilePath, this.readingText);
   }
 }

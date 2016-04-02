@@ -46,6 +46,7 @@ export class AppComponent {
   constructor(private slideServie: SlideService) { }
   changeText(text: string) {
     this.slideServie.setText(text);
+    ipcRenderer.send('ChangeText', { text });
   }
   changeSelectedLineNo(selectedLineNo: number) {
     this.page = this.slideServie.getPageNo(selectedLineNo);
