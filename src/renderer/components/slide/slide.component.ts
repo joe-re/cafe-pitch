@@ -39,12 +39,15 @@ export class Slide {
   }
   private setContentTop() {
     const content = this.el.nativeElement.querySelector('.slide-content');
-    const contentTop = (720 - content.clientHeight) / 2;
+    const contentTop = Math.floor((720 - content.clientHeight) / 2);
     content.style.top = `${contentTop}px`;
   }
   private setInnnerMargin(scale: number) {
     const slide = this.el.nativeElement.querySelector('.slide');
     const inner = this.el.nativeElement.querySelector('.slide-inner');
-    inner.style.margin = `${(slide.clientHeight - inner.clientHeight * scale) / 2}px ${(slide.clientWidth - inner.clientWidth * scale) / 2}px`;
+    inner.style.margin = `
+      ${Math.floor((slide.clientHeight - inner.clientHeight * scale) / 2)}px
+      ${Math.floor((slide.clientWidth - inner.clientWidth * scale) / 2)}px
+    `;
   }
 }
