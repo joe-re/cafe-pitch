@@ -8,7 +8,6 @@ require('ace-min-noconflict/theme-monokai');
   selector: 'editor',
   template: `
     <div id="editor"
-      (input)="handleChangeText()"
       (keyup)="handleChangeLineNo()"
       (mouseup)="handleChangeLineNo()"
     ></div>
@@ -35,6 +34,7 @@ export class Editor {
       this.changeText.emit(text);
       this.changeSelectedLineNo.emit(1);
     });
+    this.editor.getSession().on('change', this.handleChangeText.bind(this));
   }
 
   handleChangeText() {
@@ -42,6 +42,6 @@ export class Editor {
   }
 
   handleChangeLineNo() {
-    this.changeSelectedLineNo.emit(this.editor.getSelection().getCursor().row);
+    this.changeSelectedLineNo.emit(this.editor.getSelection().getCursor().row + 1);
   }
 }
