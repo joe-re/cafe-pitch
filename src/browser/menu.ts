@@ -10,7 +10,9 @@ const setMenu = (mainWindow: MainWindow) => {
     {
       label: 'File',
       submenu: [
-        { label: 'New File' },
+        { label: 'New File', accelerator: 'Command+N', click: () => {
+          FileManager.getInstance().resetFile();
+        }},
         { label: 'Open...' , accelerator: 'Command+O', click: () => {
           FileManager.getInstance().openFile();
         }},

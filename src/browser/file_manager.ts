@@ -1,7 +1,7 @@
 import MainWindow from './main_window';
 import * as fs from 'fs';
 import { EventEmitter } from 'events';
-const dialog = require('dialog');
+const dialog: Electron.Dialog = require('dialog');
 
 export default class FileManager extends EventEmitter {
   private readingFilePath = '';
@@ -23,6 +23,16 @@ export default class FileManager extends EventEmitter {
     return FileManager.instance;
   }
 
+  public resetFile() {
+    const reset = () => {
+      this.readingText = '';
+      this.readingFilePath = '';
+      this.emit('ResetFile', this.readingText);
+    };
+    if (this.isUnsaving()) this.showFileSavingQuestionDialog().then(reset.bind(this));
+    else reset();
+  }
+
   public openFile() {
     dialog.showOpenDialog(
       MainWindow.getInstance().getBrowserWindow(),
@@ -40,39 +50,81 @@ export default class FileManager extends EventEmitter {
     );
   }
 
-  public saveFile() {
-    if (this.readingFilePath) {
-      this.writeFile();
-    } else {
-      this.saveAsNewFile();
+  public saveFile(): Promise<{}> {
+    return new Promise((resolve) => {
+      const saving = this.readingFilePath ? this.writeFile : this.saveAsNewFile;
+      saving.call(this).then(resolve);
+    });
+  }
+
+  public saveAsNewFile(): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      dialog.showSaveDialog(
+        MainWindow.getInstance().getBrowserWindow(),
+        {
+          title: 'save',
+          filters: [{
+            name: 'markdown file',
+            extensions: ['md']
+          }]
+        },
+        (file) => {
+          if (file) this.writeFile(file).then(resolve);
+          else reject();
+        }
+      );
+    });
+  }
+
+  private showFileSavingQuestionDialog(): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      dialog.showMessageBox(
+        MainWindow.getInstance().getBrowserWindow(),
+        {
+          title: 'alert',
+          type: 'question',
+          message: 'file has changes, do you want to save them?',
+          buttons: ['Save', 'Cancel', "Don't Save"]
+        },
+        (response) => {
+          if (response === 2) {
+            resolve();
+            return;
+          } else if (response === 1) {
+            reject();
+            return;
+          } else if (response === 0) {
+            // if immediately open save dialog, closing animation can't keep up with opening it.
+            setTimeout(() => this.saveFile().then(resolve), 100);
+            return;
+          }
+        }
+      );
+    });
+  }
+
+  private readFile(filePath: string): Promise<{}> {
+    return new Promise((resolve) => {
+      this.readingFilePath = filePath;
+      this.readingText = fs.readFileSync(filePath, 'utf8');
+      this.emit('readFile', this.readingText);
+      resolve();
+    });
+  }
+
+  private writeFile(filePath: string = this.readingFilePath): Promise<{}> {
+    return new Promise((resolve) => {
+      this.readingFilePath = filePath;
+      this.readingText = MainWindow.getInstance().getText();
+      fs.writeFileSync(this.readingFilePath, this.readingText);
+      resolve();
+    });
+  }
+
+  private isUnsaving(): boolean {
+    if (!this.readingText && !MainWindow.getInstance().getText()) {
+      return false;
     }
-  }
-
-  public saveAsNewFile() {
-    dialog.showSaveDialog(
-      MainWindow.getInstance().getBrowserWindow(),
-      {
-        title: 'save',
-        filters: [{
-          name: 'markdown file',
-          extensions: ['md']
-        }]
-      },
-      (file) => {
-        if (file) this.writeFile(file);
-      }
-    );
-  }
-
-  private readFile(filePath: string): void {
-    this.readingFilePath = filePath;
-    this.readingText = fs.readFileSync(filePath, 'utf8');
-    this.emit('readFile', this.readingText);
-  }
-
-  private writeFile(filePath: string = this.readingFilePath): void {
-    this.readingFilePath = filePath;
-    this.readingText = MainWindow.getInstance().getText();
-    fs.writeFile(this.readingFilePath, this.readingText);
+    return this.readingText !== MainWindow.getInstance().getText();
   }
 }

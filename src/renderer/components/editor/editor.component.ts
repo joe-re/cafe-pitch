@@ -8,6 +8,7 @@ require('ace-min-noconflict/theme-monokai');
   selector: 'editor',
   template: `
     <div id="editor"
+      disabled='true'
       (keyup)="handleChangeLineNo()"
       (mouseup)="handleChangeLineNo()"
     ></div>

@@ -29,6 +29,7 @@ export default class MainWindow {
     this.window.on('closed', () => { this.window = null; });
     ipc.on('ChangeText', this.handleChangeText.bind(this));
     FileManager.getInstance().on('readFile', this.handleReadFile.bind(this));
+    FileManager.getInstance().on('ResetFile', this.handleResetFile.bind(this));
   }
 
   public openFile() {
@@ -50,5 +51,10 @@ export default class MainWindow {
   private handleReadFile(data: string) {
     this.text = data;
     this.window.webContents.send('readFile', data);
+  }
+
+  private handleResetFile() {
+    this.text = '';
+    this.window.webContents.send('readFile', '');
   }
 }
