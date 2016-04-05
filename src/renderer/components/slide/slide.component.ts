@@ -24,12 +24,12 @@ export class Slide {
   constructor(private el: ElementRef) { }
   handleResize(e: MouseEvent) {
     this.setContentScale();
-    this.setContentTop();
   }
+
   ngAfterViewChecked() {
     this.setContentScale();
-    this.setContentTop();
   }
+
   private setContentScale() {
     const slide = this.el.nativeElement.querySelector('.slide');
     const scale = slide.clientHeight / 720;
@@ -37,11 +37,7 @@ export class Slide {
     inner.style.transform = `scale(${scale})`;
     this.setInnnerMargin(scale);
   }
-  private setContentTop() {
-    const content = this.el.nativeElement.querySelector('.slide-content');
-    const contentTop = Math.floor((720 - content.clientHeight) / 2);
-    content.style.top = `${contentTop}px`;
-  }
+
   private setInnnerMargin(scale: number) {
     const slide = this.el.nativeElement.querySelector('.slide');
     const inner = this.el.nativeElement.querySelector('.slide-inner');

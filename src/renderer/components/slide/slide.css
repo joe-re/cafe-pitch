@@ -3,16 +3,17 @@
   width: 100%;
 }
 .slide-inner {
-  position: relative;
   background: white;
   font-size: 30px;
   height: 720px;
   width: 940px;
   transform-origin: 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .slide-content {
   text-align: center;
-  position: absolute;
   width: 90%;
-  margin: 0 5%;
+  margin: auto;
 }

@@ -1,3 +1,13 @@
+.slide h1,
+.slide h2,
+.slide h3,
+.slide h4,
+.slide h5,
+.slide h6,
+.slide h7 {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
 .slide ul, .slide ol {
   display: inline-block;
   margin: 0;
