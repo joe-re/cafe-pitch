@@ -1,5 +1,5 @@
 import {Component, ElementRef} from 'angular2/core';
-import {BrowserDomAdapter} from 'angular2/platform/browser'
+import {BrowserDomAdapter} from 'angular2/platform/browser';
 import {Slide} from './slide/slide.component';
 import {SlideService} from './../services/slide.service';
 import * as _ from 'lodash';

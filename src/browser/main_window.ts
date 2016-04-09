@@ -1,6 +1,7 @@
 import * as electron from 'electron';
 import FileManager from './file_manager';
 const ipc: Electron.IPCMain = electron.ipcMain;
+import {EVENTS} from './../constants/events';
 
 export default class MainWindow {
   private window: Electron.BrowserWindow;
@@ -27,9 +28,9 @@ export default class MainWindow {
     this.window = new electron.BrowserWindow({width: 800, height: 600});
     this.window.loadURL('file://' + __dirname + '/../renderer/index.html');
     this.window.on('closed', () => { this.window = null; });
-    ipc.on('ChangeText', this.handleChangeText.bind(this));
-    FileManager.getInstance().on('readFile', this.handleReadFile.bind(this));
-    FileManager.getInstance().on('ResetFile', this.handleResetFile.bind(this));
+    ipc.on(EVENTS.MAIN_WINDOW.CHANGE_TEXT, this.handleChangeText.bind(this));
+    FileManager.getInstance().on(EVENTS.FILE_MANAGER.READ_FILE, this.handleReadFile.bind(this));
+    FileManager.getInstance().on(EVENTS.FILE_MANAGER.RESET_FILE, this.handleResetFile.bind(this));
   }
 
   public openFile() {

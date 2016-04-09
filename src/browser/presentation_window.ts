@@ -1,4 +1,5 @@
 import * as electron from 'electron';
+import {EVENTS} from './../constants/events';
 const ipc: Electron.IPCMain = electron.ipcMain;
 
 export default class PresentationWindow {
@@ -8,8 +9,8 @@ export default class PresentationWindow {
 
   constructor() {
     if (PresentationWindow.instance) throw new Error('must use the getInstance.');
-    ipc.on( 'RequestCreateNewWindow', this.hanldRequestCreateNewWindow.bind( this ) );
-    ipc.on( 'RequestMessage', (ev: Electron.IPCMainEvent) => {
+    ipc.on(EVENTS.PRESENTATION_WINDOW.REQUEST_START_PRESENTATION, this.hanldRequestStartPresentation.bind( this ) );
+    ipc.on(EVENTS.PRESENTATION_WINDOW.REQUEST_MESSAGE, (ev: Electron.IPCMainEvent) => {
       ev.returnValue = this.text;
     });
   };
@@ -25,7 +26,7 @@ export default class PresentationWindow {
     return PresentationWindow.instance;
   }
 
-  private hanldRequestCreateNewWindow( _ev: Electron.IPCMainEvent, args ) {
+  private hanldRequestStartPresentation( _ev: Electron.IPCMainEvent, args ) {
     this.text = args.text;
     this.createWindow();
   }

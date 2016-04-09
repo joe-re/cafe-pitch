@@ -3,6 +3,7 @@ import {Editor} from './editor/editor.component';
 import {SlidePreview} from './slide/slide-preview.component';
 import {SlideService} from './../services/slide.service';
 import {ipcRenderer} from 'electron';
+import {EVENTS} from './../../constants/events';
 
 @Component({
   selector: 'my-app',
@@ -46,12 +47,12 @@ export class AppComponent {
   constructor(private slideServie: SlideService) { }
   changeText(text: string) {
     this.slideServie.setText(text);
-    ipcRenderer.send('ChangeText', { text });
+    ipcRenderer.send(EVENTS.MAIN_WINDOW.CHANGE_TEXT, { text });
   }
   changeSelectedLineNo(selectedLineNo: number) {
     this.page = this.slideServie.getPageNo(selectedLineNo);
   }
   clickStartButton() {
-    ipcRenderer.send('RequestCreateNewWindow', { text: this.slideServie.getText() });
+    ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.REQUEST_START_PRESENTATION, { text: this.slideServie.getText() });
   }
 }

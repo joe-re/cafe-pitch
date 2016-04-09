@@ -1,8 +1,8 @@
 import MainWindow from './main_window';
 import * as fs from 'fs';
 import { EventEmitter } from 'events';
-import ExportWindow from './export_window';
 const dialog: Electron.Dialog = require('dialog');
+import {EVENTS} from './../constants/events';
 
 export default class FileManager extends EventEmitter {
   private readingFilePath = '';
@@ -28,7 +28,7 @@ export default class FileManager extends EventEmitter {
     const reset = () => {
       this.readingText = '';
       this.readingFilePath = '';
-      this.emit('ResetFile', this.readingText);
+      this.emit(EVENTS.FILE_MANAGER.RESET_FILE, this.readingText);
     };
     if (this.isUnsaving()) this.showFileSavingQuestionDialog().then(reset.bind(this));
     else reset();
@@ -145,7 +145,7 @@ export default class FileManager extends EventEmitter {
     return new Promise((resolve) => {
       this.readingFilePath = filePath;
       this.readingText = fs.readFileSync(filePath, 'utf8');
-      this.emit('readFile', this.readingText);
+      this.emit(EVENTS.FILE_MANAGER.READ_FILE, this.readingText);
       resolve();
     });
   }

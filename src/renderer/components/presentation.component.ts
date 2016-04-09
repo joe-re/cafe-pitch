@@ -3,6 +3,7 @@ import {Slide} from './slide/slide.component';
 import {SlideService} from './../services/slide.service';
 import * as _ from 'lodash';
 const ipcRenderer = require('electron').ipcRenderer;
+import {EVENTS} from './../../constants/events';
 
 @Component({
   selector: 'presentation',
@@ -38,7 +39,7 @@ export class PresentationComponent {
   private _handleKeyUp: any;
 
   constructor(private slideServie: SlideService) {
-    slideServie.setText(ipcRenderer.sendSync('RequestMessage'));
+    slideServie.setText(ipcRenderer.sendSync(EVENTS.PRESENTATION_WINDOW.REQUEST_MESSAGE));
     this._handleKeyUp = this.handleKeyUp.bind(this);
   }
 
@@ -63,7 +64,7 @@ export class PresentationComponent {
   }
 
   private handleKeyUp(e: KeyboardEvent) {
-    if (_.includes([13, 32, 39, 40], e.keyCode)) this.goToNextPage()
+    if (_.includes([13, 32, 39, 40], e.keyCode)) this.goToNextPage();
     else if (_.includes([8, 46, 37, 38], e.keyCode)) this.goToPrevPage();
   }
 }
