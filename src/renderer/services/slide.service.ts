@@ -28,13 +28,13 @@ export class SlideService {
   public getPageNo(lineNo: number): number {
     let selectedPage = 1;
     _.some(this.getText().split('\n'), (text: string, index: number) => {
-      if (text === '===') selectedPage++;
+      if (text === '---') selectedPage++;
       return lineNo === index + 1;
     });
     return selectedPage;
   }
 
   private getPages(): string[] {
-    return this.text.split('===');
+    return this.text.split('---');
   }
 }
