@@ -20,6 +20,7 @@
     ],
     "files": [
         "./lib.d.ts",
+        "./src/browser/export_window.ts",
         "./src/browser/file_manager.ts",
         "./src/browser/main_window.ts",
         "./src/browser/main.ts",
@@ -28,9 +29,11 @@
         "./src/renderer/app.ts",
         "./src/renderer/components/app.component.ts",
         "./src/renderer/components/editor/editor.component.ts",
+        "./src/renderer/components/export.component.ts",
         "./src/renderer/components/presentation.component.ts",
         "./src/renderer/components/slide/slide-preview.component.ts",
         "./src/renderer/components/slide/slide.component.ts",
+        "./src/renderer/export.ts",
         "./src/renderer/pipe/markdown.pipe.ts",
         "./src/renderer/presentation.ts",
         "./src/renderer/services/slide.service.ts"

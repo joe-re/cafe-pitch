@@ -17,7 +17,7 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
     './../solarized-light.css'
   ],
   encapsulation: ViewEncapsulation.None,
-  inputs: ['text'],
+  inputs: ['text', 'option'],
   pipes: [MarkdownPipe]
 })
 export class Slide {

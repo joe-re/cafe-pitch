@@ -1,6 +1,7 @@
 import MainWindow from './main_window';
 import * as fs from 'fs';
 import { EventEmitter } from 'events';
+import ExportWindow from './export_window';
 const dialog: Electron.Dialog = require('dialog');
 
 export default class FileManager extends EventEmitter {
@@ -73,6 +74,43 @@ export default class FileManager extends EventEmitter {
           else reject();
         }
       );
+    });
+  }
+
+  public exportToPdf(webContents: Electron.WebContents): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      dialog.showSaveDialog(
+        MainWindow.getInstance().getBrowserWindow(),
+        {
+          title: 'save',
+          filters: [{
+            name: 'pdf file',
+            extensions: ['pdf']
+          }]
+        },
+        (file) => {
+          if (file) this.writePdf(webContents, file).then(resolve);
+          else reject();
+        }
+      );
+    });
+  };
+
+  private writePdf(webContents: Electron.WebContents, filePath: string): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      webContents.printToPDF({ marginsType: 1, printBackground: true, landscape: true, pageSize: 'A4' }, (error, data) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+        fs.writeFile(filePath, data, (writeErr) => {
+          if (writeErr) {
+            reject(error);
+            return;
+          }
+          resolve();
+        });
+      });
     });
   }
 

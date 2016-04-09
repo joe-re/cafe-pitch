@@ -1,6 +1,7 @@
 import * as electron from 'electron';
 import FileManager from './file_manager';
 import MainWindow from './main_window';
+import ExportWindow from './export_window';
 
 const menu = require('menu');
 const app = electron.app;
@@ -22,6 +23,10 @@ const setMenu = (mainWindow: MainWindow) => {
         }},
         { label: 'Save As...', click: () => {
           FileManager.getInstance().saveAsNewFile();
+        }},
+        { type: 'separator' },
+        { label: 'Export To PDF', accelerator: 'Command+P', click: () => {
+          ExportWindow.getInstance().createWindow(MainWindow.getInstance().getText());
         }},
         { type: 'separator' },
         { label: 'Quit', accelerator: 'Command+Q', click: () => app.quit() }
