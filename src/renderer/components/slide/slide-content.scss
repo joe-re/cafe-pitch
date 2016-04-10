@@ -1,0 +1,84 @@
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
+
+.slide-content {
+  // reset styles
+  html, body, div, span, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  abbr, address, cite, code,
+  del, dfn, em, img, ins, kbd, q, samp,
+  small, strong, sub, sup, var,
+  b, i,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, figcaption, figure,
+  footer, header, hgroup, menu, nav, section, summary,
+  time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+  }
+
+  blockquote, q { quotes: none; }
+
+  blockquote:before, blockquote:after, q:before, q:after { content: none; }
+
+  :focus { outline: 0; }
+
+  ins { text-decoration: none; }
+  del { text-decoration: line-through; }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  // headers
+  h1 { font-size: 2.8em; }
+  h2 { font-size: 2.4em; }
+  h3 { font-size: 1.8em; }
+  h4 { font-size: 1.4em; }
+  h5 { font-size: 1.3em; }
+  h6 { font-size: 1.15em; }
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+
+  // ul, ol
+  ul, ol {
+    display: inline-block;
+    -webkit-padding-start: 40px;
+  }
+
+  // li
+  li {
+    margin-bottom: .5em;
+    text-align: left;
+  }
+
+  // table
+  table {
+    border-spacing: 0;
+    margin: auto;
+  }
+
+  // pre, code
+  code, pre {
+    font-family: 'Inconsolata', monospace;;
+  }
+
+  pre {
+    font-size: .55em;
+    line-height: 1.2em;
+    margin: 20px auto;
+    padding: 1em;
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: normal;
+  }
+}

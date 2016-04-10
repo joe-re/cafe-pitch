@@ -1,0 +1,26 @@
+.slide-inner {
+  background-color: #fdf6e3;
+  color: #657b83;
+
+  code { background-color: #eee8d5; }
+  a { color: #b58900; }
+  a:visited { color: #cb4b16; }
+  a:hover { color: #cb4b16; }
+  h1 { color: #d33682; }
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #859900;
+  }
+  pre {
+    background-color: #fdf6e3;
+    color: #657b83;
+    border: 1pt solid #93a1a1;
+    box-shadow: 5pt 5pt 8pt #eee8d5;
+  }
+  pre code {
+    background-color: #fdf6e3;
+  }
+}

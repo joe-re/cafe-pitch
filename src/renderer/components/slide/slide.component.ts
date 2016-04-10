@@ -10,10 +10,33 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
       </div>
     </div>
   `,
+  styles: [`
+    .slide {
+      height: 100%;
+      width: 100%;
+    }
+
+    .slide-inner {
+      font-family: sans-serif;
+      background: white;
+      font-size: 30px;
+      height: 720px;
+      width: 940px;
+      transform-origin: 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-content {
+      margin: auto;
+      text-align: center;
+      width: 90%;
+    }
+  `],
   styleUrls: [
-    './components/slide/slide.css',
     './components/slide/slide-content.css',
-    './components/slide/solarize.css',
+    './components/slide/solarized-light.css',
     './../solarized-light.css'
   ],
   encapsulation: ViewEncapsulation.None,
