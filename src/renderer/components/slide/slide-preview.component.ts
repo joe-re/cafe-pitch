@@ -25,7 +25,4 @@ import {Slide} from './slide.component';
   inputs: ['text'],
   directives: [Slide]
 })
-export class SlidePreview {
-  private text: string;
-  private slideWidth: number;
-}
+export class SlidePreview { }
