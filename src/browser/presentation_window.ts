@@ -1,5 +1,6 @@
 import * as electron from 'electron';
 import {EVENTS} from './../constants/events';
+import MainWindow from './../browser/main_window';
 const ipc: Electron.IPCMain = electron.ipcMain;
 
 export default class PresentationWindow {
@@ -26,15 +27,15 @@ export default class PresentationWindow {
     return PresentationWindow.instance;
   }
 
-  private hanldRequestStartPresentation( _ev: Electron.IPCMainEvent, args ) {
-    this.text = args.text;
-    this.createWindow();
-  }
-
-  private createWindow() {
+  public createWindow() {
     if (this.window) return;
+    this.text = MainWindow.getInstance().getText();
     this.window  = new electron.BrowserWindow( { width: 940, height: 740, minWidth: 940, minHeight: 740, resizable: true } );
     this.window.loadURL('file://' + __dirname + '/../renderer/presentation_window.html');
     this.window.on('closed', () => { this.window = null; });
+  }
+
+  private hanldRequestStartPresentation( _ev: Electron.IPCMainEvent) {
+    this.createWindow();
   }
 }

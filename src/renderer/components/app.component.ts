@@ -53,6 +53,6 @@ export class AppComponent {
     this.page = this.slideServie.getPageNo(selectedLineNo);
   }
   clickStartButton() {
-    ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION, { text: this.slideServie.getText() });
+    ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION);
   }
 }

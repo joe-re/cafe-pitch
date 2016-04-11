@@ -1,6 +1,7 @@
 import * as electron from 'electron';
 import FileManager from './file_manager';
 import MainWindow from './main_window';
+import PresentationWindow from './presentation_window';
 import ExportWindow from './export_window';
 
 const menu = require('menu');
@@ -25,7 +26,7 @@ const setMenu = (mainWindow: MainWindow) => {
           FileManager.getInstance().saveAsNewFile();
         }},
         { type: 'separator' },
-        { label: 'Export To PDF', accelerator: 'Command+P', click: () => {
+        { label: 'Export To PDF', click: () => {
           ExportWindow.getInstance().createWindow(MainWindow.getInstance().getText());
         }},
         { type: 'separator' },
@@ -42,6 +43,12 @@ const setMenu = (mainWindow: MainWindow) => {
         { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
         { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
         { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' }
+      ]
+    },
+    {
+      label: 'Play',
+      submenu: [
+        { label: 'Play Slideshow', accelerator: 'Command+P', click: () => PresentationWindow.getInstance().createWindow() }
       ]
     },
     {
