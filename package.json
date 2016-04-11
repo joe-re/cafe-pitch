@@ -1,6 +1,6 @@
 {
   "name": "cafe-pitch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Markdown-driven presentation tool built on Electron.",
   "main": "dist/browser/main.js",
   "repository": {
@@ -24,6 +24,7 @@
   "dependencies": {
     "ace-min-noconflict": "^1.1.9",
     "angular2": "2.0.0-beta.12",
+    "electron-prebuilt": "^0.36.7",
     "es6-shim": "^0.35.0",
     "font-awesome": "^4.5.0",
     "highlight.js": "^9.2.0",
@@ -37,7 +38,6 @@
     "coffee-script": "^1.10.0",
     "concurrently": "^2.0.0",
     "del": "^2.2.0",
-    "electron-prebuilt": "^0.36.7",
     "gulp-sass": "^2.2.0",
     "run-sequence": "^1.1.5",
     "tsconfig-cli": "^1.0.2",
