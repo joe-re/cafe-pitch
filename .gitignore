@@ -1,6 +1,6 @@
 node_modules
 typings
-**/*.js
+src/**/*.js
 **/*.map
 dist
 npm-debug.log

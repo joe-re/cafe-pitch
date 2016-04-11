@@ -3,6 +3,13 @@
   "version": "0.0.1",
   "description": "Markdown-driven presentation tool built on Electron.",
   "main": "dist/browser/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joe-re/cafe-pitch.git"
+  },
+  "bin": {
+    "cafepitch": "./bin/cli.js"
+  },
   "scripts": {
     "prepublish": "npm run build",
     "prepare": "gulp build:prepare && tsconfig -u tsconfig.json",

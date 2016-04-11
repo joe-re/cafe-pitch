@@ -12,7 +12,7 @@ You can also install it by npm.
 
 ```
 $ npm install -g cafe-pitch
-$ cafe-pitch
+$ cafepitch
 ```
 
 # Support
