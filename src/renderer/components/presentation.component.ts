@@ -39,7 +39,7 @@ export class PresentationComponent {
   private _handleKeyUp: any;
 
   constructor(private slideServie: SlideService) {
-    slideServie.setText(ipcRenderer.sendSync(EVENTS.PRESENTATION_WINDOW.REQUEST_MESSAGE));
+    slideServie.setText(ipcRenderer.sendSync(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_MESSAGE));
     this._handleKeyUp = this.handleKeyUp.bind(this);
   }
 

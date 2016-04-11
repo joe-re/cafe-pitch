@@ -9,8 +9,8 @@ export default class PresentationWindow {
 
   constructor() {
     if (PresentationWindow.instance) throw new Error('must use the getInstance.');
-    ipc.on(EVENTS.PRESENTATION_WINDOW.REQUEST_START_PRESENTATION, this.hanldRequestStartPresentation.bind( this ) );
-    ipc.on(EVENTS.PRESENTATION_WINDOW.REQUEST_MESSAGE, (ev: Electron.IPCMainEvent) => {
+    ipc.on(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION, this.hanldRequestStartPresentation.bind( this ) );
+    ipc.on(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_MESSAGE, (ev: Electron.IPCMainEvent) => {
       ev.returnValue = this.text;
     });
   };

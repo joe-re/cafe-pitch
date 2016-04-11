@@ -47,12 +47,12 @@ export class AppComponent {
   constructor(private slideServie: SlideService) { }
   changeText(text: string) {
     this.slideServie.setText(text);
-    ipcRenderer.send(EVENTS.MAIN_WINDOW.CHANGE_TEXT, { text });
+    ipcRenderer.send(EVENTS.MAIN_WINDOW.RENDERER.SEND_CHANGED_TEXT, { text });
   }
   changeSelectedLineNo(selectedLineNo: number) {
     this.page = this.slideServie.getPageNo(selectedLineNo);
   }
   clickStartButton() {
-    ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.REQUEST_START_PRESENTATION, { text: this.slideServie.getText() });
+    ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION, { text: this.slideServie.getText() });
   }
 }

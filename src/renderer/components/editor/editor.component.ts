@@ -1,5 +1,6 @@
 import {Component, Output, EventEmitter } from 'angular2/core';
 import {ipcRenderer} from 'electron';
+import {EVENTS} from './../../../constants/events';
 require('ace-min-noconflict');
 require('ace-min-noconflict/mode-markdown');
 require('ace-min-noconflict/theme-monokai');
@@ -30,7 +31,7 @@ export class Editor {
     this.editor = ace.edit('editor');
     this.editor.getSession().setMode('ace/mode/markdown');
     this.editor.setTheme('ace/theme/monokai');
-    ipcRenderer.on('readFile', (ev, text: string) => {
+    ipcRenderer.on(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, (ev, text: string) => {
       this.editor.getSession().setValue(text);
       this.changeText.emit(text);
       this.changeSelectedLineNo.emit(1);

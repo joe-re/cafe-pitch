@@ -28,13 +28,9 @@ export default class MainWindow {
     this.window = new electron.BrowserWindow({width: 800, height: 600});
     this.window.loadURL('file://' + __dirname + '/../renderer/index.html');
     this.window.on('closed', () => { this.window = null; });
-    ipc.on(EVENTS.MAIN_WINDOW.CHANGE_TEXT, this.handleChangeText.bind(this));
+    ipc.on(EVENTS.MAIN_WINDOW.RENDERER.SEND_CHANGED_TEXT, this.handleChangeText.bind(this));
     FileManager.getInstance().on(EVENTS.FILE_MANAGER.READ_FILE, this.handleReadFile.bind(this));
     FileManager.getInstance().on(EVENTS.FILE_MANAGER.RESET_FILE, this.handleResetFile.bind(this));
-  }
-
-  public openFile() {
-    FileManager.getInstance().on('readFile', this.handleReadFile.bind(this));
   }
 
   public getBrowserWindow(): Electron.BrowserWindow {
@@ -51,11 +47,11 @@ export default class MainWindow {
 
   private handleReadFile(data: string) {
     this.text = data;
-    this.window.webContents.send('readFile', data);
+    this.window.webContents.send(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, data);
   }
 
   private handleResetFile() {
     this.text = '';
-    this.window.webContents.send('readFile', '');
+    this.window.webContents.send(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, '');
   }
 }
