@@ -1,6 +1,6 @@
 {
   "name": "cafe-pitch",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Markdown-driven presentation tool built on Electron.",
   "main": "dist/browser/main.js",
   "repository": {
