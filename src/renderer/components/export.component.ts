@@ -40,7 +40,7 @@ export class ExportComponent {
   constructor(private slideServie: SlideService, private el: ElementRef, private dom: BrowserDomAdapter) { }
   ngOnInit() {
     this.slideServie.setText(ipcRenderer.sendSync('RequestPrintText'));
-    this.pages = _.range(1, this.slideServie.getMaxPage());
+    this.pages = _.range(1, this.slideServie.getMaxPage() + 1);
   }
 
   getImages(): Array<HTMLImageElement> {
