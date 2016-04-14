@@ -24,7 +24,7 @@
   "dependencies": {
     "ace-min-noconflict": "^1.1.9",
     "angular2": "2.0.0-beta.12",
-    "electron-prebuilt": "^0.36.7",
+    "electron-prebuilt": "^0.36.12",
     "es6-shim": "^0.35.0",
     "font-awesome": "^4.5.0",
     "highlight.js": "^9.2.0",
