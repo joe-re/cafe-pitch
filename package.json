@@ -12,9 +12,9 @@
   },
   "scripts": {
     "prepublish": "npm run build",
-    "prepare": "gulp build:prepare && tsconfig -u tsconfig.json",
-    "build": "npm run prepare && tsc",
-    "watch": "npm run prepare && concurrently --kill-others \"tsc -w\" \"gulp watch\"",
+    "prebuild": "gulp build:prepare && tsconfig -u tsconfig.json",
+    "build": "tsc",
+    "watch": "npm run prebuild && concurrently --kill-others \"tsc -w\" \"gulp watch\"",
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
