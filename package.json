@@ -38,6 +38,7 @@
     "coffee-script": "^1.10.0",
     "concurrently": "^2.0.0",
     "del": "^2.2.0",
+    "electron-packager": "^6.0.2",
     "gulp": "^3.9.1",
     "gulp-sass": "^2.2.0",
     "run-sequence": "^1.1.5",

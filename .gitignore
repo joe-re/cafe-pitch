@@ -4,3 +4,4 @@ src/**/*.js
 **/*.map
 dist
 npm-debug.log
+release
