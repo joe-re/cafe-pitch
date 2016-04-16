@@ -16,6 +16,7 @@
     "build": "tsc",
     "watch": "npm run prebuild && concurrently --kill-others \"tsc -w\" \"gulp watch\"",
     "start": "electron .",
+    "package": "npm i --production && npm prune && gulp package",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -44,6 +45,7 @@
     "run-sequence": "^1.1.5",
     "tsconfig-cli": "^1.0.2",
     "typescript": "^1.8.9",
-    "typings": "^0.7.9"
+    "typings": "^0.7.9",
+    "zip-dir": "^1.0.2"
   }
 }

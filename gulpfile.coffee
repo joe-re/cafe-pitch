@@ -3,12 +3,13 @@ del      = require 'del'
 seq      = require 'run-sequence'
 sass     = require 'gulp-sass'
 packager = require 'electron-packager'
+zipdir   = require 'zip-dir'
 
 gulp.task 'clean', (cb) ->
   del([ 'dist' ], cb)
 
 gulp.task 'build:prepare', ['clean'], ->
-  seq ['build:html', 'build:angular2-polyfills.js', 'build:css', 'build:scss']
+  seq ['build:html', 'build:css', 'build:scss']
 
 gulp.task 'build:html', ->
   gulp.src('src/**/*.html')
@@ -34,11 +35,15 @@ packageOptions = {
   dir: '.',
   out: 'release',
   name: 'Cafe Pitch',
-  version: '0.36.12'
+  version: '0.36.12',
+  overwrite: true,
+  ignore: '(release|typings)'
 }
 
-gulp.task 'package:darwin', ->
-  build = (option) -> new Promise((resolve) -> packager(option, -> resolve()))
+gulp.task 'package', ->
+  build = (option) ->
+    new Promise (resolve) ->
+      packager option, -> zipdir(option.out, {saveTo: "#{option.out}.zip"}, -> resolve())
   osx = build Object.assign({}, packageOptions, platform: 'darwin', arch: 'x64', out: 'release/osx')
   winX64 = build Object.assign({}, packageOptions, platform: 'win32', arch: 'x64', out: 'release/win_x64')
   winIa32 = build Object.assign({}, packageOptions, platform: 'win32', arch: 'ia32', out: 'release/win_ia32')
