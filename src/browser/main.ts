@@ -10,7 +10,7 @@ let mainWindow;
 
 const initialize = () => {
   MainWindow.createInstance();
-  FileManager.createInstance();
+  FileManager.createInstance(MainWindow.getInstance());
   PresentationWindow.createInstance();
   MainWindow.getInstance().createWindow();
   setMenu(MainWindow.getInstance());
