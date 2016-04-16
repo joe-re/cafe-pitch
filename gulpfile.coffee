@@ -37,7 +37,7 @@ packageOptions = {
   name: 'Cafe Pitch',
   version: '0.36.12',
   overwrite: true,
-  ignore: '(release|typings)'
+  ignore: '(release|typings|src|node_modules)'
 }
 
 gulp.task 'package', ->

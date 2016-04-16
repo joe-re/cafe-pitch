@@ -13,10 +13,10 @@
   "scripts": {
     "prepublish": "npm run build",
     "prebuild": "gulp build:prepare && tsconfig -u tsconfig.json",
-    "build": "tsc",
-    "watch": "npm run prebuild && concurrently --kill-others \"tsc -w\" \"gulp watch\"",
+    "build": "webpack",
+    "watch": "npm run prebuild && concurrently --kill-others \"webpack -w\" \"gulp watch\"",
     "start": "electron .",
-    "package": "npm i --production && npm prune && gulp package",
+    "package": "npm run build && gulp package",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -43,9 +43,11 @@
     "gulp": "^3.9.1",
     "gulp-sass": "^2.2.0",
     "run-sequence": "^1.1.5",
+    "ts-loader": "^0.8.2",
     "tsconfig-cli": "^1.0.2",
     "typescript": "^1.8.9",
     "typings": "^0.7.9",
+    "webpack": "^1.13.0",
     "zip-dir": "^1.0.2"
   }
 }

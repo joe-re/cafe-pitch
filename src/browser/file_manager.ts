@@ -1,6 +1,6 @@
-import MainWindow from './main_window';
 import * as fs from 'fs';
 import { EventEmitter } from 'events';
+import MainWindow from './main_window';
 const dialog: Electron.Dialog = require('dialog');
 import {EVENTS} from './../constants/events';
 
@@ -9,14 +9,14 @@ export default class FileManager extends EventEmitter {
   private readingText = '';
   private static instance: FileManager;
 
-  constructor() {
+  constructor(private mainWinsow: MainWindow) {
     super();
     if (FileManager.instance) throw new Error('must use the getInstance.');
   };
 
-  public static createInstance() {
+  public static createInstance(mainWinsow: MainWindow) {
     if (!FileManager.instance) {
-      FileManager.instance = new FileManager();
+      FileManager.instance = new FileManager(mainWinsow);
     }
   }
 
@@ -36,7 +36,7 @@ export default class FileManager extends EventEmitter {
 
   public openFile() {
     dialog.showOpenDialog(
-      MainWindow.getInstance().getBrowserWindow(),
+      this.mainWinsow.getBrowserWindow(),
       {
         title: 'open',
         properties: ['openFile'],
@@ -61,7 +61,7 @@ export default class FileManager extends EventEmitter {
   public saveAsNewFile(): Promise<{}> {
     return new Promise((resolve, reject) => {
       dialog.showSaveDialog(
-        MainWindow.getInstance().getBrowserWindow(),
+        this.mainWinsow.getBrowserWindow(),
         {
           title: 'save',
           filters: [{
@@ -80,7 +80,7 @@ export default class FileManager extends EventEmitter {
   public exportToPdf(webContents: Electron.WebContents): Promise<{}> {
     return new Promise((resolve, reject) => {
       dialog.showSaveDialog(
-        MainWindow.getInstance().getBrowserWindow(),
+        this.mainWinsow.getBrowserWindow(),
         {
           title: 'save',
           filters: [{
@@ -117,7 +117,7 @@ export default class FileManager extends EventEmitter {
   private showFileSavingQuestionDialog(): Promise<{}> {
     return new Promise((resolve, reject) => {
       dialog.showMessageBox(
-        MainWindow.getInstance().getBrowserWindow(),
+        this.mainWinsow.getBrowserWindow(),
         {
           title: 'alert',
           type: 'question',
@@ -153,16 +153,16 @@ export default class FileManager extends EventEmitter {
   private writeFile(filePath: string = this.readingFilePath): Promise<{}> {
     return new Promise((resolve) => {
       this.readingFilePath = filePath;
-      this.readingText = MainWindow.getInstance().getText();
+      this.readingText = this.mainWinsow.getText();
       fs.writeFileSync(this.readingFilePath, this.readingText);
       resolve();
     });
   }
 
   private isUnsaving(): boolean {
-    if (!this.readingText && !MainWindow.getInstance().getText()) {
+    if (!this.readingText && !this.mainWinsow.getText()) {
       return false;
     }
-    return this.readingText !== MainWindow.getInstance().getText();
+    return this.readingText !== this.mainWinsow.getText();
   }
 }
