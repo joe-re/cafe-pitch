@@ -1,3 +1,9 @@
+## 0.0.4 (2016-04-17)
+
+### Features
+
+- Build downloadable zip
+
 ## 0.0.3 (2016-04-13)
 
 ### Fixed
