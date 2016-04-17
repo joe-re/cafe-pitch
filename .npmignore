@@ -1,2 +1,4 @@
 src/
 typings/
+release/
+node_modules/
