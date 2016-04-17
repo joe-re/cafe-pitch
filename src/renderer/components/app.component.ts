@@ -31,10 +31,10 @@ import {EVENTS} from './../../constants/events';
       </div>
       <div class="inner-contents">
         <div class="editor-area">
-          <editor (changeText)="changeText($event)" (changeSelectedLineNo)="changeSelectedLineNo($event)"></editor>
+          <editor (changeText)="changeText($event)" (changeSelectedLineNo)="changeSelectedLineNo($event)" [text]="slideService.getText()"></editor>
         </div>
         <div class="slide-preview-area">
-          <slide-preview [text]="slideServie.getPageText(page)"></slide-preview>
+          <slide-preview [text]="slideService.getPageText(page)"></slide-preview>
         </div>
       </div>
     </div>
@@ -44,13 +44,21 @@ import {EVENTS} from './../../constants/events';
 })
 export class AppComponent {
   private page = 1;
-  constructor(private slideServie: SlideService) { }
+  constructor(private slideService: SlideService) { }
+  ngOnInit() {
+    ipcRenderer.on(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, (ev, text: string) => {
+      this.changeText(text);
+      this.changeSelectedLineNo(1);
+    });
+  }
+
   changeText(text: string) {
-    this.slideServie.setText(text);
+    this.slideService.setText(text);
     ipcRenderer.send(EVENTS.MAIN_WINDOW.RENDERER.SEND_CHANGED_TEXT, { text });
   }
+
   changeSelectedLineNo(selectedLineNo: number) {
-    this.page = this.slideServie.getPageNo(selectedLineNo);
+    this.page = this.slideService.getPageNo(selectedLineNo);
   }
   clickStartButton() {
     ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION);

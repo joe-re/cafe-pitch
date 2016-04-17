@@ -13,6 +13,7 @@ module.exports =
     __filename: false,
   output:
     filename: 'dist/[name].js'
+  devtool: 'source-map',
   resolve:
     extensions: ['', '.ts', '.tsx', '.js']
     modulesDirectories: ['node_modules']
