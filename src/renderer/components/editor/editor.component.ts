@@ -1,6 +1,4 @@
-import {Component, Output, EventEmitter } from 'angular2/core';
-import {ipcRenderer} from 'electron';
-import {EVENTS} from './../../../constants/events';
+import {Component, Output, EventEmitter, SimpleChange } from 'angular2/core';
 require('ace-min-noconflict');
 require('ace-min-noconflict/mode-markdown');
 require('ace-min-noconflict/theme-monokai');
@@ -19,27 +17,43 @@ require('ace-min-noconflict/theme-monokai');
       width: 100%;
       height: 100%;
     }
-  `]
+  `],
+  inputs: ['text']
 })
 export class Editor {
   @Output('changeText') changeText = new EventEmitter();
   @Output('changeSelectedLineNo') changeSelectedLineNo = new EventEmitter();
 
   editor: AceAjax.Editor;
+  silent = false;
+  changeCount = 0;
 
   ngOnInit() {
     this.editor = ace.edit('editor');
     this.editor.getSession().setMode('ace/mode/markdown');
     this.editor.setTheme('ace/theme/monokai');
-    ipcRenderer.on(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, (ev, text: string) => {
-      this.editor.getSession().setValue(text);
-      this.changeText.emit(text);
-      this.changeSelectedLineNo.emit(1);
-    });
     this.editor.getSession().on('change', this.handleChangeText.bind(this));
   }
 
-  handleChangeText() {
+  ngOnChanges(changes: {text: SimpleChange}) {
+    if (this.changeCount > 1 ) {
+      --this.changeCount;
+      return;
+    }
+    if (this.editor && this.editor.getSession().getValue() !== changes.text.currentValue) {
+      // editor.setValue is a synchronous function call, change event is emitted before setValue return.
+      this.silent = true;
+      this.editor.getSession().setValue(changes.text.currentValue);
+      this.silent = false;
+      if (this.changeCount === 1) --this.changeCount;
+    }
+  }
+
+  handleChangeText(e) {
+    if (this.silent) return;
+    // if caused completion whitespace, it hasn't apply it yet. and updating is aync on parent.
+    // so count changed and apply last changed value.
+    ++this.changeCount;
     this.changeText.emit(this.editor.getSession().getValue());
   }
 

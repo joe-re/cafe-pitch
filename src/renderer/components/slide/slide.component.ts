@@ -40,7 +40,7 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
     './../solarized-light.css'
   ],
   encapsulation: ViewEncapsulation.None,
-  inputs: ['text', 'option'],
+  inputs: ['text'],
   pipes: [MarkdownPipe]
 })
 export class Slide {
