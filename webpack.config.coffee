@@ -23,5 +23,5 @@ module.exports =
       loader: 'ts-loader'
     ]
   plugins: [
-    new webpack.ExternalsPlugin('commonjs', ['electron', 'fs', 'dialog', 'menu']),
+    new webpack.ExternalsPlugin 'commonjs', ['electron', 'fs', 'dialog', 'menu']
   ]
