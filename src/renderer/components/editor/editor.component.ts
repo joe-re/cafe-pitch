@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, SimpleChange } from 'angular2/core';
+import {Component, Output, Input, EventEmitter, SimpleChange } from 'angular2/core';
 require('ace-min-noconflict');
 require('ace-min-noconflict/mode-markdown');
 require('ace-min-noconflict/theme-monokai');
@@ -23,10 +23,24 @@ require('ace-min-noconflict/theme-monokai');
 export class Editor {
   @Output('changeText') changeText = new EventEmitter();
   @Output('changeSelectedLineNo') changeSelectedLineNo = new EventEmitter();
+  @Input()
+  set text(text: string) {
+    if (this.changeTextCount > 1 ) {
+      --this.changeTextCount;
+      return;
+    }
+    if (this.editor && this.editor.getSession().getValue() !== text) {
+      // editor.setValue is a synchronous function call, change event is emitted before setValue return.
+      this.silent = true;
+      this.editor.getSession().setValue(text);
+      this.silent = false;
+    }
+    if (this.changeTextCount === 1) --this.changeTextCount;
+  }
 
   editor: AceAjax.Editor;
   silent = false;
-  changeCount = 0;
+  changeTextCount = 0;
 
   ngOnInit() {
     this.editor = ace.edit('editor');
@@ -35,25 +49,11 @@ export class Editor {
     this.editor.getSession().on('change', this.handleChangeText.bind(this));
   }
 
-  ngOnChanges(changes: {text: SimpleChange}) {
-    if (this.changeCount > 1 ) {
-      --this.changeCount;
-      return;
-    }
-    if (this.editor && this.editor.getSession().getValue() !== changes.text.currentValue) {
-      // editor.setValue is a synchronous function call, change event is emitted before setValue return.
-      this.silent = true;
-      this.editor.getSession().setValue(changes.text.currentValue);
-      this.silent = false;
-      if (this.changeCount === 1) --this.changeCount;
-    }
-  }
-
   handleChangeText(e) {
     if (this.silent) return;
     // if caused completion whitespace, it hasn't apply it yet. and updating is aync on parent.
     // so count changed and apply last changed value.
-    ++this.changeCount;
+    ++this.changeTextCount;
     this.changeText.emit(this.editor.getSession().getValue());
   }
 
