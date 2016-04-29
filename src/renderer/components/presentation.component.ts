@@ -27,7 +27,7 @@ import {EVENTS} from './../../constants/events';
   template: `
     <div class="contents">
       <div class="inner-contents">
-        <span *ngFor="#page of pages">
+        <span *ngFor="let page of pages">
           <slide [text]="slideServie.getPageText(page)" *ngIf="pageNo <= page"></slide>
         </span>
       </div>
