@@ -12,22 +12,24 @@ import {EVENTS} from './../../constants/events';
       height: 100%;
       box-sizing: border-box;
     }
-    slide {
-      height: 100%;
-      width: 100%;
-    }
     .inner-contents {
       height: 100%;
-      width: width: 100%;
+      width: 100%;
       min-height: 720px;
       min-width: 940px;
       margin: auto;
+    }
+    slide {
+      height: 100%;
+      width: 100%;
     }
   `],
   template: `
     <div class="contents">
       <div class="inner-contents">
-        <slide [text]="slideServie.getPageText(page)"></slide>
+        <span *ngFor="#page of pages">
+          <slide [text]="slideServie.getPageText(page)" *ngIf="pageNo <= page"></slide>
+        </span>
       </div>
     </div>
     `,
@@ -35,11 +37,13 @@ import {EVENTS} from './../../constants/events';
   providers: [SlideService]
 })
 export class PresentationComponent {
-  private page = 1;
+  private pageNo = 1;
+  private pages: Array<number>;
   private _handleKeyUp: any;
 
   constructor(private slideServie: SlideService) {
     slideServie.setText(ipcRenderer.sendSync(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_MESSAGE));
+    this.pages = _.range(1, this.slideServie.getMaxPage() + 1);
     this._handleKeyUp = this.handleKeyUp.bind(this);
   }
 
@@ -52,14 +56,14 @@ export class PresentationComponent {
   }
 
   private goToNextPage() {
-    if (this.slideServie.getMaxPage() >= this.page + 1) {
-      this.page++;
+    if (this.slideServie.getMaxPage() >= this.pageNo + 1) {
+      this.pageNo++;
     }
   }
 
   private goToPrevPage() {
-    if (1 <= this.page - 1) {
-      this.page--;
+    if (1 <= this.pageNo - 1) {
+      this.pageNo--;
     }
   }
 
