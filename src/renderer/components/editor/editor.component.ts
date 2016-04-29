@@ -1,4 +1,4 @@
-import {Component, Output, Input, EventEmitter, SimpleChange } from 'angular2/core';
+import {Component, Output, Input, EventEmitter } from 'angular2/core';
 require('ace-min-noconflict');
 require('ace-min-noconflict/mode-markdown');
 require('ace-min-noconflict/theme-monokai');
@@ -17,8 +17,7 @@ require('ace-min-noconflict/theme-monokai');
       width: 100%;
       height: 100%;
     }
-  `],
-  inputs: ['text']
+  `]
 })
 export class Editor {
   @Output('changeText') changeText = new EventEmitter();

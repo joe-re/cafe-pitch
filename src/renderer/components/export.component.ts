@@ -25,7 +25,7 @@ const ipcRenderer = require('electron').ipcRenderer;
   `],
   template: `
     <div class="contents">
-      <div slide-list>
+      <div>
         <section class="slide-section" *ngFor="#page of pages">
           <slide [text]="slideServie.getPageText(page)"></slide>
         </section>
