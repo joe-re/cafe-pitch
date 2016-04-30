@@ -22,6 +22,20 @@ $ cafepitch
 - Presentation mode
 - Export PDF
 
+# Development
+
+## setup
+```
+$ npm install
+$ npm setup
+```
+
+## coding
+```
+$ npm run watch # watch filechanges and auto build and run test during development
+$ npm start # run electron(please open other terminal)
+```
+
 # License
 
 MIT © [joe-re](https://github.com/joe-re)
