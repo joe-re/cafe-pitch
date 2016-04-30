@@ -1,5 +1,5 @@
 module.exports = (config) ->
-  config.set({
+  configuratuion =
     basePath: ''
     frameworks: ['jasmine']
     files: [
@@ -22,4 +22,11 @@ module.exports = (config) ->
     browsers: ['Chrome']
     singleRun: false
     concurrency: Infinity
-  })
+    customLaunchers:
+      Chrome_travis_ci:
+        base: 'Chrome'
+        flags: ['--no-sandbox']
+  if process.env.TRAVIS
+    configuratuion.browsers = ['Chrome_travis_ci']
+    configuratuion.singleRun = true
+  config.set(configuratuion)

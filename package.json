@@ -13,6 +13,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "prebuild": "gulp build:prepare && tsconfig -u tsconfig.json",
+    "setup": "npm i && typings install",
     "build": "webpack",
     "watch": "npm run prebuild && concurrently --kill-others \"webpack -w\" \"gulp watch\" \"npm run test-watch\"",
     "start": "electron .",
