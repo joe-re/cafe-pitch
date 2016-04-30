@@ -1,7 +1,9 @@
 node_modules
 typings
 src/**/*.js
+spec/**/*.js
 **/*.map
 dist
 npm-debug.log
 release
+spec_dist

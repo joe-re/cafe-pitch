@@ -8,7 +8,7 @@ marked.setOptions({
 
 @Pipe({name: 'markdown'})
 export class MarkdownPipe implements PipeTransform {
-  transform(value: string, args: string[]): HTMLDocument {
+  transform(value: string, args: string[]): string {
     return marked(value);
   }
 }
