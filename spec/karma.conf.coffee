@@ -19,14 +19,9 @@ module.exports = (config) ->
     colors: true
     logLevel: config.LOG_INFO
     autoWatch: true
-    browsers: ['Chrome']
+    browsers: ['Firefox']
     singleRun: false
     concurrency: Infinity
-    customLaunchers:
-      Chrome_travis_ci:
-        base: 'Chrome'
-        flags: ['--no-sandbox']
   if process.env.TRAVIS
-    configuratuion.browsers = ['Chrome_travis_ci']
     configuratuion.singleRun = true
   config.set(configuratuion)

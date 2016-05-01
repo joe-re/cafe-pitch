@@ -49,6 +49,7 @@
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.3",
     "karma-commonjs": "0.0.13",
+    "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.8",
     "karma-mocha-reporter": "^2.0.2",
     "run-sequence": "^1.1.5",
