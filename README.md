@@ -1,4 +1,5 @@
 # CafePitch
+[![Build Status](https://travis-ci.org/joe-re/cafe-pitch.svg?branch=master)](https://travis-ci.org/joe-re/cafe-pitch)
 
 Markdown-driven presentation tool built on Electron.
 
