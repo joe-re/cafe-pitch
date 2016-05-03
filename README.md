@@ -1,4 +1,5 @@
 # CafePitch
+[![Build Status](https://travis-ci.org/joe-re/cafe-pitch.svg?branch=master)](https://travis-ci.org/joe-re/cafe-pitch)
 
 Markdown-driven presentation tool built on Electron.
 
@@ -21,6 +22,20 @@ $ cafepitch
 - Live preview
 - Presentation mode
 - Export PDF
+
+# Development
+
+## setup
+```
+$ npm install
+$ npm setup
+```
+
+## coding
+```
+$ npm run watch # watch filechanges and auto build and run test during development
+$ npm start # run electron(please open other terminal)
+```
 
 # License
 
