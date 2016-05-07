@@ -9,7 +9,7 @@ gulp.task 'clean', (cb) ->
   del([ 'dist' ], cb)
 
 gulp.task 'build:prepare', ['clean'], ->
-  seq ['build:html', 'build:css', 'build:scss']
+  seq ['build:html', 'build:css', 'build:scss', 'build:emoji']
 
 gulp.task 'build:html', ->
   gulp.src('src/**/*.html')
@@ -25,6 +25,10 @@ gulp.task 'build:scss', ->
   gulp.src('src/**/*.scss')
     .pipe sass().on('error', sass.logError)
     .pipe gulp.dest('dist')
+
+gulp.task 'build:emoji', ->
+  gulp.src 'node_modules/emoji-images/pngs/*.png'
+    .pipe gulp.dest('dist/renderer/images/emoji')
 
 gulp.task 'watch', ->
   gulp.watch 'src/**/*.html', ['build:html']
