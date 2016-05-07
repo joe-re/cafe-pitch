@@ -1,5 +1,5 @@
 module.exports = (config) ->
-  configuratuion =
+  configuration =
     basePath: ''
     frameworks: ['jasmine']
     files: [
@@ -19,9 +19,12 @@ module.exports = (config) ->
     colors: true
     logLevel: config.LOG_INFO
     autoWatch: true
-    browsers: ['Firefox']
+    browsers: ['Chrome']
     singleRun: false
     concurrency: Infinity
   if process.env.TRAVIS
-    configuratuion.singleRun = true
-  config.set(configuratuion)
+    configuration.singleRun = true
+    # Chrome has dropped support for Ubuntu Precise so it's no longer possible to install the latest version.
+    # So use firefox only if run in travis. https://github.com/travis-ci/travis-ci/issues/5899
+    configuration.browsers = ['Firefox']
+  config.set(configuration)
