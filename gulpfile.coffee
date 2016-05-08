@@ -37,16 +37,19 @@ packageOptions = {
   name: 'Cafe Pitch',
   version: '0.36.12',
   overwrite: true,
-  ignore: '(release|typings|src|node_modules)'
+  ignore: '(release|typings|src|node_modules|spec|spec_dist|resource)'
 }
 
-gulp.task 'package', ->
+gulp.task 'clean:release', (cb) ->
+  del([ 'release' ], cb)
+
+gulp.task 'package', ['clean:release'], ->
   build = (option) ->
     new Promise (resolve) ->
       packager option, -> zipdir(option.out, {saveTo: "#{option.out}.zip"}, -> resolve())
-  osx = build Object.assign({}, packageOptions, platform: 'darwin', arch: 'x64', out: 'release/osx')
-  winX64 = build Object.assign({}, packageOptions, platform: 'win32', arch: 'x64', out: 'release/win_x64')
-  winIa32 = build Object.assign({}, packageOptions, platform: 'win32', arch: 'ia32', out: 'release/win_ia32')
-  linX64 =  build Object.assign({}, packageOptions, platform: 'linux', arch: 'x64', out: 'release/linux_x64')
-  linIa32 = build Object.assign({}, packageOptions, platform: 'linux', arch: 'ia32', out: 'release/linux_ia32')
+  osx = build Object.assign({}, packageOptions, platform: 'darwin', arch: 'x64', out: 'release/osx', icon: './resource/cafepitch.icns')
+  winX64 = build Object.assign({}, packageOptions, platform: 'win32', arch: 'x64', out: 'release/win_x64', icon: './resource/cafepitch.ico')
+  winIa32 = build Object.assign({}, packageOptions, platform: 'win32', arch: 'ia32', out: 'release/win_ia32', icon: './resource/cafepitch.ico')
+  linX64 =  build Object.assign({}, packageOptions, platform: 'linux', arch: 'x64', out: 'release/linux_x64', icon: './resource/cafepitch.ico')
+  linIa32 = build Object.assign({}, packageOptions, platform: 'linux', arch: 'ia32', out: 'release/linux_ia32', icon: './resource/cafepitch.ico')
   Promise.all [osx, winX64, winIa32, linX64, linIa32]
