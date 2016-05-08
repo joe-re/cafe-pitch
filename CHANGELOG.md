@@ -1,3 +1,6 @@
+## 0.0.6 (2016-05-08)
+- correct missed updating
+
 ## 0.0.5 (2016-05-08)
 
 ### Features
