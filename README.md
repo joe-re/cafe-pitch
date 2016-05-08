@@ -5,7 +5,7 @@
 
 Markdown-driven presentation tool built on Electron.
 
-![](https://cloud.githubusercontent.com/assets/4954534/14444835/4d3536e0-0083-11e6-8420-30d17c33e7b4.gif)
+![](https://cloud.githubusercontent.com/assets/4954534/15095492/7192a2d6-1503-11e6-9e2e-8b86839b73cb.gif)
 
 # Download
 
@@ -24,6 +24,7 @@ $ cafepitch
 - Live preview
 - Presentation mode
 - Export PDF
+- Emoji notation(ex :tada: :bow: etc..)
 
 # Development
 

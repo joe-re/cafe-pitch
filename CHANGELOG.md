@@ -1,3 +1,12 @@
+## 0.0.5 (2016-05-08)
+
+### Features
+
+- Bundle icon.
+- Performance for rendering image is imprpved on presentation window.
+- Support Emoji notation
+
+
 ## 0.0.4 (2016-04-17)
 
 ### Features
