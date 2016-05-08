@@ -9,9 +9,11 @@ Markdown-driven presentation tool built on Electron.
 
 # Download
 
-- [darwin_x64](https://github.com/joe-re/cafe-pitch/releases/download/v0.0.4/cafe_pitch_darwin_x64.zip)
-- [linux_x64](https://github.com/joe-re/cafe-pitch/releases/download/v0.0.4/cafe_pitch_linux_x64.zip)
-- [windows_x64](https://github.com/joe-re/cafe-pitch/releases/download/v0.0.4/cafe_pitch_win_x64.zip)
+- [darwin_x64](https://github.com/joe-re/cafe-pitch/releases/download/v0.0.5/osx.zip)
+- [linux_x64](https://github.com/joe-re/cafe-pitch/releases/download/v0.0.5/linux_x64.zip)
+- [linux_ia32](https://github.com/joe-re/cafe-pitch/releases/download/v0.0.5/linux_ia32.zip)
+- [windows_x64](https://github.com/joe-re/cafe-pitch/releases/download/v0.0.5/win_x64.zip)
+- [windows_ia32](https://github.com/joe-re/cafe-pitch/releases/download/v0.0.5/win_ia32.zip)
 
 You can also install it by npm.
 
