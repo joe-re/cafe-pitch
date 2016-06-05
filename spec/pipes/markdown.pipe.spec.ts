@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'angular2/testing';
+import { describe, it, expect, beforeEach } from '@angular/core/testing';
 import { MarkdownPipe } from '../../src/renderer/pipe/markdown.pipe';
 const $ = require('jquery');
 

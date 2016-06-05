@@ -1,5 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
-import {BrowserDomAdapter} from 'angular2/platform/browser';
+import {Component, ElementRef} from '@angular/core';
 import {Slide} from './slide/slide.component';
 import {SlideService} from './../services/slide.service';
 import * as _ from 'lodash';
@@ -33,18 +32,18 @@ const ipcRenderer = require('electron').ipcRenderer;
     </div>
     `,
   directives: [Slide],
-  providers: [SlideService, BrowserDomAdapter]
+  providers: [SlideService]
 })
 export class ExportComponent {
   pages: Array<number>;
-  constructor(private slideServie: SlideService, private el: ElementRef, private dom: BrowserDomAdapter) { }
+  constructor(private slideServie: SlideService, private el: ElementRef) { }
   ngOnInit() {
     this.slideServie.setText(ipcRenderer.sendSync('RequestPrintText'));
     this.pages = _.range(1, this.slideServie.getMaxPage() + 1);
   }
 
   getImages(): Array<HTMLImageElement> {
-    const images = this.dom.querySelectorAll(this.el.nativeElement, 'img');
+    const images = this.el.nativeElement.querySelectorAll('img');
     return Array.prototype.slice.call(images);
   }
 

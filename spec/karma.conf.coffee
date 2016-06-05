@@ -7,7 +7,6 @@ module.exports = (config) ->
       '../node_modules/reflect-metadata/Reflect.js'
       '../node_modules/rxjs/Rx.js'
       '../node_modules/zone.js/dist/zone.js'
-      '../node_modules/angular2/testing.js'
       '../spec_dist/**/*.js'
     ]
     exclude: [ ]

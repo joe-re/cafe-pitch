@@ -1,4 +1,4 @@
-import {Component, Output, Input, EventEmitter } from 'angular2/core';
+import {Component, Output, Input, EventEmitter } from '@angular/core';
 require('ace-min-noconflict');
 require('ace-min-noconflict/mode-markdown');
 require('ace-min-noconflict/theme-monokai');

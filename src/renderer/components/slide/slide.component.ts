@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewEncapsulation} from 'angular2/core';
+import {Component, ElementRef, ViewEncapsulation} from '@angular/core';
 import {MarkdownPipe} from '../../pipe/markdown.pipe';
 
 @Component({
