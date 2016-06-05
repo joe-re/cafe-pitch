@@ -1,9 +1,23 @@
 import {Component} from '@angular/core';
-import {Editor} from './editor/editor.component';
-import {SlidePreview} from './slide/slide-preview.component';
 import {SlideService} from './../services/slide.service';
 import {ipcRenderer} from 'electron';
 import {EVENTS} from './../../constants/events';
+import {MainPage} from './page/main_page.component';
+import {EditSlidePage} from './page/edit_slide.component';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+
+@RouteConfig([
+  {
+    path: '/',
+    name: 'Main',
+    component: MainPage
+  },
+  {
+    path: '/edit-slide',
+    name: 'EditSlide',
+    component: EditSlidePage
+  }
+])
 
 @Component({
   selector: 'my-app',
@@ -29,37 +43,22 @@ import {EVENTS} from './../../constants/events';
       <div class="actions">
         <button (click)="clickStartButton()">Start</button>
       </div>
-      <div class="inner-contents">
-        <div class="editor-area">
-          <editor (changeText)="changeText($event)" (changeSelectedLineNo)="changeSelectedLineNo($event)" [text]="slideService.getText()"></editor>
-        </div>
-        <div class="slide-preview-area">
-          <slide-preview [text]="slideService.getPageText(page)"></slide-preview>
-        </div>
-      </div>
+      <a [routerLink]="['EditSlide']">Heroes</a>
+      <router-outlet></router-outlet>
     </div>
     `,
-  directives: [Editor, SlidePreview],
-  providers: [SlideService]
+  directives: [ROUTER_DIRECTIVES],
+  providers: [ROUTER_PROVIDERS, SlideService]
 })
 export class AppComponent {
-  private page = 1;
   constructor(private slideService: SlideService) { }
   ngOnInit() {
     ipcRenderer.on(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, (ev, text: string) => {
-      this.changeText(text);
-      this.changeSelectedLineNo(1);
+      this.slideService.setText(text);
+      ipcRenderer.send(EVENTS.MAIN_WINDOW.RENDERER.SEND_CHANGED_TEXT, { text });
     });
   }
 
-  changeText(text: string) {
-    this.slideService.setText(text);
-    ipcRenderer.send(EVENTS.MAIN_WINDOW.RENDERER.SEND_CHANGED_TEXT, { text });
-  }
-
-  changeSelectedLineNo(selectedLineNo: number) {
-    this.page = this.slideService.getPageNo(selectedLineNo);
-  }
   clickStartButton() {
     ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION);
   }

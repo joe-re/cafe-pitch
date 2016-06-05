@@ -23,7 +23,9 @@ module.exports = (config) ->
     concurrency: Infinity
   if process.env.TRAVIS
     configuration.singleRun = true
-    # Chrome has dropped support for Ubuntu Precise so it's no longer possible to install the latest version.
-    # So use firefox only if run in travis. https://github.com/travis-ci/travis-ci/issues/5899
+    # Chrome has dropped support for Ubuntu Precise.
+    # It's no longer possible to install the latest version.
+    # So use firefox only if run in travis.
+    # https://github.com/travis-ci/travis-ci/issues/5899
     configuration.browsers = ['Firefox']
   config.set(configuration)
