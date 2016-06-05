@@ -26,7 +26,13 @@
   "license": "MIT",
   "dependencies": {
     "ace-min-noconflict": "^1.1.9",
-    "angular2": "2.0.0-beta.17",
+    "@angular/common": "2.0.0-rc.1",
+    "@angular/compiler": "2.0.0-rc.1",
+    "@angular/core": "2.0.0-rc.1",
+    "@angular/http": "2.0.0-rc.1",
+    "@angular/platform-browser": "2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.1",
+    "@angular/router": "2.0.0-rc.1",
     "electron-prebuilt": "^0.36.12",
     "emoji-images": "^0.1.1",
     "es6-shim": "^0.35.0",
@@ -36,7 +42,7 @@
     "marked": "^0.3.5",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.6",
-    "zone.js": "0.6.12"
+    "zone.js": "^0.6.12"
   },
   "devDependencies": {
     "coffee-script": "^1.10.0",
@@ -58,7 +64,7 @@
     "ts-loader": "^0.8.2",
     "tsconfig-cli": "^1.0.2",
     "typescript": "^1.8.10",
-    "typings": "^0.8.1",
+    "typings": "^1.0.3",
     "webpack": "^1.13.0",
     "zip-dir": "^1.0.2"
   }

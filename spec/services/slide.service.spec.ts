@@ -1,4 +1,4 @@
-import { describe, it, inject, expect, beforeEachProviders, beforeEach } from 'angular2/testing';
+import { describe, it, inject, expect, beforeEachProviders, beforeEach } from '@angular/core/testing';
 import { SlideService } from '../../src/renderer/services/slide.service';
 
 describe('SlideService', () => {

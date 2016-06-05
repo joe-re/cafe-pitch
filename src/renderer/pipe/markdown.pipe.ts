@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from 'angular2/core';
+import {Pipe, PipeTransform} from '@angular/core';
 const marked = require('marked');
 const emoji = require('emoji-images');
 const renderer = new marked.Renderer();
