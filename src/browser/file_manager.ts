@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { EventEmitter } from 'events';
 import MainWindow from './main_window';
-const dialog: Electron.Dialog = require('dialog');
+import { dialog } from 'electron';
 import {EVENTS} from './../constants/events';
 
 export default class FileManager extends EventEmitter {
