@@ -3,12 +3,12 @@ import FileManager from './file_manager';
 import MainWindow from './main_window';
 import PresentationWindow from './presentation_window';
 import ExportWindow from './export_window';
+import { Menu } from 'electron';
 
-const menu = require('menu');
 const app = electron.app;
 
 const setMenu = (mainWindow: MainWindow) => {
-  const buildedMenu = menu.buildFromTemplate([
+  const buildedMenu = Menu.buildFromTemplate([
     {
       label: 'File',
       submenu: [
@@ -63,7 +63,7 @@ const setMenu = (mainWindow: MainWindow) => {
     }
   ]);
 
-  menu.setApplicationMenu(buildedMenu);
+  Menu.setApplicationMenu(buildedMenu);
 };
 
 export default setMenu;
