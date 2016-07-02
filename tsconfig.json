@@ -34,11 +34,10 @@
         "src/renderer/components/presentation.component.ts",
         "src/renderer/components/slide/slide_preview.component.ts",
         "src/renderer/components/slide/slide.component.ts",
+        "src/renderer/directives/markdown.directive.ts",
         "src/renderer/export.ts",
-        "src/renderer/pipe/markdown.pipe.ts",
         "src/renderer/presentation.ts",
         "src/renderer/services/slide.service.ts",
-        "spec/pipes/markdown.pipe.spec.ts",
         "spec/services/slide.service.spec.ts"
     ],
     "atom": {
