@@ -1,19 +1,20 @@
 {
   "name": "cafe-pitch",
   "version": false,
-  "ambientDependencies": {
-    "ace": "registry:dt/ace#0.0.0+20160317120654",
-    "github-electron": "github:DefinitelyTyped/DefinitelyTyped/github-electron/github-electron.d.ts#bcd5761826eb567876c197ccc6a87c4d05731054",
-    "jasmine": "registry:dt/jasmine#2.2.0+20160412134438",
-    "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#bcd5761826eb567876c197ccc6a87c4d05731054",
-    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#bcd5761826eb567876c197ccc6a87c4d05731054"
-  },
   "globalDependencies": {
-    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504"
+    "ace": "registry:dt/ace#0.0.0+20160630235124",
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504",
+    "github-electron": "registry:dt/github-electron#1.2.5+20160624085047",
+    "node": "registry:dt/node#6.0.0+20160621231320"
   },
   "globalDevDependencies": {
+    "empower": "registry:dt/empower#0.0.0+20160317120654",
     "github-electron/electron-prebuilt": "registry:dt/github-electron/electron-prebuilt#0.30.1+20160316155526",
     "mocha": "registry:dt/mocha#2.2.5+20160619032855",
-    "power-assert": "registry:dt/power-assert#0.0.0+20160316155526"
+    "power-assert": "registry:dt/power-assert#0.0.0+20160316155526",
+    "power-assert-formatter": "registry:dt/power-assert-formatter#0.0.0+20160317120654"
+  },
+  "dependencies": {
+    "lodash": "registry:npm/lodash#4.0.0+20160701205107"
   }
 }

@@ -1,6 +1,5 @@
 import * as electron from 'electron';
 import FileManager from './file_manager';
-const ipc: Electron.IPCMain = electron.ipcMain;
 import {EVENTS} from './../constants/events';
 
 export default class MainWindow {
@@ -28,7 +27,7 @@ export default class MainWindow {
     this.window = new electron.BrowserWindow({width: 800, height: 600});
     this.window.loadURL('file://' + __dirname + '/../renderer/index.html');
     this.window.on('closed', () => { this.window = null; });
-    ipc.on(EVENTS.MAIN_WINDOW.RENDERER.SEND_CHANGED_TEXT, this.handleChangeText.bind(this));
+    electron.ipcMain.on(EVENTS.MAIN_WINDOW.RENDERER.SEND_CHANGED_TEXT, this.handleChangeText.bind(this));
     FileManager.getInstance().on(EVENTS.FILE_MANAGER.READ_FILE, this.handleReadFile.bind(this));
     FileManager.getInstance().on(EVENTS.FILE_MANAGER.RESET_FILE, this.handleResetFile.bind(this));
   }
@@ -41,7 +40,7 @@ export default class MainWindow {
     return this.text;
   }
 
-  private handleChangeText(_ev: Electron.IPCMainEvent, data) {
+  private handleChangeText(_ev, data) {
     this.text = data.text;
   }
 
