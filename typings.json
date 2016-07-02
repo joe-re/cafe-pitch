@@ -10,5 +10,10 @@
   },
   "globalDependencies": {
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504"
+  },
+  "globalDevDependencies": {
+    "github-electron/electron-prebuilt": "registry:dt/github-electron/electron-prebuilt#0.30.1+20160316155526",
+    "mocha": "registry:dt/mocha#2.2.5+20160619032855",
+    "power-assert": "registry:dt/power-assert#0.0.0+20160316155526"
   }
 }

@@ -19,7 +19,8 @@
     "start": "electron .",
     "package": "npm run build && gulp package",
     "test-watch": "concurrently --kill-others \"webpack --config ./webpack_for_spec.config.coffee -w\" \"karma start spec/karma.conf.coffee\"",
-    "test": "webpack --config ./webpack_for_spec.config.coffee && karma start spec/karma.conf.coffee"
+    "test": "webpack --config ./webpack_for_spec.config.coffee && karma start spec/karma.conf.coffee",
+    "test:e2e": "mocha --compilers ts:espower-typescript/guess spec/e2e/**/*.ts"
   },
   "keywords": [],
   "author": "",
@@ -49,6 +50,7 @@
     "concurrently": "^2.0.0",
     "del": "^2.2.0",
     "electron-packager": "^6.0.2",
+    "espower-typescript": "^5.0.1",
     "glob": "^7.0.3",
     "gulp": "^3.9.1",
     "gulp-sass": "^2.2.0",
@@ -60,7 +62,10 @@
     "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.8",
     "karma-mocha-reporter": "^2.0.2",
+    "mocha": "^2.5.3",
+    "power-assert": "^1.4.1",
     "run-sequence": "^1.1.5",
+    "spectron": "^3.2.4",
     "ts-loader": "^0.8.2",
     "tsconfig-cli": "^1.0.2",
     "typescript": "^1.8.10",
