@@ -32,7 +32,7 @@
         "src/renderer/components/editor/editor.component.ts",
         "src/renderer/components/export.component.ts",
         "src/renderer/components/presentation.component.ts",
-        "src/renderer/components/slide/slide-preview.component.ts",
+        "src/renderer/components/slide/slide_preview.component.ts",
         "src/renderer/components/slide/slide.component.ts",
         "src/renderer/export.ts",
         "src/renderer/pipe/markdown.pipe.ts",

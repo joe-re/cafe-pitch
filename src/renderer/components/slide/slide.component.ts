@@ -35,8 +35,8 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
     }
   `],
   styleUrls: [
-    './components/slide/slide-content.css',
-    './components/slide/solarized-light.css',
+    './components/slide/slide_content.css',
+    './components/slide/solarized_light.css',
     './../solarized-light.css'
   ],
   encapsulation: ViewEncapsulation.None,

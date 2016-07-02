@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Editor} from './editor/editor.component';
-import {SlidePreview} from './slide/slide-preview.component';
+import {SlidePreview} from './slide/slide_preview.component';
 import {SlideService} from './../services/slide.service';
 import {ipcRenderer} from 'electron';
 import {EVENTS} from './../../constants/events';
