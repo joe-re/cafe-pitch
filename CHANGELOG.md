@@ -1,3 +1,7 @@
+## 0.0.7 (2016-07-03)
+### Fixed
+- open anchor link using default browser #25
+
 ## 0.0.6 (2016-05-08)
 - correct missed updating
 

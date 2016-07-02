@@ -39,7 +39,7 @@ packageOptions = {
   dir: '.',
   out: 'release',
   name: 'Cafe Pitch',
-  version: '0.36.12',
+  version: '1.2.5',
   overwrite: true,
   ignore: '(release|typings|src|node_modules|spec|spec_dist|resource)'
 }
