@@ -1,12 +1,12 @@
 import {Component, ElementRef, ViewEncapsulation} from '@angular/core';
-import {MarkdownPipe} from '../../pipe/markdown.pipe';
+import {MarkdownDirective} from '../../directives/markdown.directive';
 
 @Component({
   selector: 'slide',
   template: `
     <div class="slide" (window:resize)="handleResize($event)">
       <div class="slide-inner">
-        <div class="slide-content" [innerHTML]="text | markdown"></div>
+        <div class="slide-content" [markdownText]="text"></div>
       </div>
     </div>
   `,
@@ -41,7 +41,7 @@ import {MarkdownPipe} from '../../pipe/markdown.pipe';
   ],
   encapsulation: ViewEncapsulation.None,
   inputs: ['text'],
-  pipes: [MarkdownPipe]
+  directives: [MarkdownDirective]
 })
 export class Slide {
   constructor(private el: ElementRef) { }
