@@ -17,6 +17,7 @@ export class Application {
     }
     return this.app.start();
   }
+
   stop() {
     if (!(this.app && this.app.isRunning())) {
       return Promise.reject(new Error("application isn't working."));

@@ -2,6 +2,7 @@ import {Application} from '../e2e_test_helper';
 import * as assert from 'power-assert';
 
 describe('application launch', function () {
+  this.timeout(10000);
   let app = new Application();
   beforeEach(function () {
     return app.start();
