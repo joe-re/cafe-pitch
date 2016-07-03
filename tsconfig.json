@@ -39,7 +39,6 @@
         "src/renderer/presentation.ts",
         "src/renderer/services/slide.service.ts",
         "spec/e2e/e2e_test_helper.ts",
-        "spec/e2e/pages/edit_and_previre.ts",
         "spec/services/slide.service.spec.ts"
     ],
     "atom": {

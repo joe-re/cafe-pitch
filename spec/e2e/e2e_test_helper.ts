@@ -1,28 +1,30 @@
 import {join} from 'path';
-import * as assert from 'power-assert';
 import * as electron from 'electron-prebuilt';
-const spectron = require('spectron');
+import * as spectron from 'spectron';
 
-describe('application launch', function () {
-  this.timeout(10000);
+export class Application {
+  private app: Spectron.Application;
 
-  beforeEach(function () {
-    this.app = new spectron.Application({
-      path: electron,
-      args: [join(__dirname, '..', '..')]
-    });
-    return this.app.start();
-  });
-
-  afterEach(function () {
-    if (this.app && this.app.isRunning()) {
-      return this.app.stop();
+  start() {
+    if (!this.app) {
+      this.app = new spectron.Application({
+        path: electron,
+        args: [join(__dirname, '..', '..')]
+      });
     }
-  });
+    if (this.app.isRunning()) {
+      return Promise.reject(new Error('application has already started.'));
+    }
+    return this.app.start();
+  }
+  stop() {
+    if (!(this.app && this.app.isRunning())) {
+      return Promise.reject(new Error("application isn't working."));
+    }
+    return this.app.stop();
+  }
 
-  it('shows an initial window', function () {
-    return this.app.client.getWindowCount().then(function (count) {
-      assert.equal(count, 1);
-    });
-  });
-});
+  get client() {
+    return this.app.client;
+  }
+}

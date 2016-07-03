@@ -8,3 +8,4 @@ npm-debug.log
 release
 spec_dist
 **/*.DS_Store
+.tags*

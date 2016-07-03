@@ -12,7 +12,9 @@
     "github-electron/electron-prebuilt": "registry:dt/github-electron/electron-prebuilt#0.30.1+20160316155526",
     "mocha": "registry:dt/mocha#2.2.5+20160619032855",
     "power-assert": "registry:dt/power-assert#0.0.0+20160316155526",
-    "power-assert-formatter": "registry:dt/power-assert-formatter#0.0.0+20160317120654"
+    "power-assert-formatter": "registry:dt/power-assert-formatter#0.0.0+20160317120654",
+    "q": "registry:dt/q#0.0.0+20160613154756",
+    "webdriverio": "registry:dt/webdriverio#3.3.0+20160316155526"
   },
   "dependencies": {
     "lodash": "registry:npm/lodash#4.0.0+20160701205107"
