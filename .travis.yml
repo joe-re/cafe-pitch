@@ -1,9 +1,11 @@
 language: node_js
 node_js:
   - '5.10.0'
+  - '6.2.2'
 before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+after_install:
   - npm run setup
 addons:
   firefox: "46.0"

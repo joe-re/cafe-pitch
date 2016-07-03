@@ -13,13 +13,14 @@
   "scripts": {
     "prepublish": "npm run build",
     "prebuild": "gulp build:prepare && tsconfig -u tsconfig.json",
-    "setup": "npm i && typings install",
+    "setup": "typings install",
     "build": "webpack",
-    "watch": "npm run prebuild && concurrently --kill-others \"webpack -w\" \"gulp watch\" \"npm run test-watch\"",
+    "watch": "npm run prebuild && concurrently --kill-others \"webpack -w\" \"gulp watch\"",
     "start": "electron .",
     "package": "npm run build && gulp package",
-    "test-watch": "concurrently --kill-others \"webpack --config ./webpack_for_spec.config.coffee -w\" \"karma start spec/karma.conf.coffee\"",
-    "test": "webpack --config ./webpack_for_spec.config.coffee && karma start spec/karma.conf.coffee",
+    "test": "concurrently \"npm run test:unit\" \"npm run test:e2e\"",
+    "test:unit:watch": "concurrently --kill-others \"webpack --config ./webpack_for_spec.config.coffee -w\" \"karma start spec/karma.conf.coffee\"",
+    "test:unit": "webpack --config ./webpack_for_spec.config.coffee && karma start spec/karma.conf.coffee --single-run",
     "test:e2e": "mocha --compilers ts:espower-typescript/guess spec/e2e/**/*.story.ts"
   },
   "keywords": [],
