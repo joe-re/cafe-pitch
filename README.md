@@ -34,8 +34,18 @@ $ npm setup
 
 ## coding
 ```
-$ npm run watch # watch filechanges and auto build and run test during development
-$ npm start # run electron(please open other terminal)
+$ npm run build # only build.
+$ npm run watch # watch filechanges and run auto build.
+$ npm start     # run electron.
+```
+
+## testing
+```
+$ npm run test            # run unit test and e2e test.
+$ npm run test:unit       # only run unit test.
+$ npm run test:unit:watch # watch filechanges and auto run unit test.
+$ npm run test:e2e        # only run e2e test.
+
 ```
 
 # License

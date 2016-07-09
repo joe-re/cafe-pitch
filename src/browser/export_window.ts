@@ -1,5 +1,4 @@
 import * as electron from 'electron';
-const ipc: Electron.IPCMain = electron.ipcMain;
 import FileManager from './file_manager';
 
 export default class ExportWindow {
@@ -19,10 +18,10 @@ export default class ExportWindow {
   }
 
   constructor() {
-    ipc.on('RequestPrintText', (ev: Electron.IPCMainEvent) => {
+    electron.ipcMain.on('RequestPrintText', (ev) => {
       ev.returnValue = this.text;
     });
-    ipc.on('RequestPrintToPDF', (ev: Electron.IPCMainEvent) => {
+    electron.ipcMain.on('RequestPrintToPDF', (ev) => {
       FileManager.getInstance().exportToPdf(this.window.webContents).then(() => {
         this.window.close();
         this.window = null;
