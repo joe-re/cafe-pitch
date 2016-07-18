@@ -5,7 +5,7 @@ import {MarkdownDirective} from '../../directives/markdown.directive';
   selector: 'slide',
   template: `
     <div class="slide" (window:resize)="handleResize($event)">
-      <div class="slide-inner">
+      <div class="slide-inner {{thema}}">
         <div class="slide-content" [markdownText]="text"></div>
       </div>
     </div>
@@ -37,10 +37,11 @@ import {MarkdownDirective} from '../../directives/markdown.directive';
   styleUrls: [
     './components/slide/slide_content.css',
     './components/slide/solarized_light.css',
+    './components/slide/solarized_dark.css',
     './../solarized-light.css'
   ],
   encapsulation: ViewEncapsulation.None,
-  inputs: ['text'],
+  inputs: ['text', 'thema'],
   directives: [MarkdownDirective]
 })
 export class Slide {

@@ -28,13 +28,17 @@ import {EVENTS} from './../../constants/events';
     <div class="contents">
       <div class="actions">
         <button (click)="clickStartButton()">Start</button>
+        <select (change)="changeThema($event)">
+          <option value="solarized-light">Solarized Light</option>
+          <option value="solarized-dark">Solarized Dark</option>
+        </select>
       </div>
       <div class="inner-contents">
         <div class="editor-area">
           <editor (changeText)="changeText($event)" (changeSelectedLineNo)="changeSelectedLineNo($event)" [text]="slideService.getText()"></editor>
         </div>
         <div class="slide-preview-area">
-          <slide-preview [text]="slideService.getPageText(page)"></slide-preview>
+          <slide-preview [text]="slideService.getPageText(page)" [thema]="thema"></slide-preview>
         </div>
       </div>
     </div>
@@ -44,6 +48,8 @@ import {EVENTS} from './../../constants/events';
 })
 export class AppComponent {
   private page = 1;
+  private thema = 'solarized-light';
+
   constructor(private slideService: SlideService) { }
   ngOnInit() {
     ipcRenderer.on(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, (ev, text: string) => {
@@ -60,7 +66,16 @@ export class AppComponent {
   changeSelectedLineNo(selectedLineNo: number) {
     this.page = this.slideService.getPageNo(selectedLineNo);
   }
+
   clickStartButton() {
     ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION);
+  }
+
+  changeThema(e: MouseEvent) {
+    event.preventDefault();
+    if (event.target instanceof HTMLSelectElement) {
+      const target = event.target as HTMLSelectElement;
+      this.thema = target.value;
+    }
   }
 }

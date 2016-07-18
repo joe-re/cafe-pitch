@@ -7,7 +7,7 @@ import {Slide} from './slide.component';
     <div class="slide-preview">
      <div class="inner">
        <div class="content">
-         <slide [text]="text"></slide>
+         <slide [text]="text" [thema]="thema"></slide>
        </div>
      </div>
    </div>
@@ -22,7 +22,7 @@ import {Slide} from './slide.component';
     }
     `
   ],
-  inputs: ['text'],
+  inputs: ['text', 'thema'],
   directives: [Slide]
 })
 export class SlidePreview { }
