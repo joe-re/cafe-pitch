@@ -9,3 +9,4 @@ release
 spec_dist
 **/*.DS_Store
 .tags*
+yarn-error.log
