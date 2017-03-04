@@ -9,6 +9,7 @@ import { Editor } from './components/editor/editor.component';
 import { Slide } from './components/slide/slide.component';
 import { SlidePreview } from './components/slide/slide_preview.component';
 import { MarkdownDirective } from './directives/markdown.directive';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 @NgModule({
   declarations: [ PresentationComponent, Editor, SlidePreview, MarkdownDirective, Slide ],
@@ -16,4 +17,6 @@ import { MarkdownDirective } from './directives/markdown.directive';
   providers: [],
   bootstrap: [ PresentationComponent ]
 })
-export class Export { }
+class Presentation { }
+
+platformBrowserDynamic().bootstrapModule(Presentation);
