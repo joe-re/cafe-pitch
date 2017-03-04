@@ -2,6 +2,7 @@ import {Component, Output, Input, EventEmitter } from '@angular/core';
 require('ace-min-noconflict');
 require('ace-min-noconflict/mode-markdown');
 require('ace-min-noconflict/theme-monokai');
+import ace from 'ace-min-noconflict';
 
 @Component({
   selector: 'editor',
@@ -37,7 +38,7 @@ export class Editor {
     if (this.changeTextCount === 1) --this.changeTextCount;
   }
 
-  editor: AceAjax.Editor;
+  editor: ace.AceAjax.Editor;
   silent = false;
   changeTextCount = 0;
 

@@ -1,5 +1,7 @@
+import spectron from 'spectron';
+
 export default class SlideEditorPage {
-  constructor(private client: Spectron.Client<void>) {}
+  constructor(private client: spectron.Client<void>) {}
 
   inputText(text: string): Promise<void> {
     return this.client.waitForExist('#editor').then(() => {

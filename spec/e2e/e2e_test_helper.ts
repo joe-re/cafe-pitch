@@ -1,9 +1,9 @@
 import {join} from 'path';
-import * as electron from 'electron-prebuilt';
+import * as electron from 'electron';
 import * as spectron from 'spectron';
 
 export class Application {
-  private app: Spectron.Application;
+  private app: spectron.Application;
 
   start() {
     if (!this.app) {

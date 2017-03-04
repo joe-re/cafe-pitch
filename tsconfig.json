@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "module": "commonjs",
         "sourceMap": true,
         "moduleResolution": "node",
@@ -19,7 +19,6 @@
         "./spec/**/*.ts"
     ],
     "files": [
-        "lib.d.ts",
         "src/browser/export_window.ts",
         "src/browser/file_manager.ts",
         "src/browser/main_window.ts",
@@ -41,8 +40,7 @@
         "spec/e2e/e2e_test_helper.ts",
         "spec/e2e/page/slide_editor.page.ts",
         "spec/e2e/story/input_editor.story.ts",
-        "spec/e2e/story/launch.story.ts",
-        "spec/services/slide.service.spec.ts"
+        "spec/e2e/story/launch.story.ts"
     ],
     "atom": {
         "rewriteTsconfig": false

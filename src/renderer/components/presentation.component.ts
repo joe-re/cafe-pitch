@@ -33,7 +33,6 @@ import {EVENTS} from './../../constants/events';
       </div>
     </div>
     `,
-  directives: [Slide],
   providers: [SlideService]
 })
 export class PresentationComponent {

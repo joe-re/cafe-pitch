@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 import MainWindow from './main_window';
 import { dialog } from 'electron';
 import {EVENTS} from './../constants/events';
+import * as electron from 'electron';
 
 export default class FileManager extends EventEmitter {
   private readingFilePath = '';
@@ -77,7 +78,7 @@ export default class FileManager extends EventEmitter {
     });
   }
 
-  public exportToPdf(webContents: Electron.WebContents): Promise<{}> {
+  public exportToPdf(webContents: electron.WebContents): Promise<{}> {
     return new Promise((resolve, reject) => {
       dialog.showSaveDialog(
         this.mainWinsow.getBrowserWindow(),
@@ -96,7 +97,7 @@ export default class FileManager extends EventEmitter {
     });
   };
 
-  private writePdf(webContents: Electron.WebContents, filePath: string): Promise<{}> {
+  private writePdf(webContents: electron.WebContents, filePath: string): Promise<{}> {
     return new Promise((resolve, reject) => {
       webContents.printToPDF({ marginsType: 1, printBackground: true, landscape: true, pageSize: 'A4' }, (error, data) => {
         if (error) {
