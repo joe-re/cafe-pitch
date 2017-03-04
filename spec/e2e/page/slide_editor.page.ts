@@ -22,7 +22,7 @@ export default class SlideEditorPage {
         return html.some((text) => loop(text));
       }
     }
-    return this.client.waitForExist('.slide-inner')
+    return this.client.waitForExist('.slide-inner img')
       .then(() => this.client.getHTML('.slide-inner img') )
       .then((html) => loop(html));
     }
