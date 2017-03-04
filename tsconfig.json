@@ -10,8 +10,8 @@
         "noImplicitAny": false,
         "rootDir": "./src"
     },
-    "excludes": [
-        "./node_modules"
+    "exclude": [
+        "node_modules"
     ],
     "filesGlob": [
         "./lib.d.ts",
