@@ -22,7 +22,6 @@ import {Slide} from './slide.component';
     }
     `
   ],
-  inputs: ['text'],
-  directives: [Slide]
+  inputs: ['text']
 })
 export class SlidePreview { }

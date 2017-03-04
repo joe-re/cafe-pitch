@@ -39,7 +39,6 @@ import {EVENTS} from './../../constants/events';
       </div>
     </div>
     `,
-  directives: [Editor, SlidePreview],
   providers: [SlideService]
 })
 export class AppComponent {

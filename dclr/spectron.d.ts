@@ -1,6 +1,6 @@
 declare namespace Spectron {
   export interface ApplicationOptions {
-    path: string;
+    path: any;
     args?: string[];
     cwd?: string;
     env?: Object;

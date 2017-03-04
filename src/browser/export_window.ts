@@ -2,7 +2,7 @@ import * as electron from 'electron';
 import FileManager from './file_manager';
 
 export default class ExportWindow {
-  private window: Electron.BrowserWindow;
+  private window: electron.BrowserWindow;
   private static instance;
   private text: string;
 

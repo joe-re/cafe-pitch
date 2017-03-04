@@ -1,5 +1,4 @@
 import {Component, ElementRef, ViewEncapsulation} from '@angular/core';
-import {MarkdownDirective} from '../../directives/markdown.directive';
 
 @Component({
   selector: 'slide',
@@ -40,8 +39,7 @@ import {MarkdownDirective} from '../../directives/markdown.directive';
     './../solarized-light.css'
   ],
   encapsulation: ViewEncapsulation.None,
-  inputs: ['text'],
-  directives: [MarkdownDirective]
+  inputs: ['text']
 })
 export class Slide {
   constructor(private el: ElementRef) { }

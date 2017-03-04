@@ -31,7 +31,6 @@ const ipcRenderer = require('electron').ipcRenderer;
       </div>
     </div>
     `,
-  directives: [Slide],
   providers: [SlideService]
 })
 export class ExportComponent {

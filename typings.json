@@ -3,16 +3,15 @@
   "version": false,
   "globalDependencies": {
     "ace": "registry:dt/ace#0.0.0+20160630235124",
-    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504",
-    "github-electron": "registry:dt/github-electron#1.2.5+20160624085047",
-    "node": "registry:dt/node#6.0.0+20160621231320"
+    "electron": "registry:dt/electron#1.4.8+20170227030124",
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160726072212",
+    "mocha": "registry:dt/mocha#2.2.5+20170204022515",
+    "node": "registry:dt/node#7.0.0+20170204020307"
   },
   "globalDevDependencies": {
     "empower": "registry:dt/empower#0.0.0+20160317120654",
-    "github-electron/electron-prebuilt": "registry:dt/github-electron/electron-prebuilt#0.30.1+20160316155526",
     "jquery": "registry:dt/jquery#1.10.0+20160701124751",
     "jsdom": "registry:dt/jsdom#2.0.0+20160316155526",
-    "mocha": "registry:dt/mocha#2.2.5+20160619032855",
     "power-assert": "registry:dt/power-assert#0.0.0+20160316155526",
     "power-assert-formatter": "registry:dt/power-assert-formatter#0.0.0+20160317120654",
     "q": "registry:dt/q#0.0.0+20160613154756",
