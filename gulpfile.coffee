@@ -9,7 +9,7 @@ gulp.task 'clean', (cb) ->
   del([ 'dist' ], cb)
 
 gulp.task 'build:prepare', ['clean'], ->
-  seq ['build:html', 'build:css', 'build:scss', 'build:emoji']
+  seq ['build:html', 'build:css', 'build:scss', 'build:emoji', 'build:fonts']
 
 gulp.task 'build:html', ->
   gulp.src('src/**/*.html')
@@ -18,8 +18,14 @@ gulp.task 'build:html', ->
 gulp.task 'build:css', ->
   gulp.src([
    'src/**/*.css',
-   'node_modules/highlight.js/styles/solarized-light.css'
-  ]).pipe gulp.dest('dist')
+   'node_modules/highlight.js/styles/solarized-light.css',
+   'node_modules/photon/dist/css/photon.css'
+  ]).pipe gulp.dest('dist/css')
+
+gulp.task 'build:fonts', ->
+  gulp.src([
+   'node_modules/photon/dist/fonts/*'
+  ]).pipe gulp.dest('dist/fonts')
 
 gulp.task 'build:scss', ->
   gulp.src('src/**/*.scss')
