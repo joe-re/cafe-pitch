@@ -2,19 +2,15 @@ path = require 'path'
 webpack = require 'webpack'
 
 module.exports =
-  target: 'node'
+  target: 'electron'
   node:
     __dirname: false,
     __filename: false,
   devtool: 'source-map',
   resolve:
-    extensions: ['', '.ts', '.tsx', '.js']
-    modulesDirectories: ['node_modules']
+    modules: ['node_modules']
+    extensions: ['.ts', '.tsx', '.js']
   module:
-    loaders: [
-      test: /\.tsx?$/
-      loader: 'ts-loader'
+    rules: [
+      { test: /\.tsx?$/, loader: 'ts-loader' }
     ]
-  plugins: [
-    new webpack.ExternalsPlugin 'commonjs', ['electron', 'fs']
-  ]
