@@ -23,12 +23,18 @@ import {EVENTS} from './../../constants/events';
       height: 100%;
       width: 50%;
     }
+    .header {
+      padding: 12px;
+    }
   `],
   template: `
+    <header class="header">
+      <button class="btn btn-default" (click)="clickStartButton()">
+        <span class="icon icon-play icon-text"></span>
+        Play
+      </button>
+    </header>
     <div class="contents">
-      <div class="actions">
-        <button (click)="clickStartButton()">Start</button>
-      </div>
       <div class="inner-contents">
         <div class="editor-area">
           <editor (changeText)="changeText($event)" (changeSelectedLineNo)="changeSelectedLineNo($event)" [text]="slideService.getText()"></editor>

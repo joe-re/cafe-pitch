@@ -36,7 +36,7 @@ import {Component, ElementRef, ViewEncapsulation} from '@angular/core';
   styleUrls: [
     './components/slide/slide_content.css',
     './components/slide/solarized_light.css',
-    './../solarized-light.css'
+    './../css/solarized-light.css'
   ],
   encapsulation: ViewEncapsulation.None,
   inputs: ['text']
