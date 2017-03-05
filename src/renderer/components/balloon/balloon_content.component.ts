@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Output, Input, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
 
 @Component({
   selector: 'balloon-content',
@@ -41,20 +41,29 @@ import { Component, Output, Input, EventEmitter, ElementRef } from '@angular/cor
     }
   `]
 })
-export default class BalloonContent {
+export default class BalloonContent implements AfterViewChecked {
   centerPos: number = 0;
   topPos: number = 0;
   constructor(private el: ElementRef) { }
-  setPos(topPos: number, centerPos: number) {
+  @Input()
+  set isOpen(isOpen: boolean) {
+      this.el.nativeElement.style.display = isOpen ? 'block' : 'none';
+  }
+
+  ngAfterViewChecked(): void {
     const before = this.el.nativeElement.querySelector('.triangle-before');
     const after = this.el.nativeElement.querySelector('.triangle-after');
-    before.style.top = `${topPos}px`;
-    after.style.top = `${topPos + 1}px`;
-    before.style.left = `${centerPos}px`;
-    after.style.left = `${centerPos}px`;
+    before.style.top = `${this.topPos}px`;
+    after.style.top = `${this.topPos + 1}px`;
+    before.style.left = `${this.centerPos}px`;
+    after.style.left = `${this.centerPos}px`;
     const content = this.el.nativeElement.querySelector('.balloon-content');
-    content.style.top = `${topPos + 10}px`;
-    content.style.left = `${centerPos - content.clientWidth / 2}px`;
-    console.log('setted');
+    content.style.top = `${this.topPos + 10}px`;
+    content.style.left = `${this.centerPos - content.clientWidth / 2}px`;
+  }
+
+  setPos(topPos: number, centerPos: number) {
+    this.centerPos = centerPos;
+    this.topPos = topPos;
   }
 }

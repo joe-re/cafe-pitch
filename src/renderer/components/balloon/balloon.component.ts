@@ -17,7 +17,6 @@ import BalloonContentComponent from './balloon_content.component';
 export default class Balloon implements AfterViewInit {
   @ContentChild('attachBalloon') attachBalloon: ElementRef;
   @ContentChild(BalloonContentComponent) contentComponent: BalloonContentComponent
-
   constructor(private el: ElementRef) { }
    ngAfterViewInit(): void {
      setTimeout(() => {

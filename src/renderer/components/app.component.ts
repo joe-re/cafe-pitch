@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import {Editor} from './editor/editor.component';
 import {SlidePreview} from './slide/slide_preview.component';
 import {SlideService} from './../services/slide.service';
@@ -29,6 +29,7 @@ import {EVENTS} from './../../constants/events';
     .action {
       display: inline-block;
       text-align: center;
+      margin-right: 100px;
     }
     .action-name {
       color: white;
@@ -36,8 +37,8 @@ import {EVENTS} from './../../constants/events';
     .attach-balloon {
       position: relative;
     }
-    .hello-message {
-      width: 200px;
+    .download-qiita-form {
+      width: 400px;
       height: 300px;
     }
   `],
@@ -51,13 +52,15 @@ import {EVENTS} from './../../constants/events';
       </div>
       <div class="action">
         <balloon>
-          <button #attachBalloon class="btn btn-large btn-default" (click)="clickStartButton()">
+          <button #attachBalloon class="btn btn-large btn-default download-qiita-button" (click)="clickQiitaDownloadButton($event)">
             <span class="icon icon-play"></span>
           </button>
           <div class="action-name">Download from Qiita</div>
-          <balloon-content>
-            <div class="hello-message">
-              <input />
+          <balloon-content class="qiita-balloon" [isOpen]="isOpenDownloadQiitaForm">
+            <div class="download-qiita-form">
+              <label>Article URL
+                <input />
+              </label>
             </div>
           </balloon-content>
         </balloon>
@@ -78,12 +81,36 @@ import {EVENTS} from './../../constants/events';
 })
 export class AppComponent {
   private page = 1;
-  constructor(private slideService: SlideService) { }
+  private isOpenDownloadQiitaForm = false;
+  private _handleClickApplicaton: any;
+
+  constructor(private slideService: SlideService, private el: ElementRef) {
+    this._handleClickApplicaton = this.handleClickApplication.bind(this);
+  }
+
   ngOnInit() {
     ipcRenderer.on(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, (ev, text: string) => {
       this.changeText(text);
       this.changeSelectedLineNo(1);
     });
+    document.addEventListener('click', this._handleClickApplicaton);
+  }
+
+  ngOnDestroy() {
+    document.removeEventListener('click', this._handleClickApplicaton);
+  }
+
+  handleClickApplication(e: MouseEvent) {
+    if (!(e.target instanceof HTMLElement)) return;
+    const quiitaContents: NodeList = this.el.nativeElement.querySelectorAll('.qiita-balloon, .download-qiita-button');
+    let isClickedQuiitaContents = false;
+    for (const node of quiitaContents) {
+      if (node.contains(e.target)) {
+        isClickedQuiitaContents = true;
+        break;
+      }
+    }
+    if (!isClickedQuiitaContents) this.isOpenDownloadQiitaForm = false;
   }
 
   changeText(text: string) {
@@ -94,7 +121,12 @@ export class AppComponent {
   changeSelectedLineNo(selectedLineNo: number) {
     this.page = this.slideService.getPageNo(selectedLineNo);
   }
+
   clickStartButton() {
     ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION);
+  }
+
+  clickQiitaDownloadButton(e: MouseEvent) {
+    this.isOpenDownloadQiitaForm = !this.isOpenDownloadQiitaForm;
   }
 }
