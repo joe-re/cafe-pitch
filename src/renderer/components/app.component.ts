@@ -26,13 +26,42 @@ import {EVENTS} from './../../constants/events';
     .header {
       padding: 12px;
     }
+    .action {
+      display: inline-block;
+      text-align: center;
+    }
+    .action-name {
+      color: white;
+    }
+    .attach-balloon {
+      position: relative;
+    }
+    .hello-message {
+      width: 200px;
+      height: 300px;
+    }
   `],
   template: `
     <header class="header">
-      <button class="btn btn-default" (click)="clickStartButton()">
-        <span class="icon icon-play icon-text"></span>
-        Play
-      </button>
+      <div class="action">
+        <button class="btn btn-large btn-default" (click)="clickStartButton()">
+          <span class="icon icon-play"></span>
+        </button>
+        <div class="action-name">Play</div>
+      </div>
+      <div class="action">
+        <balloon>
+          <button #attachBalloon class="btn btn-large btn-default" (click)="clickStartButton()">
+            <span class="icon icon-play"></span>
+          </button>
+          <div class="action-name">Download from Qiita</div>
+          <balloon-content>
+            <div class="hello-message">
+              <input />
+            </div>
+          </balloon-content>
+        </balloon>
+      </div>
     </header>
     <div class="contents">
       <div class="inner-contents">

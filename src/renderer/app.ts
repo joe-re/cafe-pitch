@@ -8,12 +8,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Editor } from './components/editor/editor.component';
 import { Slide } from './components/slide/slide.component';
 import { SlidePreview } from './components/slide/slide_preview.component';
+import Balloon from './components/balloon/balloon.component';
+import BalloonContent from './components/balloon/balloon_content.component';
 import { MarkdownDirective } from './directives/markdown.directive';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { HttpModule } from '@angular/http'; 
 
 @NgModule({
-  declarations: [ AppComponent, Editor, SlidePreview, MarkdownDirective, Slide ],
-  imports: [ BrowserModule, ],
+  declarations: [
+    AppComponent,
+    Editor,
+    SlidePreview,
+    MarkdownDirective,
+    Slide,
+    Balloon,
+    BalloonContent
+  ],
+  imports: [ BrowserModule, HttpModule],
   providers: [],
   bootstrap: [AppComponent]
 })
