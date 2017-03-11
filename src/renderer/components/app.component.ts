@@ -46,7 +46,7 @@ import {EVENTS} from './../../constants/events';
   `],
   template: `
     <header class="header">
-      <action-bar></action-bar>
+      <action-bar (changeText)="changeText($event)"></action-bar>
     </header>
     <div class="contents">
       <div class="inner-contents">

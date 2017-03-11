@@ -1,4 +1,6 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, Output, EventEmitter } from '@angular/core';
+import { QiitaService } from './../../services/qiita.service';
+import { SlideService } from './../../services/slide.service';
 
 @Component({
   selector: 'action-bar',
@@ -20,6 +22,14 @@ import { Component, ElementRef } from '@angular/core';
       height: 200px;
       padding: 20px;
     }
+    .qiita-url-textarea {
+      resize: none;
+    }
+    button[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .error { color: red; }
   `],
   template: `
     <div class="action-bar">
@@ -35,25 +45,37 @@ import { Component, ElementRef } from '@angular/core';
             <span class="icon icon-play"></span>
           </button>
           <div class="action-name">Download from Qiita</div>
-          <balloon-content class="qiita-balloon" [isOpen]="isOpenDownloadQiitaForm">
-            <form class="download-qiita-form">
+          <balloon-content class="qiita-balloon" [isOpen]="isOpenDownloadQiitaForm" >
+            <form class="download-qiita-form" (ngSubmit)="submitQiitaDownloadForm()">
               <div class="form-group">
                 <label>Article URL</label>
-                <textarea class="form-control" rows="3"></textarea>
+                <textarea
+                  class="form-control qiita-url-textarea"
+                  rows="3"
+                  [(ngModel)]="qiitaUrl"
+                  [ngModelOptions]="{standalone: true}"
+                >
+                </textarea>
               </div>
-              <button class="btn btn-primary">Download</button>
+              <button type="submit" class="btn btn-primary" [disabled]="isDisabledToSubmit()">Download</button>
+              <span class="error" *ngIf="isError">Failed to download Qiita article.</span>
             </form>
           </balloon-content>
         </balloon>
       </div>
     </div>
     `,
+    providers: [QiitaService, SlideService]
 })
 export class ActionBar {
+  @Output('changeText') changeText = new EventEmitter();
   private isOpenDownloadQiitaForm = false;
   private _handleClickApplicaton: any;
+  private qiitaUrl = '';
+  private isLoading = false;
+  private isError = false;
 
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef, private qiitaService: QiitaService, private slideService: SlideService) {
     this._handleClickApplicaton = this.handleClickApplication.bind(this);
   }
 
@@ -81,5 +103,27 @@ export class ActionBar {
   clickQiitaDownloadButton(e: MouseEvent) {
     this.isOpenDownloadQiitaForm = !this.isOpenDownloadQiitaForm;
   }
-}
 
+  submitQiitaDownloadForm(e: MouseEvent) {
+    this.isLoading = true;
+    this.isError = false;
+    this.qiitaService.get(this.qiitaUrl)
+      .finally(() => this.isLoading = false)
+      .subscribe(
+        result => {
+          console.log(result.raw_body);
+          this.changeText.emit(result.raw_body);
+          this.isOpenDownloadQiitaForm = false;
+          this.qiitaUrl = '';
+        },
+        error => {
+          console.log(error);
+          this.isError = true;
+        },
+      )
+  }
+
+  isDisabledToSubmit() {
+    return this.isLoading || !this.qiitaUrl;
+  }
+}

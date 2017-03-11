@@ -8,6 +8,6 @@ import QiitaArticle from '../../types/qiita_article';
 export class QiitaService {
     constructor(private http: Http) {}
     get(url: string) {
-        return this.http.get(url).map(response => response.json().data as QiitaArticle)
+      return this.http.get(`${url}.json`).map(response => response.json() as QiitaArticle)
     }
 }

@@ -14,6 +14,7 @@ import BalloonContent from './components/balloon/balloon_content.component';
 import { MarkdownDirective } from './directives/markdown.directive';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HttpModule } from '@angular/http'; 
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { HttpModule } from '@angular/http';
     BalloonContent,
     ActionBar
   ],
-  imports: [ BrowserModule, HttpModule],
+  imports: [ BrowserModule, HttpModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
