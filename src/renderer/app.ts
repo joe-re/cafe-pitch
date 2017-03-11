@@ -7,6 +7,7 @@ import { AppComponent } from './components/app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { Editor } from './components/editor/editor.component';
 import { Slide } from './components/slide/slide.component';
+import { ActionBar } from './components/action_bar/action_bar.component';
 import { SlidePreview } from './components/slide/slide_preview.component';
 import Balloon from './components/balloon/balloon.component';
 import BalloonContent from './components/balloon/balloon_content.component';
@@ -22,7 +23,8 @@ import { HttpModule } from '@angular/http';
     MarkdownDirective,
     Slide,
     Balloon,
-    BalloonContent
+    BalloonContent,
+    ActionBar
   ],
   imports: [ BrowserModule, HttpModule],
   providers: [],

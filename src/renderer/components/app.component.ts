@@ -46,29 +46,7 @@ import {EVENTS} from './../../constants/events';
   `],
   template: `
     <header class="header">
-      <div class="action">
-        <button class="btn btn-large btn-default" (click)="clickStartButton()">
-          <span class="icon icon-play"></span>
-        </button>
-        <div class="action-name">Play</div>
-      </div>
-      <div class="action">
-        <balloon>
-          <button #attachBalloon class="btn btn-large btn-default download-qiita-button" (click)="clickQiitaDownloadButton($event)">
-            <span class="icon icon-play"></span>
-          </button>
-          <div class="action-name">Download from Qiita</div>
-          <balloon-content class="qiita-balloon" [isOpen]="isOpenDownloadQiitaForm">
-            <form class="download-qiita-form">
-              <div class="form-group">
-                <label>Article URL</label>
-                <textarea class="form-control" rows="3"></textarea>
-              </div>
-              <button class="btn btn-primary">Download</button>
-            </form>
-          </balloon-content>
-        </balloon>
-      </div>
+      <action-bar></action-bar>
     </header>
     <div class="contents">
       <div class="inner-contents">
@@ -85,23 +63,14 @@ import {EVENTS} from './../../constants/events';
 })
 export class AppComponent {
   private page = 1;
-  private isOpenDownloadQiitaForm = false;
-  private _handleClickApplicaton: any;
 
-  constructor(private slideService: SlideService, private el: ElementRef) {
-    this._handleClickApplicaton = this.handleClickApplication.bind(this);
-  }
+  constructor(private slideService: SlideService, private el: ElementRef) { }
 
   ngOnInit() {
     ipcRenderer.on(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, (ev, text: string) => {
       this.changeText(text);
       this.changeSelectedLineNo(1);
     });
-    document.addEventListener('click', this._handleClickApplicaton);
-  }
-
-  ngOnDestroy() {
-    document.removeEventListener('click', this._handleClickApplicaton);
   }
 
   handleClickApplication(e: MouseEvent) {
@@ -114,7 +83,6 @@ export class AppComponent {
         break;
       }
     }
-    if (!isClickedQuiitaContents) this.isOpenDownloadQiitaForm = false;
   }
 
   changeText(text: string) {
@@ -128,9 +96,5 @@ export class AppComponent {
 
   clickStartButton() {
     ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION);
-  }
-
-  clickQiitaDownloadButton(e: MouseEvent) {
-    this.isOpenDownloadQiitaForm = !this.isOpenDownloadQiitaForm;
   }
 }
