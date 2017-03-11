@@ -38,8 +38,10 @@ import {EVENTS} from './../../constants/events';
       position: relative;
     }
     .download-qiita-form {
+      text-align: left;
       width: 400px;
-      height: 300px;
+      height: 200px;
+      padding: 20px;
     }
   `],
   template: `
@@ -57,11 +59,13 @@ import {EVENTS} from './../../constants/events';
           </button>
           <div class="action-name">Download from Qiita</div>
           <balloon-content class="qiita-balloon" [isOpen]="isOpenDownloadQiitaForm">
-            <div class="download-qiita-form">
-              <label>Article URL
-                <input />
-              </label>
-            </div>
+            <form class="download-qiita-form">
+              <div class="form-group">
+                <label>Article URL</label>
+                <textarea class="form-control" rows="3"></textarea>
+              </div>
+              <button class="btn btn-primary">Download</button>
+            </form>
           </balloon-content>
         </balloon>
       </div>
