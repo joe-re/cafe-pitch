@@ -93,8 +93,4 @@ export class AppComponent {
   changeSelectedLineNo(selectedLineNo: number) {
     this.page = this.slideService.getPageNo(selectedLineNo);
   }
-
-  clickStartButton() {
-    ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION);
-  }
 }
