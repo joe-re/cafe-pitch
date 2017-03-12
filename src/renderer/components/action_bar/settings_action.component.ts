@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import SettingsService from './../../services/settings.service';
+import Settings from './../../../types/settings';
 
 @Component({
   selector: 'settings-action',
@@ -23,27 +26,27 @@ import { Component } from '@angular/core';
         </button>
         <div class="action-name">Settings</div>
         <balloon-content [isOpen]="isOpenBalloon" >
-          <form class="settings-form" (ngSubmit)="submit()">
+          <form class="settings-form" #settingsForm="ngForm" (ngSubmit)="submit(settingsForm)">
             <div class="form-group">
               <div>Sepatator</div>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox"> Horizontal Line(---)
+                  <input [(ngModel)]="settings.separator.horizontalLine" name="horizontalLine" type="checkbox"> Horizontal Line(---)
                 </label>
               </div>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox"> Before h1
+                  <input [(ngModel)]="settings.separator.h1" name="h1" type="checkbox"> Before h1
                 </label>
               </div>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox"> Before h2
+                  <input [(ngModel)]="settings.separator.h2" name="h2" type="checkbox"> Before h2
                 </label>
               </div>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox"> Before h3
+                  <input [(ngModel)]="settings.separator.h3" name="h3" type="checkbox"> Before h3
                 </label>
               </div>
             </div>
@@ -54,15 +57,26 @@ import { Component } from '@angular/core';
       </balloon>
     </div>
   `,
-  styleUrls: ['./components/action_bar/action.css']
+  styleUrls: ['./components/action_bar/action.css'],
+  providers: [SettingsService]
 })
 export default class SettingsAction {
   private isOpenBalloon = false;
+  private settings: Settings;
+
+  constructor(private settingsService: SettingsService) {}
+
+  ngOnInit() {
+    this.settings = this.settingsService.get();
+    console.log(this.settings);
+  }
+
   clickSettingsButton(e: MouseEvent) {
     this.isOpenBalloon = !this.isOpenBalloon;
   }
 
-  submit(e: MouseEvent) {
+  submit(settingsForm: NgForm) {
+    this.settingsService.save(this.settings);
     this.isOpenBalloon = false;
   }
 } 
