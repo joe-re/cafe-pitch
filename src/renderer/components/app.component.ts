@@ -1,9 +1,12 @@
-import {Component} from '@angular/core';
-import {Editor} from './editor/editor.component';
-import {SlidePreview} from './slide/slide_preview.component';
-import {SlideService} from './../services/slide.service';
-import {ipcRenderer} from 'electron';
-import {EVENTS} from './../../constants/events';
+import { Component, ElementRef } from '@angular/core';
+import { Editor } from './editor/editor.component';
+import { SlidePreview } from './slide/slide_preview.component';
+import { SlideService } from './../services/slide.service';
+import MouseControllService from './../services/mouse_controll.service';
+import { ipcRenderer } from 'electron';
+import { EVENTS } from './../../constants/events';
+import Settings from './../../types/settings';
+import SettingsService from './../services/settings.service';
 
 @Component({
   selector: 'my-app',
@@ -29,10 +32,7 @@ import {EVENTS} from './../../constants/events';
   `],
   template: `
     <header class="header">
-      <button class="btn btn-default" (click)="clickStartButton()">
-        <span class="icon icon-play icon-text"></span>
-        Play
-      </button>
+      <action-bar (changeText)="changeText($event)"></action-bar>
     </header>
     <div class="contents">
       <div class="inner-contents">
@@ -40,21 +40,43 @@ import {EVENTS} from './../../constants/events';
           <editor (changeText)="changeText($event)" (changeSelectedLineNo)="changeSelectedLineNo($event)" [text]="slideService.getText()"></editor>
         </div>
         <div class="slide-preview-area">
-          <slide-preview [text]="slideService.getPageText(page)"></slide-preview>
+          <slide-preview [text]="slideService.getPageText(page, settings)"></slide-preview>
         </div>
       </div>
     </div>
-    `,
-  providers: [SlideService]
+  `,
+  providers: [SlideService, MouseControllService, SettingsService]
 })
 export class AppComponent {
   private page = 1;
-  constructor(private slideService: SlideService) { }
+  private _handleClickApplication;
+  private settings: Settings;
+
+  constructor(
+    private slideService: SlideService,
+    private mouseControllService: MouseControllService,
+    private settingsService: SettingsService,
+    private el: ElementRef
+  ) {
+    this._handleClickApplication = this.handleClickApplication.bind(this)
+  }
+
   ngOnInit() {
     ipcRenderer.on(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, (ev, text: string) => {
       this.changeText(text);
       this.changeSelectedLineNo(1);
     });
+    document.addEventListener('click', this._handleClickApplication);
+    this.settings = this.settingsService.get();
+  }
+
+  ngOnDestroy() {
+    document.removeEventListener('click', this._handleClickApplication);
+  }
+
+  handleClickApplication(e: MouseEvent) {
+    if (!(e.target instanceof HTMLElement)) return;
+    this.mouseControllService.clicked(e.target);
   }
 
   changeText(text: string) {
@@ -63,9 +85,6 @@ export class AppComponent {
   }
 
   changeSelectedLineNo(selectedLineNo: number) {
-    this.page = this.slideService.getPageNo(selectedLineNo);
-  }
-  clickStartButton() {
-    ipcRenderer.send(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_START_PRESENTATION);
+    this.page = this.slideService.getPageNo(selectedLineNo, this.settings);
   }
 }

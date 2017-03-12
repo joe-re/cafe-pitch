@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/globals/ace/index.d.ts" />
 
-import {Component, Output, Input, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter } from '@angular/core';
 import 'ace-min-noconflict';
 import 'ace-min-noconflict/mode-markdown';
 import 'ace-min-noconflict/theme-monokai';
