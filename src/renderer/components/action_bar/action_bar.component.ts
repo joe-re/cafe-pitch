@@ -1,17 +1,23 @@
 import { Component, ElementRef, Output, EventEmitter } from '@angular/core';
 import { QiitaService } from './../../services/qiita.service';
-import { SlideService } from './../../services/slide.service';
 
 @Component({
   selector: 'action-bar',
   styles: [`
+    .action-group {
+      display: inline-block;
+      margin-right: 100px;
+    }
     .action {
       display: inline-block;
       text-align: center;
-      margin-right: 100px;
+      margin-right: 16px;
+    }
+    .action-button {
+      margin-bottom: 4px;
     }
     .action-name {
-      color: white;
+      color: #bbb;
     }
     .attach-balloon {
       position: relative;
@@ -33,39 +39,49 @@ import { SlideService } from './../../services/slide.service';
   `],
   template: `
     <div class="action-bar">
-      <div class="action">
-        <button class="btn btn-large btn-default" (click)="clickStartButton()">
-          <span class="icon icon-play"></span>
-        </button>
-        <div class="action-name">Play</div>
-      </div>
-      <div class="action">
-        <balloon>
-          <button #attachBalloon class="btn btn-large btn-default download-qiita-button" (click)="clickQiitaDownloadButton($event)">
+      <div class="action-group">
+        <div class="action">
+          <button class="btn btn-large btn-default action-button" (click)="clickStartButton()">
             <span class="icon icon-play"></span>
           </button>
-          <div class="action-name">Download from Qiita</div>
-          <balloon-content class="qiita-balloon" [isOpen]="isOpenDownloadQiitaForm" >
-            <form class="download-qiita-form" (ngSubmit)="submitQiitaDownloadForm()">
-              <div class="form-group">
-                <label>Article URL</label>
-                <textarea
-                  class="form-control qiita-url-textarea"
-                  rows="3"
-                  [(ngModel)]="qiitaUrl"
-                  [ngModelOptions]="{standalone: true}"
-                >
-                </textarea>
-              </div>
-              <button type="submit" class="btn btn-primary" [disabled]="isDisabledToSubmit()">Download</button>
-              <span class="error" *ngIf="isError">Failed to download Qiita article.</span>
-            </form>
-          </balloon-content>
-        </balloon>
+          <div class="action-name">Play</div>
+        </div>
+      </div>
+      <div class="action-group">
+        <div class="action">
+          <balloon>
+            <button #attachBalloon class="btn btn-large btn-default  action-button download-qiita-button" (click)="clickQiitaDownloadButton($event)">
+              <span class="icon icon-play"></span>
+            </button>
+            <div class="action-name">Download from Qiita</div>
+            <balloon-content class="qiita-balloon" [isOpen]="isOpenDownloadQiitaForm" >
+              <form class="download-qiita-form" (ngSubmit)="submitQiitaDownloadForm()">
+                <div class="form-group">
+                  <label>Article URL</label>
+                  <textarea
+                    class="form-control qiita-url-textarea"
+                    rows="3"
+                    [(ngModel)]="qiitaUrl"
+                    [ngModelOptions]="{standalone: true}"
+                  >
+                  </textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="isDisabledToSubmit()">Download</button>
+                <span class="error" *ngIf="isError">Failed to download Qiita article.</span>
+              </form>
+            </balloon-content>
+          </balloon>
+        </div>
+        <div class="action">
+          <button class="btn btn-large btn-default action-button">
+            <span class="icon icon-cog"></span>
+          </button>
+          <div class="action-name">Settings</div>
+        </div>
       </div>
     </div>
     `,
-    providers: [QiitaService, SlideService]
+    providers: [QiitaService]
 })
 export class ActionBar {
   @Output('changeText') changeText = new EventEmitter();
@@ -75,7 +91,7 @@ export class ActionBar {
   private isLoading = false;
   private isError = false;
 
-  constructor(private el: ElementRef, private qiitaService: QiitaService, private slideService: SlideService) {
+  constructor(private el: ElementRef, private qiitaService: QiitaService) {
     this._handleClickApplicaton = this.handleClickApplication.bind(this);
   }
 
