@@ -61,6 +61,9 @@ export class SlideService {
     if (settings.separator.h1) cond.push('^#\\s');
     if (settings.separator.h2) cond.push('^##\\s');
     if (settings.separator.h3) cond.push('^###\\s');
+    if (settings.separator.h4) cond.push('^####\\s');
+    if (settings.separator.h5) cond.push('^#####\\s');
+    if (settings.separator.h6) cond.push('^######\\s');
     if (cond.length === 0) cond.push('^---$');
     return new RegExp(`(${cond.join('|')})`);
   }

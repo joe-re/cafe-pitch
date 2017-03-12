@@ -11,7 +11,7 @@ import { Subscription }   from 'rxjs/Subscription';
     .settings-form {
       text-align: left;
       width: 400px;
-      height: 240px;
+      height: 400px;
       padding: 20px;
     }
     button[disabled] {
@@ -49,6 +49,21 @@ import { Subscription }   from 'rxjs/Subscription';
               <div class="checkbox">
                 <label>
                   <input [(ngModel)]="settings.separator.h3" name="h3" type="checkbox"> Before h3
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input [(ngModel)]="settings.separator.h4" name="h4" type="checkbox"> Before h4
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input [(ngModel)]="settings.separator.h5" name="h5" type="checkbox"> Before h5
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input [(ngModel)]="settings.separator.h6" name="h6" type="checkbox"> Before h6
                 </label>
               </div>
             </div>

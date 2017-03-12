@@ -11,7 +11,10 @@ export default class SettingsService {
         horizontalLine: true,
         h1: true,
         h2: true,
-        h3: false
+        h3: true,
+        h4: false,
+        h5: false,
+        h6: false
       }
     };
   }
@@ -19,7 +22,7 @@ export default class SettingsService {
   public get(): Settings {
     const settings =  window.localStorage.getItem('settings');
     if (!settings) return this.createInitialSettings();
-    return JSON.parse(settings);
+    return Object.assign(this.createInitialSettings(), JSON.parse(settings));
   }
 
   public save(settings: Settings) {
