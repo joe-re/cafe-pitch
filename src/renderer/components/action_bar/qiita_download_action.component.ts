@@ -1,3 +1,4 @@
+// This is just idea implementation. Perhaps it may be implemented in the future.
 import { Component, ElementRef, Output, EventEmitter } from '@angular/core';
 import { QiitaService } from './../../services/qiita.service';
 

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'action-bar',
@@ -14,16 +14,9 @@ import { Component, Output, EventEmitter } from '@angular/core';
         <play-action></play-action>
       </div>
       <div class="action-group">
-        <qiita-download-action (changeText)="changeText($event)"></qiita-download-action>
         <settings-action></settings-action>
       </div>
     </div>
     `,
 })
-export class ActionBar {
-  @Output('changeText') _changeText = new EventEmitter();
-
-  changeText(text: string) {
-    this._changeText.emit(text);
-  }
-}
+export class ActionBar { }
