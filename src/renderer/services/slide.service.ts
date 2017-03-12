@@ -43,7 +43,9 @@ export class SlideService {
   private getPages(settings: Settings): string[] {
     const regExp = this.createPageBreakRegexp(settings);
     const target = this.getText().split('\n').reduce((p, c) => {
-      const replaced = c.replace(regExp, (matched) => '---pagebreak---' + matched);
+      const replaced = c.replace(regExp, (matched) =>
+        matched === '---' ? '---pagebreak---' : '---pagebreak---' + matched
+      );
       return p + replaced + '\n';
     }, '');
     const pages = target.split('---pagebreak---');
