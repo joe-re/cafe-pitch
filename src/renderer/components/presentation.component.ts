@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
 import {Slide} from './slide/slide.component';
 import {SlideService} from './../services/slide.service';
+import SettingsService from './../services/settings.service';
 import * as _ from 'lodash';
-const ipcRenderer = require('electron').ipcRenderer;
-import {EVENTS} from './../../constants/events';
+import { ipcRenderer } from 'electron';
+import { EVENTS } from './../../constants/events';
+import Settings from './../../types/settings';
 
 @Component({
   selector: 'presentation',
@@ -33,21 +35,26 @@ import {EVENTS} from './../../constants/events';
       </div>
     </div>
     `,
-  providers: [SlideService]
+  providers: [SlideService, SettingsService]
 })
 export class PresentationComponent {
   private pageNo = 1;
   private pages: Array<number>;
   private _handleKeyUp: any;
+  private settings: Settings;
 
-  constructor(private slideServie: SlideService) {
+  constructor(
+    private slideServie: SlideService,
+    private settingsService: SettingsService
+  ) {
     slideServie.setText(ipcRenderer.sendSync(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_MESSAGE));
-    this.pages = _.range(1, this.slideServie.getMaxPage() + 1);
+    this.pages = _.range(1, this.slideServie.getMaxPage(this.settings) + 1);
     this._handleKeyUp = this.handleKeyUp.bind(this);
   }
 
   ngOnInit() {
     document.addEventListener('keyup', this._handleKeyUp);
+    this.settings = this.settingsService.get();
   }
 
   ngOnDestroy() {
@@ -55,7 +62,7 @@ export class PresentationComponent {
   }
 
   private goToNextPage() {
-    if (this.slideServie.getMaxPage() >= this.pageNo + 1) {
+    if (this.slideServie.getMaxPage(this.settings) >= this.pageNo + 1) {
       this.pageNo++;
     }
   }

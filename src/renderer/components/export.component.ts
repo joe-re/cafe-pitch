@@ -1,8 +1,10 @@
 import {Component, ElementRef} from '@angular/core';
 import {Slide} from './slide/slide.component';
 import {SlideService} from './../services/slide.service';
+import SettingsService from './../services/settings.service';
 import * as _ from 'lodash';
-const ipcRenderer = require('electron').ipcRenderer;
+import { ipcRenderer } from 'electron';
+import Settings from './../../types/settings';
 
 @Component({
   selector: 'export',
@@ -31,14 +33,21 @@ const ipcRenderer = require('electron').ipcRenderer;
       </div>
     </div>
     `,
-  providers: [SlideService]
+  providers: [SlideService, SettingsService]
 })
 export class ExportComponent {
   pages: Array<number>;
-  constructor(private slideServie: SlideService, private el: ElementRef) { }
+  private settings: Settings;
+
+  constructor(
+    private slideServie: SlideService,
+    private settingsService: SettingsService,
+    private el: ElementRef
+  ) { }
   ngOnInit() {
     this.slideServie.setText(ipcRenderer.sendSync('RequestPrintText'));
-    this.pages = _.range(1, this.slideServie.getMaxPage() + 1);
+    this.settings = this.settingsService.get();
+    this.pages = _.range(1, this.slideServie.getMaxPage(this.settings) + 1);
   }
 
   getImages(): Array<HTMLImageElement> {

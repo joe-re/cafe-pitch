@@ -5,6 +5,8 @@ import { SlideService } from './../services/slide.service';
 import MouseControllService from './../services/mouse_controll.service';
 import { ipcRenderer } from 'electron';
 import { EVENTS } from './../../constants/events';
+import Settings from './../../types/settings';
+import SettingsService from './../services/settings.service';
 
 @Component({
   selector: 'my-app',
@@ -38,18 +40,24 @@ import { EVENTS } from './../../constants/events';
           <editor (changeText)="changeText($event)" (changeSelectedLineNo)="changeSelectedLineNo($event)" [text]="slideService.getText()"></editor>
         </div>
         <div class="slide-preview-area">
-          <slide-preview [text]="slideService.getPageText(page)"></slide-preview>
+          <slide-preview [text]="slideService.getPageText(page, settings)"></slide-preview>
         </div>
       </div>
     </div>
-    `,
-  providers: [SlideService, MouseControllService]
+  `,
+  providers: [SlideService, MouseControllService, SettingsService]
 })
 export class AppComponent {
   private page = 1;
   private _handleClickApplication;
+  private settings: Settings;
 
-  constructor(private slideService: SlideService, private mouseControllService: MouseControllService, private el: ElementRef) {
+  constructor(
+    private slideService: SlideService,
+    private mouseControllService: MouseControllService,
+    private settingsService: SettingsService,
+    private el: ElementRef
+  ) {
     this._handleClickApplication = this.handleClickApplication.bind(this)
   }
 
@@ -59,6 +67,7 @@ export class AppComponent {
       this.changeSelectedLineNo(1);
     });
     document.addEventListener('click', this._handleClickApplication);
+    this.settings = this.settingsService.get();
   }
 
   ngOnDestroy() {
@@ -76,6 +85,6 @@ export class AppComponent {
   }
 
   changeSelectedLineNo(selectedLineNo: number) {
-    this.page = this.slideService.getPageNo(selectedLineNo);
+    this.page = this.slideService.getPageNo(selectedLineNo, this.settings);
   }
 }
