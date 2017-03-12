@@ -1,9 +1,10 @@
 import { Component, ElementRef } from '@angular/core';
-import {Editor} from './editor/editor.component';
-import {SlidePreview} from './slide/slide_preview.component';
-import {SlideService} from './../services/slide.service';
-import {ipcRenderer} from 'electron';
-import {EVENTS} from './../../constants/events';
+import { Editor } from './editor/editor.component';
+import { SlidePreview } from './slide/slide_preview.component';
+import { SlideService } from './../services/slide.service';
+import MouseControllService from './../services/mouse_controll.service';
+import { ipcRenderer } from 'electron';
+import { EVENTS } from './../../constants/events';
 
 @Component({
   selector: 'my-app',
@@ -42,18 +43,31 @@ import {EVENTS} from './../../constants/events';
       </div>
     </div>
     `,
-  providers: [SlideService]
+  providers: [SlideService, MouseControllService]
 })
 export class AppComponent {
   private page = 1;
+  private _handleClickApplication;
 
-  constructor(private slideService: SlideService, private el: ElementRef) { }
+  constructor(private slideService: SlideService, private mouseControllService: MouseControllService, private el: ElementRef) {
+    this._handleClickApplication = this.handleClickApplication.bind(this)
+  }
 
   ngOnInit() {
     ipcRenderer.on(EVENTS.MAIN_WINDOW.MAIN.SEND_REFRESHED_TEXT, (ev, text: string) => {
       this.changeText(text);
       this.changeSelectedLineNo(1);
     });
+    document.addEventListener('click', this._handleClickApplication);
+  }
+
+  ngOnDestroy() {
+    document.removeEventListener('click', this._handleClickApplication);
+  }
+
+  handleClickApplication(e: MouseEvent) {
+    if (!(e.target instanceof HTMLElement)) return;
+    this.mouseControllService.clicked(e.target);
   }
 
   changeText(text: string) {

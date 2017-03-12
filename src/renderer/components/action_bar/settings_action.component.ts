@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import SettingsService from './../../services/settings.service';
+import MouseControllService from './../../services/mouse_controll.service';
 import Settings from './../../../types/settings';
+import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'settings-action',
@@ -21,11 +23,11 @@ import Settings from './../../../types/settings';
   template: `
     <div class="action">
       <balloon>
-        <button #attachBalloon class="btn btn-large btn-default action-button" (click)="clickSettingsButton()">
+        <button id="settings-button" #attachBalloon class="btn btn-large btn-default action-button" (click)="clickSettingsButton()">
           <span class="icon icon-cog"></span>
         </button>
         <div class="action-name">Settings</div>
-        <balloon-content [isOpen]="isOpenBalloon" >
+        <balloon-content id="settings-balloon" [isOpen]="isOpenBalloon" >
           <form class="settings-form" #settingsForm="ngForm" (ngSubmit)="submit(settingsForm)">
             <div class="form-group">
               <div>Sepatator</div>
@@ -63,12 +65,29 @@ import Settings from './../../../types/settings';
 export default class SettingsAction {
   private isOpenBalloon = false;
   private settings: Settings;
+  private mouseControllSubscription: Subscription;
 
-  constructor(private settingsService: SettingsService) {}
+  constructor(
+    private settingsService: SettingsService,
+    private mouseControllService: MouseControllService,
+    private el: ElementRef
+  ) {}
 
   ngOnInit() {
     this.settings = this.settingsService.get();
     console.log(this.settings);
+    this.mouseControllSubscription = this.mouseControllService.clicked$.subscribe(html => this.handleClickApplication(html));
+  }
+
+  ngOnDestroy() {
+    this.mouseControllSubscription.unsubscribe();
+  }
+
+  handleClickApplication(html: HTMLElement) {
+    const settingsContents: Node[] = Array.prototype.slice.call(
+      this.el.nativeElement.querySelectorAll('#settings-button, #settings-balloon')
+    );
+    if (!settingsContents.find((node) => node.contains(html))) this.isOpenBalloon = false;
   }
 
   clickSettingsButton(e: MouseEvent) {
