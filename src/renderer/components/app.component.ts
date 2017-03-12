@@ -42,7 +42,7 @@ import { EVENTS } from './../../constants/events';
         </div>
       </div>
     </div>
-    `,
+  `,
   providers: [SlideService, MouseControllService]
 })
 export class AppComponent {

@@ -28,13 +28,19 @@ export class SlideService {
   public getPageNo(lineNo: number): number {
     let selectedPage = 1;
     _.some(this.getText().split('\n'), (text: string, index: number) => {
-      if (text === '---') selectedPage++;
+      if (text.match(/(^---$|^#\s|^##\s|^###\s)/)) selectedPage++;
       return lineNo === index + 1;
     });
     return selectedPage;
   }
 
   private getPages(): string[] {
-    return this.text.split('---');
+    const pages: string[] = [];
+    const target = this.getText().split('\n').reduce((p, c) => {
+      const replaced = c.replace(/(^---$|^#\s|^##\s|^###\s)/, (matched) => '---pagebreak---' + matched);
+      return p + replaced + '\n';
+    }, '');
+    console.log(target);
+    return target.split('---pagebreak---');
   }
 }
