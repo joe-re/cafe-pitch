@@ -75,7 +75,6 @@ export default class SettingsAction {
 
   ngOnInit() {
     this.settings = this.settingsService.get();
-    console.log(this.settings);
     this.mouseControllSubscription = this.mouseControllService.clicked$.subscribe(html => this.handleClickApplication(html));
   }
 

@@ -29,8 +29,12 @@ export class SlideService {
   public getPageNo(lineNo: number, settings: Settings): number {
     const regExp = this.createPageBreakRegexp(settings);
     let selectedPage = 1;
+    let foundFirstContents = false;
     _.some(this.getText().split('\n'), (text: string, index: number) => {
-      if (text.match(regExp)) selectedPage++;
+      if (foundFirstContents && text.match(regExp)) {
+        selectedPage++;
+      } 
+      if (!text) foundFirstContents = true; // don't count until find first content, because remove first empty separator
       return lineNo === index + 1;
     });
     return selectedPage;
@@ -38,13 +42,15 @@ export class SlideService {
 
   private getPages(settings: Settings): string[] {
     const regExp = this.createPageBreakRegexp(settings);
-    const pages: string[] = [];
     const target = this.getText().split('\n').reduce((p, c) => {
       const replaced = c.replace(regExp, (matched) => '---pagebreak---' + matched);
       return p + replaced + '\n';
     }, '');
-    console.log(target);
-    return target.split('---pagebreak---');
+    const pages = target.split('---pagebreak---');
+    if (pages.length > 0 && !pages[0].replace('\n', '')) {
+      pages.shift(); // remove first empty separator
+    }
+    return pages;
   }
 
   private createPageBreakRegexp(settings: Settings): RegExp {
@@ -54,7 +60,6 @@ export class SlideService {
     if (settings.separator.h2) cond.push('^##\\s');
     if (settings.separator.h3) cond.push('^###\\s');
     if (cond.length === 0) cond.push('^---$');
-    console.log(`(${cond.join('|')})`);
     return new RegExp(`(${cond.join('|')})`);
   }
 }

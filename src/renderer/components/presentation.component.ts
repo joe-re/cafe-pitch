@@ -30,7 +30,7 @@ import Settings from './../../types/settings';
     <div class="contents">
       <div class="inner-contents">
         <span *ngFor="let page of pages">
-          <slide [text]="slideServie.getPageText(page)" *ngIf="pageNo <= page"></slide>
+          <slide [text]="slideServie.getPageText(page, settings)" *ngIf="pageNo <= page"></slide>
         </span>
       </div>
     </div>
@@ -47,14 +47,14 @@ export class PresentationComponent {
     private slideServie: SlideService,
     private settingsService: SettingsService
   ) {
-    slideServie.setText(ipcRenderer.sendSync(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_MESSAGE));
-    this.pages = _.range(1, this.slideServie.getMaxPage(this.settings) + 1);
     this._handleKeyUp = this.handleKeyUp.bind(this);
   }
 
   ngOnInit() {
     document.addEventListener('keyup', this._handleKeyUp);
+    this.slideServie.setText(ipcRenderer.sendSync(EVENTS.PRESENTATION_WINDOW.RENDERER.REQUEST_MESSAGE));
     this.settings = this.settingsService.get();
+    this.pages = _.range(1, this.slideServie.getMaxPage(this.settings) + 1);
   }
 
   ngOnDestroy() {
