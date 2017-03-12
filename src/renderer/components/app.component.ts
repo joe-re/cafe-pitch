@@ -26,23 +26,6 @@ import {EVENTS} from './../../constants/events';
     .header {
       padding: 12px;
     }
-    .action {
-      display: inline-block;
-      text-align: center;
-      margin-right: 100px;
-    }
-    .action-name {
-      color: white;
-    }
-    .attach-balloon {
-      position: relative;
-    }
-    .download-qiita-form {
-      text-align: left;
-      width: 400px;
-      height: 200px;
-      padding: 20px;
-    }
   `],
   template: `
     <header class="header">
@@ -71,18 +54,6 @@ export class AppComponent {
       this.changeText(text);
       this.changeSelectedLineNo(1);
     });
-  }
-
-  handleClickApplication(e: MouseEvent) {
-    if (!(e.target instanceof HTMLElement)) return;
-    const quiitaContents: NodeList = this.el.nativeElement.querySelectorAll('.qiita-balloon, .download-qiita-button');
-    let isClickedQuiitaContents = false;
-    for (const node of quiitaContents) {
-      if (node.contains(e.target)) {
-        isClickedQuiitaContents = true;
-        break;
-      }
-    }
   }
 
   changeText(text: string) {

@@ -47,7 +47,7 @@ export default class BalloonContent implements AfterViewChecked {
   constructor(private el: ElementRef) { }
   @Input()
   set isOpen(isOpen: boolean) {
-      this.el.nativeElement.style.display = isOpen ? 'block' : 'none';
+    this.el.nativeElement.style.display = isOpen ? 'block' : 'none';
   }
 
   ngAfterViewChecked(): void {

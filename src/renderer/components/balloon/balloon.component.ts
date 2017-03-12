@@ -19,15 +19,13 @@ export default class Balloon implements AfterViewInit {
   @ContentChild(BalloonContentComponent) contentComponent: BalloonContentComponent
   constructor(private el: ElementRef) { }
    ngAfterViewInit(): void {
-     setTimeout(() => {
-       this.setBallonContentPositon();
-     }, 0);
+     setTimeout(() => this.setBallonContentPositon(), 0);
    }
 
    setBallonContentPositon() {
      const ballon = this.el.nativeElement.querySelector('.balloon');
-     const { clientWidth, offsetWidth, clientHeight, offsetTop } = this.attachBalloon.nativeElement;
-     const centerPos = clientWidth + offsetWidth / 2;
+     const centerPos = ballon.offsetWidth / 2;
+     const { clientHeight, offsetTop } = this.attachBalloon.nativeElement;
      const topPos = clientHeight + offsetTop;
      this.contentComponent.setPos(topPos, centerPos);
    }

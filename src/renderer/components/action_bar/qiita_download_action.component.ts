@@ -4,9 +4,6 @@ import { QiitaService } from './../../services/qiita.service';
 @Component({
   selector: 'qiita-download-action',
   styles: [`
-    .attach-balloon {
-      position: relative;
-    }
     .download-qiita-form {
       text-align: left;
       width: 400px;
@@ -25,7 +22,7 @@ import { QiitaService } from './../../services/qiita.service';
   template: `
     <div class="action">
       <balloon>
-        <button #attachBalloon class="btn btn-large btn-default  action-button download-qiita-button" (click)="clickQiitaDownloadButton($event)">
+        <button #attachBalloon class="btn btn-large btn-default action-button download-qiita-button" (click)="clickQiitaDownloadButton($event)">
           <span class="icon icon-play"></span>
         </button>
         <div class="action-name">Download from Qiita</div>
