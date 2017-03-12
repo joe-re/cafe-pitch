@@ -19,14 +19,14 @@ describe('input text to editor.', function () {
   describe('input markdown text', function() {
     it('parses and renders html.', function() {
       const page = new SlideEditorPage(app.client);
-      return page.inputText('# h1 title\n## h2 title')
+      return page.inputText('# h1 title\n- list')
         .then(() => page.getSlideHtml())
         .then((html) => {
           const dom: Document = jsdom(html);
           const h1 = dom.querySelector('h1');
           assert.equal(h1.textContent, 'h1 title');
-          const h2 = dom.querySelector('h2');
-          assert.equal(h2.textContent, 'h2 title');
+          const li = dom.querySelector('li');
+          assert.equal(li.textContent, 'list');
         });
     });
   });
