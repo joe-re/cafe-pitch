@@ -35,8 +35,9 @@ export default class ExportWindow {
       this.window = null;
     }
     this.text = text;
-    this.window  = new electron.BrowserWindow( { width: 940, height: 0, webPreferences: { webSecurity: false } } );
+    this.window  = new electron.BrowserWindow({ width: 940, height: 740, show: false });
     this.window.loadURL('file://' + __dirname + '/../renderer/export_window.html');
     this.window.on('closed', () => { this.window = null; });
+    this.window.toggleDevTools();
   }
 }

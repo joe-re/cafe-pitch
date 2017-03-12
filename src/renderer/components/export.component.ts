@@ -28,7 +28,7 @@ import Settings from './../../types/settings';
     <div class="contents">
       <div>
         <section class="slide-section" *ngFor="let page of pages">
-          <slide [text]="slideServie.getPageText(page)"></slide>
+          <slide [text]="slideServie.getPageText(page, settings)"></slide>
         </section>
       </div>
     </div>
