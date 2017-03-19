@@ -18,7 +18,7 @@
     "watch": "npm run prebuild && concurrently --kill-others \"webpack -w\" \"gulp watch\"",
     "start": "electron .",
     "package": "npm run build && gulp package",
-    "test": "concurrently \"npm run test:e2e\"",
+    "test": "concurrently \"npm run test:e2e\" \"npm run test:unit\"",
     "test:unit": "mocha --compilers ts:espower-typescript/guess spec/unit/**/*.spec.ts",
     "test:e2e": "mocha --compilers ts:espower-typescript/guess spec/e2e/**/*.story.ts"
   },
