@@ -18,8 +18,8 @@
     "watch": "npm run prebuild && concurrently --kill-others \"webpack -w\" \"gulp watch\"",
     "start": "electron .",
     "package": "npm run build && gulp package",
-    "test": "concurrently \"npm run test:e2e\"",
-    "test:unit:watch": "concurrently --kill-others \"webpack --config ./webpack_for_spec.config.coffee -w\" \"karma start spec/karma.conf.coffee\"",
+    "test": "concurrently \"npm run test:e2e\" \"npm run test:unit\"",
+    "test:unit": "mocha --compilers ts:espower-typescript/guess spec/unit/**/*.spec.ts",
     "test:e2e": "mocha --compilers ts:espower-typescript/guess spec/e2e/**/*.story.ts"
   },
   "keywords": [],
@@ -53,7 +53,7 @@
     "concurrently": "^2.0.0",
     "del": "^2.2.0",
     "electron-packager": "^6.0.2",
-    "espower-typescript": "^5.0.1",
+    "espower-typescript": "^8.0.0",
     "glob": "^7.0.3",
     "gulp": "^3.9.1",
     "gulp-sass": "^2.2.0",
@@ -74,7 +74,7 @@
     "ts-loader": "^2.0.1",
     "tsconfig-cli": "^1.0.2",
     "typescript": "^2.2.1",
-    "typescript-simple": "git://github.com/joe-re/typescript-simple.git#fix-path-resolve-error",
+    "typescript-simple": "^8.0.0",
     "typings": "^2.1.0",
     "webpack": "^2.2.1",
     "zip-dir": "^1.0.2"
