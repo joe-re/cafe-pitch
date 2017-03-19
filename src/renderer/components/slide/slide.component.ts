@@ -25,6 +25,7 @@ import {Component, ElementRef, ViewEncapsulation} from '@angular/core';
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow-y: scroll;
     }
 
     .slide-content {
