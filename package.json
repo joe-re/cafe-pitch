@@ -1,6 +1,6 @@
 {
   "name": "cafe-pitch",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Markdown-driven presentation tool built on Electron.",
   "main": "dist/browser/main.js",
   "repository": {
@@ -17,7 +17,8 @@
     "build": "webpack",
     "watch": "npm run prebuild && concurrently --kill-others \"webpack -w\" \"gulp watch\"",
     "start": "electron .",
-    "package": "npm run build && gulp package",
+    "clean": "rm -rf dist && rm -rf release",
+    "package": "npm run clean && npm run build && cp ./prod_resources/* ./dist/ && electron-packager dist \"CafePitch\" --all --out=release --icon=\"resource/cafepitch\" && gulp zip",
     "test": "concurrently \"npm run test:e2e\" \"npm run test:unit\"",
     "test:unit": "mocha --compilers ts:espower-typescript/guess spec/unit/**/*.spec.ts",
     "test:e2e": "mocha --compilers ts:espower-typescript/guess spec/e2e/**/*.story.ts"
@@ -52,7 +53,7 @@
     "coffee-script": "^1.10.0",
     "concurrently": "^2.0.0",
     "del": "^2.2.0",
-    "electron-packager": "^6.0.2",
+    "electron-packager": "^8.6.0",
     "espower-typescript": "^8.0.0",
     "glob": "^7.0.3",
     "gulp": "^3.9.1",

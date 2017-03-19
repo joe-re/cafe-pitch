@@ -1,0 +1,8 @@
+{
+  "name": "cafe-pitch",
+  "version": "0.1.0",
+  "description": "Markdown-driven presentation tool built on Electron.",
+  "main": "browser/main.js",
+  "author": "joe-re",
+  "license": "MIT"
+}
