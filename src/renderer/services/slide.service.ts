@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import Settings from '../../types/settings';
+import lex from '../utils/lex';
 
 @Injectable()
 export class SlideService {
@@ -27,44 +28,30 @@ export class SlideService {
   }
 
   public getPageNo(lineNo: number, settings: Settings): number {
-    const regExp = this.createPageBreakRegexp(settings);
+    const lines = lex(this.getText(), settings);
     let selectedPage = 1;
-    let foundFirstContents = false;
-    _.some(this.getText().split('\n'), (text: string, index: number) => {
-      if (foundFirstContents && text.match(regExp)) {
-        selectedPage++;
-      } 
-      if (!text) foundFirstContents = true; // don't count until find first content, because remove first empty separator
+    _.some(lines, (line, index: number) => {
+      if (line.break) selectedPage++;
       return lineNo === index + 1;
     });
     return selectedPage;
   }
 
   private getPages(settings: Settings): string[] {
-    const regExp = this.createPageBreakRegexp(settings);
-    const target = this.getText().split('\n').reduce((p, c) => {
-      const replaced = c.replace(regExp, (matched) =>
-        matched === '---' ? '---pagebreak---' : '---pagebreak---' + matched
-      );
-      return p + replaced + '\n';
-    }, '');
-    const pages = target.split('---pagebreak---');
-    if (pages.length > 0 && !pages[0].replace('\n', '')) {
-      pages.shift(); // remove first empty separator
-    }
+    const lines = lex(this.getText(), settings);
+    console.log(lines);
+    const pages: string[] = [];
+    let page = '';
+    lines.forEach(line => {
+      if (line.type === 'heading' || line.type === 'hr') {
+        if (line.break) {
+          pages.push(page);
+          page = '';
+        }
+      }
+      page += line.text;
+    });
+    if (page) pages.push(page);
     return pages;
-  }
-
-  private createPageBreakRegexp(settings: Settings): RegExp {
-    const cond = [];
-    if (settings.separator.horizontalLine) cond.push('^---$');
-    if (settings.separator.h1) cond.push('^#\\s');
-    if (settings.separator.h2) cond.push('^##\\s');
-    if (settings.separator.h3) cond.push('^###\\s');
-    if (settings.separator.h4) cond.push('^####\\s');
-    if (settings.separator.h5) cond.push('^#####\\s');
-    if (settings.separator.h6) cond.push('^######\\s');
-    if (cond.length === 0) cond.push('^---$');
-    return new RegExp(`(${cond.join('|')})`);
   }
 }
