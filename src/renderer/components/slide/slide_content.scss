@@ -45,13 +45,13 @@
   h5 { font-size: 1.3em; }
   h6 { font-size: 1.15em; }
   h1, h2, h3, h4, h5, h6 {
+    white-space: normal;
     margin-bottom: 20px;
     margin-top: 0;
   }
 
   // ul, ol
   ul, ol {
-    display: inline-block;
     -webkit-padding-start: 40px;
   }
 
@@ -80,5 +80,10 @@
     text-align: left;
     white-space: pre-wrap;
     word-wrap: normal;
+  }
+
+  // p
+  p {
+    text-align: left;
   }
 }
