@@ -2,7 +2,7 @@ import Settings from '../../types/settings';
 
 const conds = {
   code: /^ {4}[^\n]+(?:\n|$)/,
-  fences: /^ *(`{3,}|~{3,})[\s\S]*\1(?:\n+|$)/,
+  fences: /^ *(`{3,}|~{3,})[\s\S]*?\1(?:\n|$)/,
   heading: /^ *(#{1,6}) .+(?:\n|$)/,
   hr: /^ *[-*_]{3,} *(?:\n+|$)/,
   others: /^.+?(?:\n|$)/,

@@ -39,7 +39,6 @@ export class SlideService {
 
   private getPages(settings: Settings): string[] {
     const lines = lex(this.getText(), settings);
-    console.log(lines);
     const pages: string[] = [];
     let page = '';
     lines.forEach(line => {

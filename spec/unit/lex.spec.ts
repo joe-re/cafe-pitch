@@ -4,7 +4,10 @@ import lex from '../../src/renderer/utils/lex';
 import * as assert from 'power-assert';
 
 describe('lexing lines', function() {
-  it('should be lexed by lines', function () {
+  const settings = {
+    separator: { horizontalLine: true, h1: true, h2: true, h3: true, h4: false, h5: false, h6: false }
+  };
+  it('should be lexed by line', function () {
     const text =
       'text\n\n' +
       '# heading1\n' +
@@ -26,9 +29,6 @@ describe('lexing lines', function() {
       'fenses2 line\n' +
       '```\n' +
       '---\n';
-    const settings = {
-      separator: { horizontalLine: true, h1: true, h2: true, h3: true, h4: false, h5: false, h6: false }
-    };
     const lines = lex(text, settings);
     assert.equal(lines.length, 21);
     assert.deepEqual(lines[0], { type: 'others', text: 'text\n' });
@@ -53,4 +53,22 @@ describe('lexing lines', function() {
     assert.deepEqual(lines[19], { type: 'code', text: '```\n' });
     assert.deepEqual(lines[20], { type: 'hr', text: '\n', break: true });
   });
-});
+
+  context('there are two fenses', function() {
+    let text =
+     '## fenses1\n' +
+     '\n' +
+     '```\n' +
+     'fenses1\n' +
+     '```\n' +
+     '\n' +
+     '## fenses2\n' +
+     '\n' + '```\n' +
+     'fenses2\n' +
+     '```';
+    it('should be lexed correctly', function () {
+      const lines = lex(text, settings);
+      assert.equal(lines.length, 10);
+    });
+  });
+})
