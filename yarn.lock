@@ -245,6 +245,10 @@ array-find-index@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-find-index/-/array-find-index-1.0.2.tgz#df010aa1287e164bbda6f9723b0a96a1ec4187a1"
 
+array-find@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/array-find/-/array-find-1.0.0.tgz#6c8e286d11ed768327f8e62ecee87353ca3e78b8"
+
 array-slice@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/array-slice/-/array-slice-0.2.3.tgz#dd3cfb80ed7973a75117cdac69b0b99ec86186f5"
@@ -1150,6 +1154,12 @@ custom-event@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/custom-event/-/custom-event-1.0.1.tgz#5d02a46850adf1b4a317946a3928fccb5bfd0425"
 
+d@1:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/d/-/d-1.0.0.tgz#754bb5bfe55451da69a58b94d45f4c5b0462d58f"
+  dependencies:
+    es5-ext "^0.10.9"
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
@@ -1465,6 +1475,12 @@ emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
 
+empower-assert@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/empower-assert/-/empower-assert-1.0.1.tgz#31e310abc065baa7c3a0487e6be5bbcc65f3c1de"
+  dependencies:
+    estraverse "^4.2.0"
+
 empower-core@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/empower-core/-/empower-core-0.6.1.tgz#6c187f502fcef7554d57933396aac655483772b1"
@@ -1555,15 +1571,67 @@ error-ex@^1.2.0:
   dependencies:
     is-arrayish "^0.2.1"
 
+es5-ext@^0.10.14, es5-ext@^0.10.9, es5-ext@~0.10.14:
+  version "0.10.14"
+  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.14.tgz#625bc9ab9cac0f6fb9dc271525823d1800b3d360"
+  dependencies:
+    es6-iterator "2"
+    es6-symbol "~3.1"
+
+es6-iterator@2, es6-iterator@^2.0.1, es6-iterator@~2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/es6-iterator/-/es6-iterator-2.0.1.tgz#8e319c9f0453bf575d374940a655920e59ca5512"
+  dependencies:
+    d "1"
+    es5-ext "^0.10.14"
+    es6-symbol "^3.1"
+
+es6-map@^0.1.3:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/es6-map/-/es6-map-0.1.5.tgz#9136e0503dcc06a301690f0bb14ff4e364e949f0"
+  dependencies:
+    d "1"
+    es5-ext "~0.10.14"
+    es6-iterator "~2.0.1"
+    es6-set "~0.1.5"
+    es6-symbol "~3.1.1"
+    event-emitter "~0.3.5"
+
 es6-promise@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.0.5.tgz#7882f30adde5b240ccfa7f7d78c548330951ae42"
+
+es6-set@~0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/es6-set/-/es6-set-0.1.5.tgz#d2b3ec5d4d800ced818db538d28974db0a73ccb1"
+  dependencies:
+    d "1"
+    es5-ext "~0.10.14"
+    es6-iterator "~2.0.1"
+    es6-symbol "3.1.1"
+    event-emitter "~0.3.5"
 
 es6-shim@^0.35.0:
   version "0.35.2"
   resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.35.2.tgz#45c5b3eb2f792ed28f130d826239be50affb897f"
 
-escallmatch@^1.4.2:
+es6-symbol@3.1.1, es6-symbol@^3.1, es6-symbol@^3.1.1, es6-symbol@~3.1, es6-symbol@~3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/es6-symbol/-/es6-symbol-3.1.1.tgz#bf00ef4fdab6ba1b46ecb7b629b4c7ed5715cc77"
+  dependencies:
+    d "1"
+    es5-ext "~0.10.14"
+
+es6-weak-map@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/es6-weak-map/-/es6-weak-map-2.0.2.tgz#5e3ab32251ffd1538a1f8e5ffa1357772f92d96f"
+  dependencies:
+    d "1"
+    es5-ext "^0.10.14"
+    es6-iterator "^2.0.1"
+    es6-symbol "^3.1.1"
+
+escallmatch@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/escallmatch/-/escallmatch-1.5.0.tgz#50099d86e8091b092df8ddfbc3f9a6fb05a024d0"
   dependencies:
@@ -1593,42 +1661,62 @@ escodegen@^1.6.1, escodegen@^1.7.0:
   optionalDependencies:
     source-map "~0.2.0"
 
-espower-source@^1.1.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/espower-source/-/espower-source-1.2.0.tgz#e7d95f6cd9d22675e69e7c1139d92099009b4bed"
+escope@^3.3.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/escope/-/escope-3.6.0.tgz#e01975e812781a163a6dadfdd80398dc64c889c3"
+  dependencies:
+    es6-map "^0.1.3"
+    es6-weak-map "^2.0.1"
+    esrecurse "^4.1.0"
+    estraverse "^4.1.1"
+
+espower-location-detector@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/espower-location-detector/-/espower-location-detector-1.0.0.tgz#a17b7ecc59d30e179e2bef73fb4137704cb331b5"
+  dependencies:
+    is-url "^1.2.1"
+    path-is-absolute "^1.0.0"
+    source-map "^0.5.0"
+    xtend "^4.0.0"
+
+espower-source@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/espower-source/-/espower-source-2.0.1.tgz#ac6e08dd561e495466cfe70ca6c521a313b6be72"
   dependencies:
     acorn "^4.0.0"
     acorn-es7-plugin "^1.0.10"
     convert-source-map "^1.1.1"
+    empower-assert "^1.0.0"
     escodegen "^1.6.1"
-    espower "^1.0.6"
+    espower "^2.0.0"
+    estraverse "^4.0.0"
+    merge-estraverse-visitors "^1.0.0"
     multi-stage-sourcemap "^0.2.1"
     path-is-absolute "^1.0.0"
     xtend "^4.0.0"
 
-espower-typescript@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/espower-typescript/-/espower-typescript-5.0.1.tgz#7e2dc952ecb3ba6ceea2f89011d2722160e73123"
+espower-typescript@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/espower-typescript/-/espower-typescript-8.0.0.tgz#1b780289f3dfd78801aa919eae6522ec5fd85c46"
   dependencies:
-    espower-source "^1.1.0"
-    minimatch "^3.0.0"
-    typescript "~1.8.2"
-    typescript-simple "^5.0.0"
+    espower-source "^2.0.0"
+    minimatch "^3.0.3"
+    typescript "^2.2.1"
+    typescript-simple "^8.0.0"
 
-espower@^1.0.6:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/espower/-/espower-1.3.2.tgz#7715f7516e576c857c06a8a88eb5e2bf2dd7824c"
+espower@^2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/espower/-/espower-2.0.3.tgz#f04952fbe10e91b7151b2f3b6f1e00dde31605e0"
   dependencies:
-    deep-equal "^1.0.0"
-    escallmatch "^1.4.2"
+    array-find "^1.0.0"
+    escallmatch "^1.5.0"
     escodegen "^1.7.0"
+    escope "^3.3.0"
+    espower-location-detector "^1.0.0"
     espurify "^1.3.0"
     estraverse "^4.1.0"
-    is-url "^1.2.1"
-    isarray "^0.0.1"
-    path-is-absolute "^1.0.0"
     source-map "^0.5.0"
-    type-name "^1.0.1"
+    type-name "^2.0.0"
     xtend "^4.0.0"
 
 esprima@^2.0.0, esprima@^2.7.1:
@@ -1645,17 +1733,35 @@ espurify@^1.3.0, espurify@^1.6.0:
   dependencies:
     core-js "^2.0.0"
 
+esrecurse@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/esrecurse/-/esrecurse-4.1.0.tgz#4713b6536adf7f2ac4f327d559e7756bff648220"
+  dependencies:
+    estraverse "~4.1.0"
+    object-assign "^4.0.1"
+
 estraverse@^1.9.1:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-1.9.3.tgz#af67f2dc922582415950926091a4005d29c9bb44"
 
-estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.2.0:
+estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
+
+estraverse@~4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.1.1.tgz#f6caca728933a850ef90661d0e17982ba47111a2"
 
 esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
+
+event-emitter@~0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/event-emitter/-/event-emitter-0.3.5.tgz#df8c69eef1647923c7157b9ce83840610b02cc39"
+  dependencies:
+    d "1"
+    es5-ext "~0.10.14"
 
 eventemitter3@1.x.x:
   version "1.2.0"
@@ -2685,7 +2791,7 @@ is-windows@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-0.2.0.tgz#de1aa6d63ea29dd248737b69f1ff8b8002d2108c"
 
-isarray@0.0.1, isarray@^0.0.1:
+isarray@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
 
@@ -3311,6 +3417,12 @@ meow@^3.1.0, meow@^3.7.0:
     read-pkg-up "^1.0.1"
     redent "^1.0.0"
     trim-newlines "^1.0.0"
+
+merge-estraverse-visitors@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/merge-estraverse-visitors/-/merge-estraverse-visitors-1.0.0.tgz#eb968338b5ded5ceed82cec0307decba2d8ea994"
+  dependencies:
+    estraverse "^4.0.0"
 
 micromatch@^2.1.5, micromatch@^2.3.7:
   version "2.3.11"
@@ -5171,11 +5283,7 @@ type-is@~1.6.14:
     media-typer "0.3.0"
     mime-types "~2.1.13"
 
-type-name@^1.0.1:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/type-name/-/type-name-1.1.0.tgz#ad9c3f7c330f5b2f08de7d79f56d2b9451e42b0e"
-
-type-name@^2.0.1:
+type-name@^2.0.0, type-name@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/type-name/-/type-name-2.0.2.tgz#efe7d4123d8ac52afff7f40c7e4dec5266008fb4"
 
@@ -5183,13 +5291,19 @@ typedarray@~0.0.5:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript-simple@^5.0.0, "typescript-simple@git://github.com/joe-re/typescript-simple.git#fix-path-resolve-error":
+typescript-simple@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/typescript-simple/-/typescript-simple-8.0.0.tgz#a84e6a49299118996fc6d21c555de76399133695"
+  dependencies:
+    typescript "^2.2.1"
+
+"typescript-simple@git://github.com/joe-re/typescript-simple.git#fix-path-resolve-error":
   version "5.0.2"
   resolved "git://github.com/joe-re/typescript-simple.git#b98b905f2108cf02bc89697d89f422d1a8234e1c"
   dependencies:
     typescript "^1.8.2"
 
-typescript@^1.8.2, typescript@~1.8.2:
+typescript@^1.8.2:
   version "1.8.10"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-1.8.10.tgz#b475d6e0dff0bf50f296e5ca6ef9fbb5c7320f1e"
 
