@@ -7,6 +7,7 @@ import Settings from './../../types/settings';
 import { SlideService } from './../services/slide.service';
 import SettingsService from './../services/settings.service';
 import MouseControllService from './../services/mouse_controll.service';
+import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'my-app',
@@ -50,6 +51,7 @@ export class AppComponent {
   private page = 1;
   private _handleClickApplication;
   private settings: Settings;
+  private settingsChangedSubscription: Subscription;
 
   constructor(
     private slideService: SlideService,
@@ -67,10 +69,14 @@ export class AppComponent {
     });
     document.addEventListener('click', this._handleClickApplication);
     this.settings = this.settingsService.get();
+    this.settingsChangedSubscription = this.settingsService.changed$.subscribe((settings) => {
+      this.settings = settings;
+    });
   }
 
   ngOnDestroy() {
     document.removeEventListener('click', this._handleClickApplication);
+    this.settingsChangedSubscription.unsubscribe();
   }
 
   handleClickApplication(e: MouseEvent) {
