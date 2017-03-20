@@ -1,5 +1,3 @@
-/// <reference path="../../typings/globals/mocha/index.d.ts" />
-
 import lex from '../../src/renderer/utils/lex';
 import * as assert from 'power-assert';
 

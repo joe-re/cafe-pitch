@@ -1,20 +1,21 @@
-import spectron from 'spectron';
+import { Client } from 'spectron';
 
 export default class SlideEditorPage {
-  constructor(private client: spectron.Client<void>) {}
+  constructor(private client: Client<void>) {}
 
-  inputText(text: string): Promise<void> {
+  inputText(text: string): WebdriverIO.Client<void> {
     return this.client.waitForExist('#editor').then(() => {
       this.client.setValue('#editor textarea', text);
     });
   }
 
-  getSlideHtml(): Promise<string> {
+  getSlideHtml(): WebdriverIO.Client<string> {
     return this.client.waitForExist('.slide-content')
-      .then(() => this.client.getHTML('.slide-content'));
+      .then(() => this.client.getHTML('.slide-content'))
+      .then((html) => typeof html === 'string' ? html : html.join());
   }
 
-  findEmoji(emojiName: string): Promise<boolean> {
+  findEmoji(emojiName: string): WebdriverIO.Client<boolean> {
     function loop(html: string | string[]): boolean {
       if (typeof html === 'string') {
         return html.indexOf(`${emojiName}.png`) >= 0;

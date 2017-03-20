@@ -9,7 +9,8 @@ export class Application {
     if (!this.app) {
       this.app = new spectron.Application({
         path: electron,
-        args: [join(__dirname, '..', '..')]
+        args: [join(__dirname, '..', '..')],
+        startTimeout: 10000
       });
     }
     if (this.app.isRunning()) {

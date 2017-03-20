@@ -2,7 +2,7 @@ gulp     = require 'gulp'
 del      = require 'del'
 seq      = require 'run-sequence'
 sass     = require 'gulp-sass'
-packager = require 'electron-packager'
+glob     = require 'glob'
 zipdir   = require 'zip-dir'
 
 gulp.task 'clean', (cb) ->
@@ -41,25 +41,9 @@ gulp.task 'watch', ->
   gulp.watch 'src/**/*.css', ['build:css']
   gulp.watch 'src/**/*.scss', ['build:scss']
 
-packageOptions = {
-  dir: '.',
-  out: 'release',
-  name: 'Cafe Pitch',
-  version: '1.2.5',
-  overwrite: true,
-  ignore: '(release|typings|src|node_modules|spec|spec_dist|resource)'
-}
-
-gulp.task 'clean:release', (cb) ->
-  del([ 'release' ], cb)
-
-gulp.task 'package', ['clean:release'], ->
-  build = (option) ->
+gulp.task 'zip', ->
+  build = (dir) ->
     new Promise (resolve) ->
-      packager option, -> zipdir(option.out, {saveTo: "#{option.out}.zip"}, -> resolve())
-  osx = build Object.assign({}, packageOptions, platform: 'darwin', arch: 'x64', out: 'release/osx', icon: './resource/cafepitch.icns')
-  winX64 = build Object.assign({}, packageOptions, platform: 'win32', arch: 'x64', out: 'release/win_x64', icon: './resource/cafepitch.ico')
-  winIa32 = build Object.assign({}, packageOptions, platform: 'win32', arch: 'ia32', out: 'release/win_ia32', icon: './resource/cafepitch.ico')
-  linX64 =  build Object.assign({}, packageOptions, platform: 'linux', arch: 'x64', out: 'release/linux_x64', icon: './resource/cafepitch.ico')
-  linIa32 = build Object.assign({}, packageOptions, platform: 'linux', arch: 'ia32', out: 'release/linux_ia32', icon: './resource/cafepitch.ico')
-  Promise.all [osx, winX64, winIa32, linX64, linIa32]
+      zipdir(dir, {saveTo: "#{dir}.zip"}, -> resolve())
+  releases = glob.sync('./release/*')
+  return Promise.all releases.map((dir) -> build(dir))

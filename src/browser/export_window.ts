@@ -2,7 +2,7 @@ import * as electron from 'electron';
 import FileManager from './file_manager';
 
 export default class ExportWindow {
-  private window: electron.BrowserWindow;
+  private window: Electron.BrowserWindow;
   private static instance;
   private text: string;
 
@@ -38,6 +38,5 @@ export default class ExportWindow {
     this.window  = new electron.BrowserWindow({ width: 940, height: 740, show: false });
     this.window.loadURL('file://' + __dirname + '/../renderer/export_window.html');
     this.window.on('closed', () => { this.window = null; });
-    this.window.toggleDevTools();
   }
 }
