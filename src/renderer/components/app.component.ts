@@ -1,12 +1,12 @@
 import { Component, ElementRef } from '@angular/core';
 import { Editor } from './editor/editor.component';
 import { SlidePreview } from './slide/slide_preview.component';
-import { SlideService } from './../services/slide.service';
-import MouseControllService from './../services/mouse_controll.service';
 import { ipcRenderer } from 'electron';
 import { EVENTS } from './../../constants/events';
 import Settings from './../../types/settings';
+import { SlideService } from './../services/slide.service';
 import SettingsService from './../services/settings.service';
+import MouseControllService from './../services/mouse_controll.service';
 
 @Component({
   selector: 'my-app',
@@ -45,7 +45,6 @@ import SettingsService from './../services/settings.service';
       </div>
     </div>
   `,
-  providers: [SlideService, MouseControllService, SettingsService]
 })
 export class AppComponent {
   private page = 1;

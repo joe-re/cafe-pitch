@@ -33,7 +33,6 @@ import Settings from './../../types/settings';
       </div>
     </div>
     `,
-  providers: [SlideService, SettingsService]
 })
 export class ExportComponent {
   pages: Array<number>;

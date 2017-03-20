@@ -18,6 +18,9 @@ import { MarkdownDirective } from './directives/markdown.directive';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HttpModule } from '@angular/http'; 
 import { FormsModule }   from '@angular/forms';
+import { SlideService } from './services/slide.service';
+import SettingsService from './services/settings.service';
+import MouseControllService from './services/mouse_controll.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,7 @@ import { FormsModule }   from '@angular/forms';
     SettingsAction
   ],
   imports: [ BrowserModule, HttpModule, FormsModule],
-  providers: [],
+  providers: [SlideService, MouseControllService, SettingsService],
   bootstrap: [AppComponent]
 })
 class App { }
