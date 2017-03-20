@@ -13,36 +13,9 @@
     "exclude": [
         "node_modules"
     ],
-    "filesGlob": [
+    "include": [
         "./lib.d.ts",
         "./src/**/*.ts",
         "./spec/**/*.ts"
-    ],
-    "files": [
-        "src/browser/export_window.ts",
-        "src/browser/file_manager.ts",
-        "src/browser/main_window.ts",
-        "src/browser/main.ts",
-        "src/browser/menu.ts",
-        "src/browser/presentation_window.ts",
-        "src/constants/events.ts",
-        "src/renderer/app.ts",
-        "src/renderer/components/app.component.ts",
-        "src/renderer/components/editor/editor.component.ts",
-        "src/renderer/components/export.component.ts",
-        "src/renderer/components/presentation.component.ts",
-        "src/renderer/components/slide/slide_preview.component.ts",
-        "src/renderer/components/slide/slide.component.ts",
-        "src/renderer/directives/markdown.directive.ts",
-        "src/renderer/export.ts",
-        "src/renderer/presentation.ts",
-        "src/renderer/services/slide.service.ts",
-        "spec/e2e/e2e_test_helper.ts",
-        "spec/e2e/page/slide_editor.page.ts",
-        "spec/e2e/story/input_editor.story.ts",
-        "spec/e2e/story/launch.story.ts"
-    ],
-    "atom": {
-        "rewriteTsconfig": false
-    }
+    ]
 }

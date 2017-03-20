@@ -3,7 +3,7 @@ import MainWindow from './../browser/main_window';
 import * as electron from 'electron';
 
 export default class PresentationWindow {
-  private window: electron.BrowserWindow;
+  private window: Electron.BrowserWindow;
   private text: string;
   private static instance: PresentationWindow;
 

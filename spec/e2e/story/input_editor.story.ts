@@ -1,5 +1,3 @@
-/// <reference path="../../../typings/globals/mocha/index.d.ts" />
-
 import {Application} from '../e2e_test_helper';
 import * as assert from 'power-assert';
 import SlideEditorPage from '../page/slide_editor.page';

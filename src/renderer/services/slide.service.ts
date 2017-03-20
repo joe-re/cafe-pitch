@@ -31,7 +31,9 @@ export class SlideService {
     const lines = lex(this.getText(), settings);
     let selectedPage = 1;
     _.some(lines, (line, index: number) => {
-      if (line.break) selectedPage++;
+      if (line.type === 'hr' || line.type === 'heading' && line.break) {
+        selectedPage++;
+      }
       return lineNo === index + 1;
     });
     return selectedPage;
@@ -42,11 +44,9 @@ export class SlideService {
     const pages: string[] = [];
     let page = '';
     lines.forEach(line => {
-      if (line.type === 'heading' || line.type === 'hr') {
-        if (line.break) {
-          pages.push(page);
-          page = '';
-        }
+      if (line.type === 'hr' || line.type === 'heading' && line.break) {
+        pages.push(page);
+        page = '';
       }
       page += line.text;
     });

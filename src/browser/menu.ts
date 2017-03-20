@@ -61,7 +61,7 @@ const setMenu = (mainWindow: MainWindow) => {
         }
       ]
     }
-  ] as electron.MenuItemOptions[];
+  ] as Electron.MenuItemOptions[];
   Menu.setApplicationMenu(Menu.buildFromTemplate(menuItems));
 };
 

@@ -3,7 +3,7 @@ import FileManager from './file_manager';
 import {EVENTS} from './../constants/events';
 
 export default class MainWindow {
-  private window: electron.BrowserWindow;
+  private window: Electron.BrowserWindow;
   private static instance: MainWindow;
   private text: string;
 
@@ -32,7 +32,7 @@ export default class MainWindow {
     FileManager.getInstance().on(EVENTS.FILE_MANAGER.RESET_FILE, this.handleResetFile.bind(this));
   }
 
-  public getBrowserWindow(): electron.BrowserWindow {
+  public getBrowserWindow(): Electron.BrowserWindow {
     return this.window;
   }
 

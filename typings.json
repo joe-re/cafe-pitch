@@ -4,9 +4,7 @@
   "globalDependencies": {
     "ace": "registry:dt/ace#0.0.0+20160630235124",
     "electron": "registry:dt/electron#1.4.8+20170227030124",
-    "es6-shim": "registry:dt/es6-shim#0.31.2+20160726072212",
-    "mocha": "registry:dt/mocha#2.2.5+20170204022515",
-    "node": "registry:dt/node#7.0.0+20170204020307"
+    "mocha": "registry:dt/mocha#2.2.5+20170204022515"
   },
   "globalDevDependencies": {
     "empower": "registry:dt/empower#0.0.0+20160317120654",
