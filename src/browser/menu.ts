@@ -48,7 +48,7 @@ const setMenu = (mainWindow: MainWindow) => {
     {
       label: 'Play',
       submenu: [
-        { label: 'Play Slideshow', accelerator: 'Command+P', click: () => PresentationWindow.getInstance().createWindow() }
+        { label: 'Play Slideshow', accelerator: 'Alt+CmdOrCtrl+P', click: () => PresentationWindow.getInstance().createWindow() }
       ]
     },
     {
