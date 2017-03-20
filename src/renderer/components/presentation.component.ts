@@ -35,7 +35,6 @@ import Settings from './../../types/settings';
       </div>
     </div>
     `,
-  providers: [SlideService, SettingsService]
 })
 export class PresentationComponent {
   private pageNo = 1;

@@ -74,8 +74,7 @@ import { Subscription }   from 'rxjs/Subscription';
       </balloon>
     </div>
   `,
-  styleUrls: ['./components/action_bar/action.css'],
-  providers: [SettingsService]
+  styleUrls: ['./components/action_bar/action.css']
 })
 export default class SettingsAction {
   private isOpenBalloon = false;

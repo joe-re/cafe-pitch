@@ -10,11 +10,14 @@ import { Slide } from './components/slide/slide.component';
 import { SlidePreview } from './components/slide/slide_preview.component';
 import { MarkdownDirective } from './directives/markdown.directive';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { SlideService } from './services/slide.service';
+import SettingsService from './services/settings.service';
+import MouseControllService from './services/mouse_controll.service';
 
 @NgModule({
   declarations: [ ExportComponent, Editor, SlidePreview, MarkdownDirective, Slide ],
   imports: [ BrowserModule ],
-  providers: [],
+  providers: [SlideService, MouseControllService, SettingsService],
   bootstrap: [ ExportComponent ]
 })
 class Export { }

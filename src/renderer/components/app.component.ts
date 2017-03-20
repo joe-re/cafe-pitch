@@ -1,12 +1,13 @@
 import { Component, ElementRef } from '@angular/core';
 import { Editor } from './editor/editor.component';
 import { SlidePreview } from './slide/slide_preview.component';
-import { SlideService } from './../services/slide.service';
-import MouseControllService from './../services/mouse_controll.service';
 import { ipcRenderer } from 'electron';
 import { EVENTS } from './../../constants/events';
 import Settings from './../../types/settings';
+import { SlideService } from './../services/slide.service';
 import SettingsService from './../services/settings.service';
+import MouseControllService from './../services/mouse_controll.service';
+import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'my-app',
@@ -45,12 +46,12 @@ import SettingsService from './../services/settings.service';
       </div>
     </div>
   `,
-  providers: [SlideService, MouseControllService, SettingsService]
 })
 export class AppComponent {
   private page = 1;
   private _handleClickApplication;
   private settings: Settings;
+  private settingsChangedSubscription: Subscription;
 
   constructor(
     private slideService: SlideService,
@@ -68,10 +69,14 @@ export class AppComponent {
     });
     document.addEventListener('click', this._handleClickApplication);
     this.settings = this.settingsService.get();
+    this.settingsChangedSubscription = this.settingsService.changed$.subscribe((settings) => {
+      this.settings = settings;
+    });
   }
 
   ngOnDestroy() {
     document.removeEventListener('click', this._handleClickApplication);
+    this.settingsChangedSubscription.unsubscribe();
   }
 
   handleClickApplication(e: MouseEvent) {
