@@ -1,3 +1,7 @@
+## 0.1.1 (2017-03-20)
+### Fixed
+- fix cli error
+
 ## 0.1.0 (2017-03-20)
 ### Features
 - You are enable to change separator's element on yourself.
