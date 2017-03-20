@@ -43,6 +43,8 @@ export class Editor {
 
   ngOnInit() {
     this.editor = ace.edit('editor');
+    const commands: any = this.editor.commands;
+    commands.bindKey("Ctrl-P", "golineup");
     this.editor.getSession().setMode('ace/mode/markdown');
     this.editor.setTheme('ace/theme/monokai');
     this.editor.getSession().on('change', this.handleChangeText.bind(this));
