@@ -1,3 +1,7 @@
+## 0.1.0 (2017-03-20)
+### Features
+- You are enable to change separator's element on yourself.
+
 ## 0.0.7 (2016-07-03)
 ### Fixed
 - open anchor link using default browser #25
