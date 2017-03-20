@@ -1,3 +1,7 @@
+## 0.1.2 (2017-03-20)
+### Fixed
+- enable to use ctrl-p on editor #38
+
 ## 0.1.1 (2017-03-20)
 ### Fixed
 - fix cli error
