@@ -5,7 +5,7 @@
 
 Markdown-driven presentation tool built on Electron.
 
-![](https://cloud.githubusercontent.com/assets/4954534/15095492/7192a2d6-1503-11e6-9e2e-8b86839b73cb.gif)
+![](https://cloud.githubusercontent.com/assets/4954534/24092260/87112200-0d90-11e7-8642-e133d5dcffd6.gif)
 
 # Download
 You can get executable binary in below link.
@@ -43,7 +43,6 @@ $ npm start     # run electron.
 ```
 $ npm run test            # run unit test and e2e test.
 $ npm run test:unit       # only run unit test.
-$ npm run test:unit:watch # watch filechanges and auto run unit test.
 $ npm run test:e2e        # only run e2e test.
 
 ```
