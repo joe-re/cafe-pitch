@@ -1,4 +1,4 @@
-import {Application} from '../e2e_test_helper';
+import Application from '../application';
 import * as assert from 'power-assert';
 import SlideEditorPage from '../page/slide_editor.page';
 import { jsdom } from 'jsdom';

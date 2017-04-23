@@ -27,7 +27,7 @@ function reportLog(app: any, testName) {
   });
 }
 
-export class Application {
+export default class Application {
   private app: spectron.Application;
 
   start() {
@@ -73,13 +73,3 @@ export class Application {
   }
 }
 
-export function waitForExistFile(filePath: string) {
-  return new Promise((resolve, _reject) => {
-    const timer = setInterval(() => {
-      if (fs.existsSync(filePath)) {
-        resolve();
-        clearInterval(timer);
-      }
-    }, 1000);
-  });
-}

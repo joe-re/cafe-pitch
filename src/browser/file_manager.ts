@@ -35,7 +35,7 @@ export default class FileManager extends EventEmitter {
   }
 
   public openFile() {
-    dialog.showOpenDialog(
+    const files = dialog.showOpenDialog(
       this.mainWinsow.getBrowserWindow(),
       {
         title: 'open',
@@ -45,10 +45,8 @@ export default class FileManager extends EventEmitter {
           extensions: ['md']
         }]
       },
-      (files) => {
-        if (files && files.length > 0) this.readFile(files[0]);
-      }
     );
+    if (files && files.length > 0) this.readFile(files[0]);
   }
 
   public saveFile(): Promise<{}> {

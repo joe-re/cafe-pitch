@@ -1,4 +1,4 @@
-import {Application} from '../e2e_test_helper';
+import Application from '../application';
 import * as assert from 'power-assert';
 
 describe('application launch', function () {
