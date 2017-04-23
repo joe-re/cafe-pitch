@@ -15,6 +15,22 @@ export default class SlideEditorPage {
       .then((html) => typeof html === 'string' ? html : html.join());
   }
 
+  waitForExistEditorText(text: string): WebdriverIO.Client<boolean> {
+    return this.client.waitForExist('#editor')
+      .then(() => new Promise((resolve, _reject) => {
+        const timer = setInterval(() => {
+          this.client.getText("#editor .ace_text").then(contents => {
+            const editorText = typeof contents === 'string' ? contents : contents.join('\n');
+            if (editorText === text) {
+              resolve(true);
+              clearInterval(timer);
+            }
+          });
+        }, 1000);
+      }))
+      .then(() => true);
+  }
+
   findEmoji(emojiName: string): WebdriverIO.Client<boolean> {
     function loop(html: string | string[]): boolean {
       if (typeof html === 'string') {

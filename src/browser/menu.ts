@@ -28,9 +28,7 @@ const setMenu = (mainWindow: MainWindow) => {
         { type: 'separator' },
         { label: 'Export To PDF', click: () => {
           ExportWindow.getInstance().createWindow(MainWindow.getInstance().getText());
-        }},
-        { type: 'separator' },
-        { label: 'Quit', accelerator: 'Command+Q', click: () => app.quit() }
+        }}
       ]
     },
     {
@@ -62,6 +60,16 @@ const setMenu = (mainWindow: MainWindow) => {
       ]
     }
   ] as Electron.MenuItemOptions[];
+  if (process.platform === "darwin" ) {
+    menuItems.unshift(
+      {
+        label: "CafePitch",
+        submenu: [
+          { label: "Quit", accelerator: "CmdOrCtrl+Q", click: () => app.quit() }
+        ]
+      }
+    );
+  }
   Menu.setApplicationMenu(Menu.buildFromTemplate(menuItems));
 };
 

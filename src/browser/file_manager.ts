@@ -35,7 +35,7 @@ export default class FileManager extends EventEmitter {
   }
 
   public openFile() {
-    dialog.showOpenDialog(
+    const files = dialog.showOpenDialog(
       this.mainWinsow.getBrowserWindow(),
       {
         title: 'open',
@@ -45,10 +45,8 @@ export default class FileManager extends EventEmitter {
           extensions: ['md']
         }]
       },
-      (files) => {
-        if (files && files.length > 0) this.readFile(files[0]);
-      }
     );
+    if (files && files.length > 0) this.readFile(files[0]);
   }
 
   public saveFile(): Promise<{}> {
@@ -59,22 +57,17 @@ export default class FileManager extends EventEmitter {
   }
 
   public saveAsNewFile(): Promise<{}> {
-    return new Promise((resolve, reject) => {
-      dialog.showSaveDialog(
-        this.mainWinsow.getBrowserWindow(),
-        {
-          title: 'save',
-          filters: [{
-            name: 'markdown file',
-            extensions: ['md']
-          }]
-        },
-        (file) => {
-          if (file) this.writeFile(file).then(resolve);
-          else reject();
-        }
-      );
-    });
+     const file = dialog.showSaveDialog(
+       this.mainWinsow.getBrowserWindow(),
+       {
+         title: 'save',
+         filters: [{
+           name: 'markdown file',
+           extensions: ['md']
+         }]
+       }
+     );
+     return this.writeFile(file);
   }
 
   public exportToPdf(webContents: Electron.WebContents): Promise<{}> {
