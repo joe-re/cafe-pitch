@@ -3,6 +3,8 @@ import * as fs from 'fs';
 import * as electron from 'electron';
 import * as spectron from 'spectron';
 import * as fakeMenu from 'spectron-fake-menu';
+import * as mkdirp from 'mkdirp';
+import * as del from 'del';
 
 const outputDir = "reports";
 
@@ -29,6 +31,12 @@ export class Application {
   private app: spectron.Application;
 
   start() {
+    del.sync([
+      `${join(process.cwd(), 'sandbox')}/**/*`,
+      `${join(process.cwd(), 'reports')}/**/*`,
+    ]);
+    mkdirp.sync(join(process.cwd(), 'sandbox'));
+    mkdirp.sync(join(process.cwd(), 'reports'));
     if (!this.app) {
       this.app = new spectron.Application({
         path: electron,
@@ -46,15 +54,18 @@ export class Application {
     return this.app.start();
   }
 
-  stop() {
+  stop(testResult: string = null, testTitle: string = null) {
     if (!(this.app && this.app.isRunning())) {
       return Promise.reject(new Error("application isn't working."));
+    }
+    if (testResult && testTitle && testResult === 'failed') {
+      return this.report(testTitle).then(() => this.app.stop());
     }
     return this.app.stop();
   }
 
-  report(testName) {
-    return Promise.all([reportLog(this.app, testName), capturePage(this.app, testName)])
+  report(testTitle) {
+    return Promise.all([reportLog(this.app, testTitle), capturePage(this.app, testTitle)])
   }
 
   get client() {
