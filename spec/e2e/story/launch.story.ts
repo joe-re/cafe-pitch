@@ -9,7 +9,7 @@ describe('application launch', function () {
   });
 
   afterEach(function () {
-    return app.stop();
+    return app.stop(this.currentTest.state, this.currentTest.title);
   });
 
   it('shows an initial window', function () {

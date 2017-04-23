@@ -11,7 +11,7 @@ describe('input text to editor.', function () {
   });
 
   afterEach(function () {
-    return app.stop();
+    return app.stop(this.currentTest.state, this.currentTest.title);
   });
 
   describe('input markdown text', function() {
