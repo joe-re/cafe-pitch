@@ -2,6 +2,7 @@ node_modules
 typings
 src/**/*.js
 spec/**/*.js
+!spec/e2e/preload.js
 **/*.map
 dist
 npm-debug.log
@@ -10,3 +11,5 @@ spec_dist
 **/*.DS_Store
 .tags*
 yarn-error.log
+sandbox
+reports

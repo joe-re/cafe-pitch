@@ -59,22 +59,17 @@ export default class FileManager extends EventEmitter {
   }
 
   public saveAsNewFile(): Promise<{}> {
-    return new Promise((resolve, reject) => {
-      dialog.showSaveDialog(
-        this.mainWinsow.getBrowserWindow(),
-        {
-          title: 'save',
-          filters: [{
-            name: 'markdown file',
-            extensions: ['md']
-          }]
-        },
-        (file) => {
-          if (file) this.writeFile(file).then(resolve);
-          else reject();
-        }
-      );
-    });
+     const file = dialog.showSaveDialog(
+       this.mainWinsow.getBrowserWindow(),
+       {
+         title: 'save',
+         filters: [{
+           name: 'markdown file',
+           extensions: ['md']
+         }]
+       }
+     );
+     return this.writeFile(file);
   }
 
   public exportToPdf(webContents: Electron.WebContents): Promise<{}> {
