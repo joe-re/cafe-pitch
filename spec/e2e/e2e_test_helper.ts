@@ -72,3 +72,14 @@ export class Application {
     return this.app.client;
   }
 }
+
+export function waitForExistFile(filePath: string) {
+  return new Promise((resolve, _reject) => {
+    const timer = setInterval(() => {
+      if (fs.existsSync(filePath)) {
+        resolve();
+        clearInterval(timer);
+      }
+    }, 1000);
+  });
+}

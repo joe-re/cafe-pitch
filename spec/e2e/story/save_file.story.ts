@@ -1,4 +1,4 @@
-import { Application } from '../e2e_test_helper';
+import { Application, waitForExistFile } from '../e2e_test_helper';
 import SlideEditorPage from '../page/slide_editor.page';
 import * as fs from 'fs';
 import * as assert from 'power-assert';
@@ -16,20 +16,12 @@ describe('save as new file', function () {
     return app.stop(this.currentTest.state, this.currentTest.title);
   });
 
-  it('should create new file.', function () {
+  it('should save as a new file.', function () {
     const page = new SlideEditorPage(app.client);
     return page.inputText("test text").then(() => {
       setTimeout(() => fakeMenu.clickMenu('File', 'Save As...'), 100);
-      return new Promise((resolve, _reject) => {
-        const timer = setInterval(() => {
-          if (fs.existsSync("./sandbox/test.md")) {
-            const text = fs.readFileSync("./sandbox/test.md", "utf8");
-            resolve(text);
-            clearInterval(timer);
-          }
-        }, 1000);
-      });
-    }).then((text) => {
+      return waitForExistFile('./sandbox/test.md')
+    }).then(() => fs.readFileSync("./sandbox/test.md", "utf8")).then((text) => {
       assert.equal("test text", text);
     });
   });
