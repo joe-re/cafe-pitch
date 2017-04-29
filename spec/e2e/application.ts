@@ -31,10 +31,6 @@ export default class Application {
   private app: spectron.Application;
 
   start() {
-    del.sync([
-      `${join(process.cwd(), 'sandbox')}/**/*`,
-      `${join(process.cwd(), 'reports')}/**/*`,
-    ]);
     mkdirp.sync(join(process.cwd(), 'sandbox'));
     mkdirp.sync(join(process.cwd(), 'reports'));
     if (!this.app) {
