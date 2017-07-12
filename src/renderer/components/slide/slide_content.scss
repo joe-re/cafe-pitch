@@ -48,6 +48,7 @@
     white-space: normal;
     margin-bottom: 20px;
     margin-top: 0;
+    font-weight: bold;
   }
 
   // ul, ol
@@ -69,7 +70,7 @@
 
   // pre, code
   code, pre {
-    font-family: 'Inconsolata', monospace;;
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   }
 
   pre {
