@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as electron from 'electron';
 import * as spectron from 'spectron';
 import * as fakeMenu from 'spectron-fake-menu';
+import * as fakeDialog from 'spectron-fake-dialog';
 import * as mkdirp from 'mkdirp';
 import * as del from 'del';
 
@@ -37,12 +38,12 @@ export default class Application {
       this.app = new spectron.Application({
         path: electron,
         args: [
-           "--require", join(__dirname, "preload.js"),
           join(__dirname, '..', '..')
         ],
         startTimeout: 10000
       });
       fakeMenu.apply(this.app);
+      fakeDialog.apply(this.app);
     }
     if (this.app.isRunning()) {
       return Promise.reject(new Error('application has already started.'));

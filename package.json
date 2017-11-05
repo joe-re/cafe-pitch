@@ -73,6 +73,7 @@
     "protractor": "~5.1.0",
     "run-sequence": "^1.1.5",
     "spectron": "^3.6.0",
+    "spectron-fake-dialog": "^0.0.1",
     "spectron-fake-menu": "^0.0.1",
     "ts-loader": "^2.0.1",
     "tsconfig-cli": "^1.0.2",

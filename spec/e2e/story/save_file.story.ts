@@ -4,13 +4,17 @@ import SlideEditorPage from '../page/slide_editor.page';
 import * as fs from 'fs';
 import * as assert from 'power-assert';
 import * as fakeMenu from 'spectron-fake-menu';
+import * as fakeDialog from 'spectron-fake-dialog';
 
 describe("click 'Save As...' menu", function () {
   this.timeout(10000);
   let app = new Application();
 
   beforeEach(function () {
-    return app.start();
+    return app.start().then(() => fakeDialog.mock([
+      { method: 'showSaveDialog', value: 'sandbox/test.md' },
+      { method: 'showOpenDialog', value: ['sandbox/test.md'] }
+    ]));
   });
 
   afterEach(function () {
@@ -33,7 +37,10 @@ describe("click 'Save' menu", function () {
   let app = new Application();
 
   beforeEach(function () {
-    return app.start();
+    return app.start().then(() => fakeDialog.mock([
+      { method: 'showSaveDialog', value: 'sandbox/test.md' },
+      { method: 'showOpenDialog', value: ['sandbox/test.md'] }
+    ]));
   });
 
   afterEach(function () {

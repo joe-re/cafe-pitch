@@ -4930,6 +4930,10 @@ spdx-license-ids@^1.0.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-1.2.2.tgz#c9df7a3424594ade6bd11900d596696dc06bac57"
 
+spectron-fake-dialog@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/spectron-fake-dialog/-/spectron-fake-dialog-0.0.1.tgz#ffd5cfadcac64eb957340389f047529c4a68e23a"
+
 spectron-fake-menu@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/spectron-fake-menu/-/spectron-fake-menu-0.0.1.tgz#c2d3f3eb14e1dc0fafbca20b12bf05234abbb96c"
